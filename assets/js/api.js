@@ -6920,22 +6920,26 @@ async function requestApi(action, payload = {}) {
   const config = window.NGINGETKEN_CONFIG || {};
   const apiUrl = config.API_URL || 'mock';
   if (apiUrl && apiUrl !== 'mock') {
-    const body = {
-      action,
-      token: config.ADMIN_TOKEN || '',
-      ...payload
-    };
-    const res = await fetch(apiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(body)
-    });
-    const text = await res.text();
-    let json;
-    try { json = JSON.parse(text); }
-    catch (err) { throw new Error('Respons backend tidak valid. Cek deployment Apps Script.'); }
-    if (!json.success) throw new Error(json.message || 'Permintaan ke backend gagal');
-    return json.data;
+    try {
+      const body = {
+        action,
+        token: config.ADMIN_TOKEN || '',
+        ...payload
+      };
+      const res = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(body)
+      });
+      const text = await res.text();
+      let json;
+      try { json = JSON.parse(text); }
+      catch (err) { throw new Error('Respons backend tidak valid. Cek deployment Apps Script.'); }
+      if (!json.success) throw new Error(json.message || 'Permintaan ke backend gagal');
+      return json.data;
+    } catch (err) {
+      console.warn('Backend Apps Script belum siap, memakai database lokal:', err.message);
+    }
   }
 
   await new Promise(r => setTimeout(r, 300));
