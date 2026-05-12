@@ -261,7 +261,7 @@ const NGINGETKEN_DATA = {
       "nama_periode": "Januari 2026",
       "tanggal_mulai": "2026-01-01",
       "tanggal_deadline": "2026-02-06",
-      "form_url": "https://forms.office.com/...",
+      "form_url": "isi.html",
       "status": "Selesai"
     },
     {
@@ -269,7 +269,7 @@ const NGINGETKEN_DATA = {
       "nama_periode": "Februari 2026",
       "tanggal_mulai": "2026-02-01",
       "tanggal_deadline": "2026-03-06",
-      "form_url": "https://forms.office.com/...",
+      "form_url": "isi.html",
       "status": "Selesai"
     },
     {
@@ -277,7 +277,7 @@ const NGINGETKEN_DATA = {
       "nama_periode": "Maret 2026",
       "tanggal_mulai": "2026-03-01",
       "tanggal_deadline": "2026-04-06",
-      "form_url": "https://forms.office.com/...",
+      "form_url": "isi.html",
       "status": "Selesai"
     },
     {
@@ -285,75 +285,1000 @@ const NGINGETKEN_DATA = {
       "nama_periode": "April 2026",
       "tanggal_mulai": "2026-04-01",
       "tanggal_deadline": "2026-05-06",
-      "form_url": "https://forms.office.com/...",
-      "status": "Selesai"
+      "form_url": "isi.html",
+      "status": "Aktif"
     },
     {
       "periode_id": "PRD2026MEI",
       "nama_periode": "Mei 2026",
       "tanggal_mulai": "2026-05-01",
       "tanggal_deadline": "2026-06-06",
-      "form_url": "https://forms.office.com/...",
-      "status": "Aktif"
+      "form_url": "isi.html",
+      "status": "Draft"
     },
     {
       "periode_id": "PRD2026JUN",
       "nama_periode": "Juni 2026",
       "tanggal_mulai": "2026-06-01",
       "tanggal_deadline": "2026-07-06",
-      "form_url": "https://forms.office.com/...",
-      "status": "Selesai"
+      "form_url": "isi.html",
+      "status": "Draft"
     },
     {
       "periode_id": "PRD2026JUL",
       "nama_periode": "Juli 2026",
       "tanggal_mulai": "2026-07-01",
       "tanggal_deadline": "2026-08-06",
-      "form_url": "https://forms.office.com/...",
-      "status": "Selesai"
+      "form_url": "isi.html",
+      "status": "Draft"
     },
     {
       "periode_id": "PRD2026AGU",
       "nama_periode": "Agustus 2026",
       "tanggal_mulai": "2026-08-01",
       "tanggal_deadline": "2026-09-06",
-      "form_url": "https://forms.office.com/...",
-      "status": "Selesai"
+      "form_url": "isi.html",
+      "status": "Draft"
     },
     {
       "periode_id": "PRD2026SEP",
       "nama_periode": "September 2026",
       "tanggal_mulai": "2026-09-01",
       "tanggal_deadline": "2026-10-06",
-      "form_url": "https://forms.office.com/...",
-      "status": "Selesai"
+      "form_url": "isi.html",
+      "status": "Draft"
     },
     {
       "periode_id": "PRD2026OKT",
       "nama_periode": "Oktober 2026",
       "tanggal_mulai": "2026-10-01",
       "tanggal_deadline": "2026-11-06",
-      "form_url": "https://forms.office.com/...",
-      "status": "Selesai"
+      "form_url": "isi.html",
+      "status": "Draft"
     },
     {
       "periode_id": "PRD2026NOV",
       "nama_periode": "November 2026",
       "tanggal_mulai": "2026-11-01",
       "tanggal_deadline": "2026-12-06",
-      "form_url": "https://forms.office.com/...",
-      "status": "Selesai"
+      "form_url": "isi.html",
+      "status": "Draft"
     },
     {
       "periode_id": "PRD2026DES",
       "nama_periode": "Desember 2026",
       "tanggal_mulai": "2026-12-01",
       "tanggal_deadline": "2027-01-06",
-      "form_url": "https://forms.office.com/...",
-      "status": "Selesai"
+      "form_url": "isi.html",
+      "status": "Draft"
     }
   ],
   "responses": [
+    {
+      "response_id": "R001",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P040",
+      "nama": "Tri Purna Putra",
+      "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
+      "waktu_submit": "2025-03-03 09:56:08",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R002",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P038",
+      "nama": "Temaaro Adeodatus Christian",
+      "unit": "PKCDT",
+      "waktu_submit": "2025-03-03 09:58:35",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R003",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P035",
+      "nama": "Sucianto Wahyu Wicaksono",
+      "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
+      "waktu_submit": "2025-03-03 09:58:56",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R004",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P017",
+      "nama": "Imadelia Tasya Eartam",
+      "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
+      "waktu_submit": "2025-03-03 10:01:49",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R005",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": null,
+      "nama": "Ronico L. A. Hutagalung",
+      "unit": "PERBEND",
+      "waktu_submit": "2025-03-03 10:03:11",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Perlu Cek",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R006",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": null,
+      "nama": "Deni Gunawan",
+      "unit": "PENINDAKAN DAN PENYIDIKAN",
+      "waktu_submit": "2025-03-03 10:03:12",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Perlu Cek",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R007",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P002",
+      "nama": "Agung Hermawan",
+      "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
+      "waktu_submit": "2025-03-03 10:04:42",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "\" Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung\"",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R008",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P016",
+      "nama": "Herry Fahroji",
+      "unit": "UMUM",
+      "waktu_submit": "2025-03-03 10:05:44",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "\" Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung\"",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R009",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P025",
+      "nama": "Rahmat Dihartanto",
+      "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
+      "waktu_submit": "2025-03-03 10:06:06",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R010",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P019",
+      "nama": "Imam Hanavi",
+      "unit": "PENINDAKAN DAN PENYIDIKAN",
+      "waktu_submit": "2025-03-03 10:07:24",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung\"",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R011",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P042",
+      "nama": "Welly Kristianto",
+      "unit": "PKCDT",
+      "waktu_submit": "2025-03-03 10:07:40",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R012",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P019",
+      "nama": "Imam Hanavi",
+      "unit": "PENINDAKAN DAN PENYIDIKAN",
+      "waktu_submit": "2025-03-03 10:14:24",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung\"",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R013",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P019",
+      "nama": "Imam Hanavi",
+      "unit": "PENINDAKAN DAN PENYIDIKAN",
+      "waktu_submit": "2025-03-03 10:14:44",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung\"",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R014",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": null,
+      "nama": "Aditya Diraja",
+      "unit": "PKCDT",
+      "waktu_submit": "2025-03-03 10:24:14",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung\"",
+      "catatan": "",
+      "status_validasi": "Perlu Cek",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R015",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P021",
+      "nama": "Ismail Martawinata",
+      "unit": "PERBEND",
+      "waktu_submit": "2025-03-03 10:28:29",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung\"",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R016",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P029",
+      "nama": "Riska Cahyandaru",
+      "unit": "UMUM",
+      "waktu_submit": "2025-03-03 10:29:36",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R017",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": null,
+      "nama": "Jihad Fadhil M",
+      "unit": "UMUM",
+      "waktu_submit": "2025-03-03 10:29:44",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Perlu Cek",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R018",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P001",
+      "nama": "Achmad Helwi",
+      "unit": "PENINDAKAN DAN PENYIDIKAN",
+      "waktu_submit": "2025-03-03 10:55:29",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R019",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P023",
+      "nama": "M. Arif Anugrah",
+      "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
+      "waktu_submit": "2025-03-03 11:37:43",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R020",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P027",
+      "nama": "Reza Yudhistira",
+      "unit": "PKCDT",
+      "waktu_submit": "2025-03-03 11:45:49",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R021",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P009",
+      "nama": "Dwi Wahyu Handoko",
+      "unit": "UMUM",
+      "waktu_submit": "2025-03-03 11:55:04",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "\" Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung\"",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R022",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": null,
+      "nama": "Fabia Ihza Dewantara",
+      "unit": "UMUM",
+      "waktu_submit": "2025-03-03 13:02:06",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Perlu Cek",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R023",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P010",
+      "nama": "Edy Susanto",
+      "unit": "PENINDAKAN DAN PENYIDIKAN",
+      "waktu_submit": "2025-03-03 16:19:49",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R024",
+      "periode_id": "PRD2026MAR",
+      "periode_bulan": "Maret",
+      "pegawai_id": "P018",
+      "nama": "Imam Berlian",
+      "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
+      "waktu_submit": "2025-03-04 08:35:32",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R025",
+      "periode_id": "PRD2026APR",
+      "periode_bulan": "April",
+      "pegawai_id": "P025",
+      "nama": "Rahmat Dihartanto",
+      "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
+      "waktu_submit": "2025-04-24 11:45:05",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "\" Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung\"",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R026",
+      "periode_id": "PRD2026MEI",
+      "periode_bulan": "Mei",
+      "pegawai_id": "P002",
+      "nama": "Agung Hermawan",
+      "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
+      "waktu_submit": "2025-05-14 14:48:59",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R027",
+      "periode_id": "PRD2026MEI",
+      "periode_bulan": "Mei",
+      "pegawai_id": "P029",
+      "nama": "Riska Cahyandaru",
+      "unit": "UMUM",
+      "waktu_submit": "2025-05-14 16:00:44",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R028",
+      "periode_id": "PRD2026MEI",
+      "periode_bulan": "Mei",
+      "pegawai_id": "P016",
+      "nama": "Herry Fahroji",
+      "unit": "UMUM",
+      "waktu_submit": "2025-05-14 16:03:26",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R029",
+      "periode_id": "PRD2026MEI",
+      "periode_bulan": "Mei",
+      "pegawai_id": null,
+      "nama": "Deni Gunawan",
+      "unit": "PENINDAKAN DAN PENYIDIKAN",
+      "waktu_submit": "2025-05-14 16:10:30",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Perlu Cek",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R030",
+      "periode_id": "PRD2026MEI",
+      "periode_bulan": "Mei",
+      "pegawai_id": null,
+      "nama": "Ronico L. A. Hutagalung",
+      "unit": "PERBEND",
+      "waktu_submit": "2025-05-14 16:11:04",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Perlu Cek",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R031",
+      "periode_id": "PRD2026MEI",
+      "periode_bulan": "Mei",
+      "pegawai_id": "P021",
+      "nama": "Ismail Martawinata",
+      "unit": "PERBEND",
+      "waktu_submit": "2025-05-14 16:21:46",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "\" Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung\"",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R032",
+      "periode_id": "PRD2026MEI",
+      "periode_bulan": "Mei",
+      "pegawai_id": "P009",
+      "nama": "Dwi Wahyu Handoko",
+      "unit": "UMUM",
+      "waktu_submit": "2025-05-14 16:33:55",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R033",
+      "periode_id": "PRD2026MEI",
+      "periode_bulan": "Mei",
+      "pegawai_id": null,
+      "nama": "Agung Pratama Putra",
+      "unit": "UMUM",
+      "waktu_submit": "2025-05-14 17:11:08",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Perlu Cek",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R034",
+      "periode_id": "PRD2026MEI",
+      "periode_bulan": "Mei",
+      "pegawai_id": "P001",
+      "nama": "Achmad Helwi",
+      "unit": "PENINDAKAN DAN PENYIDIKAN",
+      "waktu_submit": "2025-05-14 17:13:39",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R035",
+      "periode_id": "PRD2026MEI",
+      "periode_bulan": "Mei",
+      "pegawai_id": null,
+      "nama": "Mudhoffar",
+      "unit": "UMUM",
+      "waktu_submit": "2025-05-14 20:31:09",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Perlu Cek",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R036",
+      "periode_id": "PRD2026MEI",
+      "periode_bulan": "Mei",
+      "pegawai_id": "P038",
+      "nama": "Temaaro Adeodatus Christian",
+      "unit": "PKCDT",
+      "waktu_submit": "2025-05-14 21:08:03",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
+    {
+      "response_id": "R037",
+      "periode_id": "PRD2026MEI",
+      "periode_bulan": "Mei",
+      "pegawai_id": "P027",
+      "nama": "Reza Yudhistira",
+      "unit": "PKCDT",
+      "waktu_submit": "2025-05-15 09:29:17",
+      "answers": {
+        "q4_gratifikasi": "Tidak",
+        "q5_suap": "Tidak",
+        "q6_curang": "Tidak",
+        "q7_pemerasan": "Tidak",
+        "q8_kode_etik": "Tidak",
+        "q9_gaya_hidup_mewah": "Tidak",
+        "q10_benturan_kepentingan": "Tidak",
+        "q11_penggelapan_jabatan": "Tidak"
+      },
+      "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
+      "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian teraebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung mauoun tidak langsung",
+      "catatan": "",
+      "status_validasi": "Valid",
+      "integrity_score": 100,
+      "risk_level": "Rendah"
+    },
     {
       "response_id": "R038",
       "periode_id": "PRD2026MEI",
@@ -400,7 +1325,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -425,7 +1350,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung\"",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -450,7 +1375,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -509,7 +1434,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026MEI",
       "periode_bulan": "Mei",
       "pegawai_id": "P035",
-      "nama": "Sucianto wahyu wicaksono",
+      "nama": "Sucianto Wahyu Wicaksono",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2025-05-16 10:05:25",
       "answers": {
@@ -534,7 +1459,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026MEI",
       "periode_bulan": "Mei",
       "pegawai_id": "P040",
-      "nama": "Tri purna putra",
+      "nama": "Tri Purna Putra",
       "unit": "PERBEND",
       "waktu_submit": "2025-05-16 10:07:03",
       "answers": {
@@ -559,7 +1484,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026MEI",
       "periode_bulan": "Mei",
       "pegawai_id": "P032",
-      "nama": "Septian budi",
+      "nama": "Septian Budi Subroto",
       "unit": "PKCDT",
       "waktu_submit": "2025-05-16 10:08:56",
       "answers": {
@@ -600,7 +1525,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung.",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -609,7 +1534,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026MEI",
       "periode_bulan": "Mei",
       "pegawai_id": "P042",
-      "nama": "Welly k",
+      "nama": "Welly Kristianto",
       "unit": "PKCDT",
       "waktu_submit": "2025-05-16 10:45:47",
       "answers": {
@@ -634,7 +1559,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026MEI",
       "periode_bulan": "Mei",
       "pegawai_id": "P025",
-      "nama": "rahmat dihartanto",
+      "nama": "Rahmat Dihartanto",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2025-05-20 08:22:25",
       "answers": {
@@ -659,7 +1584,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026MEI",
       "periode_bulan": "Mei",
       "pegawai_id": "P018",
-      "nama": "berlian",
+      "nama": "Imam Berlian",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2025-07-01 10:35:34",
       "answers": {
@@ -700,7 +1625,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -734,7 +1659,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026JUN",
       "periode_bulan": "Juni",
       "pegawai_id": "P035",
-      "nama": "sucianto wahyu wicaksono",
+      "nama": "Sucianto Wahyu Wicaksono",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2025-07-01 10:56:03",
       "answers": {
@@ -884,7 +1809,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026JUN",
       "periode_bulan": "Juni",
       "pegawai_id": "P004",
-      "nama": "Andik bintoro",
+      "nama": "Andik Bintoro",
       "unit": "PERBEND",
       "waktu_submit": "2025-07-01 11:12:34",
       "answers": {
@@ -1009,7 +1934,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026JUN",
       "periode_bulan": "Juni",
       "pegawai_id": "P021",
-      "nama": "Ismail M",
+      "nama": "Ismail Martawinata",
       "unit": "PERBEND",
       "waktu_submit": "2025-07-03 15:54:51",
       "answers": {
@@ -1059,7 +1984,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026JUL",
       "periode_bulan": "Juli",
       "pegawai_id": "P042",
-      "nama": "Welly kristianto",
+      "nama": "Welly Kristianto",
       "unit": "PKCDT",
       "waktu_submit": "2025-08-04 08:28:06",
       "answers": {
@@ -1150,7 +2075,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -1250,7 +2175,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -1259,7 +2184,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026JUL",
       "periode_bulan": "Juli",
       "pegawai_id": "P004",
-      "nama": "Andik",
+      "nama": "Andik Bintoro",
       "unit": "PERBEND",
       "waktu_submit": "2025-08-04 08:45:54",
       "answers": {
@@ -1300,7 +2225,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung.",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -1309,7 +2234,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026JUL",
       "periode_bulan": "Juli",
       "pegawai_id": "P035",
-      "nama": "sucianto wahyu wicaksono",
+      "nama": "Sucianto Wahyu Wicaksono",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2025-08-04 09:00:00",
       "answers": {
@@ -1375,7 +2300,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -1384,7 +2309,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026JUL",
       "periode_bulan": "Juli",
       "pegawai_id": "P034",
-      "nama": "SUBHAN NUR AMIRUL HAJ",
+      "nama": "Subhan Nur Amirul Haj",
       "unit": "PKCDT",
       "waktu_submit": "2025-08-04 10:04:20",
       "answers": {
@@ -1409,7 +2334,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026JUL",
       "periode_bulan": "Juli",
       "pegawai_id": "P021",
-      "nama": "Ismail M",
+      "nama": "Ismail Martawinata",
       "unit": "PERBEND",
       "waktu_submit": "2025-08-04 10:25:07",
       "answers": {
@@ -1450,7 +2375,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -1534,7 +2459,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026AGU",
       "periode_bulan": "Agustus",
       "pegawai_id": "P042",
-      "nama": "Welly kristianto",
+      "nama": "Welly Kristianto",
       "unit": "PKCDT",
       "waktu_submit": "2025-09-01 07:56:44",
       "answers": {
@@ -1609,7 +2534,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026AGU",
       "periode_bulan": "Agustus",
       "pegawai_id": "P004",
-      "nama": "Andik b",
+      "nama": "Andik Bintoro",
       "unit": "PERBEND",
       "waktu_submit": "2025-09-01 08:00:17",
       "answers": {
@@ -1634,7 +2559,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026AGU",
       "periode_bulan": "Agustus",
       "pegawai_id": "P025",
-      "nama": "Rahmat dihartanto",
+      "nama": "Rahmat Dihartanto",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2025-09-01 08:01:28",
       "answers": {
@@ -1750,7 +2675,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -1859,7 +2784,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026AGU",
       "periode_bulan": "Agustus",
       "pegawai_id": "P035",
-      "nama": "sucianto wahyu wicaksono",
+      "nama": "Sucianto Wahyu Wicaksono",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2025-09-03 08:16:31",
       "answers": {
@@ -1884,7 +2809,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026SEP",
       "periode_bulan": "September",
       "pegawai_id": "P025",
-      "nama": "RAHMAT DIHARTANTO",
+      "nama": "Rahmat Dihartanto",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2025-10-02 08:39:16",
       "answers": {
@@ -1909,7 +2834,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026SEP",
       "periode_bulan": "September",
       "pegawai_id": "P042",
-      "nama": "Welly kristianto",
+      "nama": "Welly Kristianto",
       "unit": "PKCDT",
       "waktu_submit": "2025-10-02 10:29:30",
       "answers": {
@@ -2059,7 +2984,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026SEP",
       "periode_bulan": "September",
       "pegawai_id": "P035",
-      "nama": "sucianto wahyu wicaksono",
+      "nama": "Sucianto Wahyu Wicaksono",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2025-10-02 11:19:57",
       "answers": {
@@ -2300,7 +3225,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -2334,7 +3259,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026OKT",
       "periode_bulan": "Oktober",
       "pegawai_id": "P035",
-      "nama": "sucianto wahyu wicaksono",
+      "nama": "Sucianto Wahyu Wicaksono",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2025-11-03 10:03:42",
       "answers": {
@@ -2409,7 +3334,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026OKT",
       "periode_bulan": "Oktober",
       "pegawai_id": "P042",
-      "nama": "Welly kristianto",
+      "nama": "Welly Kristianto",
       "unit": "PKCDT",
       "waktu_submit": "2025-11-03 11:00:00",
       "answers": {
@@ -2450,7 +3375,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -2509,7 +3434,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026NOV",
       "periode_bulan": "November",
       "pegawai_id": "P035",
-      "nama": "sucianto wahyu wicaksono",
+      "nama": "Sucianto Wahyu Wicaksono",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2025-12-04 09:19:49",
       "answers": {
@@ -2575,7 +3500,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -2584,7 +3509,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026NOV",
       "periode_bulan": "November",
       "pegawai_id": "P042",
-      "nama": "Welly kristianto",
+      "nama": "Welly Kristianto",
       "unit": "PKCDT",
       "waktu_submit": "2025-12-04 09:21:53",
       "answers": {
@@ -2659,7 +3584,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026NOV",
       "periode_bulan": "November",
       "pegawai_id": "P040",
-      "nama": "Tri purna putra",
+      "nama": "Tri Purna Putra",
       "unit": "PERBEND",
       "waktu_submit": "2025-12-04 09:34:43",
       "answers": {
@@ -2725,7 +3650,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -2809,7 +3734,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026NOV",
       "periode_bulan": "November",
       "pegawai_id": "P005",
-      "nama": "Badar",
+      "nama": "Badar Muhammad Al Haq",
       "unit": "PENINDAKAN DAN PENYIDIKAN",
       "waktu_submit": "2025-12-05 13:12:42",
       "answers": {
@@ -2850,7 +3775,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -3050,7 +3975,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -3100,7 +4025,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -3134,7 +4059,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026NOV",
       "periode_bulan": "November",
       "pegawai_id": "P025",
-      "nama": "RAHMAT DIHARTANTO",
+      "nama": "Rahmat Dihartanto",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2025-12-08 14:31:20",
       "answers": {
@@ -3175,7 +4100,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung\"",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -3200,7 +4125,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -3250,7 +4175,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -3284,7 +4209,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026NOV",
       "periode_bulan": "November",
       "pegawai_id": "P004",
-      "nama": "andik bintoro",
+      "nama": "Andik Bintoro",
       "unit": "PERBEND",
       "waktu_submit": "2025-12-08 14:41:58",
       "answers": {
@@ -3309,7 +4234,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026NOV",
       "periode_bulan": "November",
       "pegawai_id": "P008",
-      "nama": "Dobi p",
+      "nama": "Dobi Pantara",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2025-12-08 14:42:48",
       "answers": {
@@ -3334,7 +4259,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026NOV",
       "periode_bulan": "November",
       "pegawai_id": "P021",
-      "nama": "Ismail M",
+      "nama": "Ismail Martawinata",
       "unit": "PERBEND",
       "waktu_submit": "2025-12-08 15:02:48",
       "answers": {
@@ -3384,7 +4309,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026NOV",
       "periode_bulan": "November",
       "pegawai_id": "P032",
-      "nama": "Septian budi subroto",
+      "nama": "Septian Budi Subroto",
       "unit": "PKCDT",
       "waktu_submit": "2025-12-08 15:09:45",
       "answers": {
@@ -3409,7 +4334,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026NOV",
       "periode_bulan": "November",
       "pegawai_id": "P020",
-      "nama": "INDRA TRIANSYAH",
+      "nama": "Indra Triansyah",
       "unit": "PENINDAKAN DAN PENYIDIKAN",
       "waktu_submit": "2025-12-09 08:40:31",
       "answers": {
@@ -3434,7 +4359,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026NOV",
       "periode_bulan": "November",
       "pegawai_id": "P034",
-      "nama": "SUBHAN",
+      "nama": "Subhan Nur Amirul Haj",
       "unit": "PKCDT",
       "waktu_submit": "2025-12-09 08:40:59",
       "answers": {
@@ -3484,7 +4409,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026DES",
       "periode_bulan": "Desember",
       "pegawai_id": "P042",
-      "nama": "Welly kristianto",
+      "nama": "Welly Kristianto",
       "unit": "PKCDT",
       "waktu_submit": "2026-01-05 11:18:24",
       "answers": {
@@ -3534,7 +4459,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026DES",
       "periode_bulan": "Desember",
       "pegawai_id": "P040",
-      "nama": "tri purna putra",
+      "nama": "Tri Purna Putra",
       "unit": "PERBEND",
       "waktu_submit": "2026-01-05 11:38:18",
       "answers": {
@@ -3559,7 +4484,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026DES",
       "periode_bulan": "Desember",
       "pegawai_id": "P035",
-      "nama": "sucianto wahyu wicaksono",
+      "nama": "Sucianto Wahyu Wicaksono",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2026-01-05 12:05:20",
       "answers": {
@@ -3784,7 +4709,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026DES",
       "periode_bulan": "Desember",
       "pegawai_id": "P042",
-      "nama": "Welly kristianto",
+      "nama": "Welly Kristianto",
       "unit": "PKCDT",
       "waktu_submit": "2026-01-08 09:22:51",
       "answers": {
@@ -3909,7 +4834,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026DES",
       "periode_bulan": "Desember",
       "pegawai_id": "P021",
-      "nama": "ISMAIL M",
+      "nama": "Ismail Martawinata",
       "unit": "PERBEND",
       "waktu_submit": "2026-01-08 12:54:41",
       "answers": {
@@ -3975,7 +4900,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -4000,7 +4925,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -4159,7 +5084,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026FEB",
       "periode_bulan": "Februari",
       "pegawai_id": "P035",
-      "nama": "sucianto wahyu wicaksono",
+      "nama": "Sucianto Wahyu Wicaksono",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2026-03-03 07:57:08",
       "answers": {
@@ -4384,7 +5309,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026FEB",
       "periode_bulan": "Februari",
       "pegawai_id": "P042",
-      "nama": "Welly kristianto",
+      "nama": "Welly Kristianto",
       "unit": "PKCDT",
       "waktu_submit": "2026-03-04 10:22:08",
       "answers": {
@@ -4709,7 +5634,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026FEB",
       "periode_bulan": "Februari",
       "pegawai_id": "P040",
-      "nama": "Tri purna putra",
+      "nama": "Tri Purna Putra",
       "unit": "PERBEND",
       "waktu_submit": "2026-03-04 10:56:40",
       "answers": {
@@ -4775,7 +5700,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -5009,7 +5934,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026MAR",
       "periode_bulan": "Maret",
       "pegawai_id": "P042",
-      "nama": "welly kristianto",
+      "nama": "Welly Kristianto",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2026-04-06 08:57:20",
       "answers": {
@@ -5075,7 +6000,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -5159,7 +6084,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026MAR",
       "periode_bulan": "Maret",
       "pegawai_id": "P032",
-      "nama": "Septian budi subroto",
+      "nama": "Septian Budi Subroto",
       "unit": "PKCDT",
       "waktu_submit": "2026-04-07 10:03:06",
       "answers": {
@@ -5284,7 +6209,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026MAR",
       "periode_bulan": "Maret",
       "pegawai_id": "P035",
-      "nama": "sucianto wahyu wicaksono",
+      "nama": "Sucianto Wahyu Wicaksono",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2026-04-07 10:10:34",
       "answers": {
@@ -5409,7 +6334,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026MAR",
       "periode_bulan": "Maret",
       "pegawai_id": "P004",
-      "nama": "Andik bintoro",
+      "nama": "Andik Bintoro",
       "unit": "PERBEND",
       "waktu_submit": "2026-04-07 10:24:58",
       "answers": {
@@ -5434,7 +6359,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026MAR",
       "periode_bulan": "Maret",
       "pegawai_id": "P005",
-      "nama": "Badar m",
+      "nama": "Badar Muhammad Al Haq",
       "unit": "PENINDAKAN DAN PENYIDIKAN",
       "waktu_submit": "2026-04-07 10:26:25",
       "answers": {
@@ -5659,7 +6584,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026APR",
       "periode_bulan": "April",
       "pegawai_id": "P035",
-      "nama": "sucianto wahyu wicaksono",
+      "nama": "Sucianto Wahyu Wicaksono",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2026-05-04 09:36:01",
       "answers": {
@@ -5759,7 +6684,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026APR",
       "periode_bulan": "April",
       "pegawai_id": "P008",
-      "nama": "dobi",
+      "nama": "Dobi Pantara",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2026-05-04 10:16:45",
       "answers": {
@@ -5850,7 +6775,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -5959,7 +6884,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026APR",
       "periode_bulan": "April",
       "pegawai_id": "P024",
-      "nama": "OKWAN WAMANCHA",
+      "nama": "Okwan Wamancha",
       "unit": "PKCDT",
       "waktu_submit": "2026-05-05 09:26:14",
       "answers": {
@@ -6075,7 +7000,7 @@ const NGINGETKEN_DATA = {
       "answer_json": "{\"q4_gratifikasi\": \"Tidak\", \"q5_suap\": \"Tidak\", \"q6_curang\": \"Tidak\", \"q7_pemerasan\": \"Tidak\", \"q8_kode_etik\": \"Tidak\", \"q9_gaya_hidup_mewah\": \"Tidak\", \"q10_benturan_kepentingan\": \"Tidak\", \"q11_penggelapan_jabatan\": \"Tidak\"}",
       "salinan_pernyataan": "Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung",
       "catatan": "",
-      "status_validasi": "Valid",
+      "status_validasi": "Perlu Cek",
       "integrity_score": 100,
       "risk_level": "Rendah"
     },
@@ -6084,7 +7009,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026APR",
       "periode_bulan": "April",
       "pegawai_id": "P032",
-      "nama": "Septian budi subroto",
+      "nama": "Septian Budi Subroto",
       "unit": "PKCDT",
       "waktu_submit": "2026-05-06 09:15:34",
       "answers": {
@@ -6109,7 +7034,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026APR",
       "periode_bulan": "April",
       "pegawai_id": "P018",
-      "nama": "Imam",
+      "nama": "Imam Berlian",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "waktu_submit": "2026-05-06 09:15:55",
       "answers": {
@@ -6134,7 +7059,7 @@ const NGINGETKEN_DATA = {
       "periode_id": "PRD2026APR",
       "periode_bulan": "April",
       "pegawai_id": "P042",
-      "nama": "Welly kristianto",
+      "nama": "Welly Kristianto",
       "unit": "PKCDT",
       "waktu_submit": "2026-05-06 09:31:52",
       "answers": {
@@ -6183,8 +7108,8 @@ const NGINGETKEN_DATA = {
       "response_id": "R271",
       "periode_id": "PRD2026APR",
       "periode_bulan": "April",
-      "pegawai_id": null,
-      "nama": "Andik.bintoro",
+      "pegawai_id": "P004",
+      "nama": "Andik Bintoro",
       "unit": "PERBEND",
       "waktu_submit": "2026-05-06 09:38:43",
       "answers": {
@@ -6385,21 +7310,21 @@ const NGINGETKEN_DATA = {
       "pegawai_id": "P001",
       "nama": "Achmad Helwi",
       "unit": "PENINDAKAN DAN PENYIDIKAN",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-04 09:35:32",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P002",
       "nama": "Agung Hermawan",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-04 09:33:28",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P003",
@@ -6409,27 +7334,27 @@ const NGINGETKEN_DATA = {
       "waktu_submit": "-",
       "integrity_score": "-",
       "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P004",
       "nama": "Andik Bintoro",
       "unit": "PERBEND",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-06 09:38:43",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P005",
       "nama": "Badar Muhammad Al Haq",
       "unit": "PENINDAKAN DAN PENYIDIKAN",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-06 09:54:13",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P006",
@@ -6439,7 +7364,7 @@ const NGINGETKEN_DATA = {
       "waktu_submit": "-",
       "integrity_score": "-",
       "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P007",
@@ -6449,67 +7374,67 @@ const NGINGETKEN_DATA = {
       "waktu_submit": "-",
       "integrity_score": "-",
       "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P008",
       "nama": "Dobi Pantara",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-04 10:16:45",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P009",
       "nama": "Dwi Wahyu Handoko",
       "unit": "UMUM",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-04 10:28:02",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P010",
       "nama": "Edy Susanto",
       "unit": "PENINDAKAN DAN PENYIDIKAN",
       "status_pengisian": "Sudah Mengisi",
-      "waktu_submit": "2025-05-16 10:01:25",
+      "waktu_submit": "2026-05-04 09:33:22",
       "integrity_score": 100,
       "risk_level": "Rendah",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P011",
       "nama": "Elfirman Yusuf Sebayang",
       "unit": "UMUM",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-04 09:52:40",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P012",
       "nama": "Ficri Ramadiansyah",
       "unit": "UMUM",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-05 09:27:03",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P013",
       "nama": "Handika Ferdiansyah",
       "unit": "UMUM",
       "status_pengisian": "Sudah Mengisi",
-      "waktu_submit": "2025-05-16 09:57:23",
+      "waktu_submit": "2026-05-06 08:58:21",
       "integrity_score": 100,
       "risk_level": "Rendah",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P014",
@@ -6519,57 +7444,57 @@ const NGINGETKEN_DATA = {
       "waktu_submit": "-",
       "integrity_score": "-",
       "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P015",
       "nama": "Hendro Dwiyatno",
       "unit": "PENINDAKAN DAN PENYIDIKAN",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-06 14:27:30",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P016",
       "nama": "Herry Fahroji",
       "unit": "UMUM",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-04 15:34:45",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P017",
       "nama": "Imadelia Tasya Eartam",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-06 08:59:46",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P018",
       "nama": "Imam Berlian",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "status_pengisian": "Sudah Mengisi",
-      "waktu_submit": "2025-07-01 10:35:34",
+      "waktu_submit": "2026-05-06 09:15:55",
       "integrity_score": 100,
       "risk_level": "Rendah",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P019",
       "nama": "Imam Hanavi",
       "unit": "PENINDAKAN DAN PENYIDIKAN",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-06 10:06:14",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P020",
@@ -6579,7 +7504,7 @@ const NGINGETKEN_DATA = {
       "waktu_submit": "-",
       "integrity_score": "-",
       "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P021",
@@ -6589,7 +7514,7 @@ const NGINGETKEN_DATA = {
       "waktu_submit": "-",
       "integrity_score": "-",
       "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P022",
@@ -6599,87 +7524,87 @@ const NGINGETKEN_DATA = {
       "waktu_submit": "-",
       "integrity_score": "-",
       "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P023",
       "nama": "M. Arif Anugrah",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-04 18:18:37",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P024",
       "nama": "Okwan Wamancha",
       "unit": "PKCDT",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-05 09:26:14",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P025",
       "nama": "Rahmat Dihartanto",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "status_pengisian": "Sudah Mengisi",
-      "waktu_submit": "2025-05-20 08:22:25",
+      "waktu_submit": "2026-05-04 09:31:06",
       "integrity_score": 100,
       "risk_level": "Rendah",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P026",
       "nama": "Rendra",
       "unit": "UMUM",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-06 09:35:43",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P027",
       "nama": "Reza Yudhistira",
       "unit": "PENINDAKAN DAN PENYIDIKAN",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-06 11:09:51",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P028",
       "nama": "Rian Fauzi",
       "unit": "UMUM",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-04 15:33:23",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P029",
       "nama": "Riska Cahyandaru",
       "unit": "PKCDT",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-04 10:38:36",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P030",
       "nama": "Roeslan Abdul Rohim",
       "unit": "PENINDAKAN DAN PENYIDIKAN",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-04 10:12:18",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P031",
@@ -6689,17 +7614,17 @@ const NGINGETKEN_DATA = {
       "waktu_submit": "-",
       "integrity_score": "-",
       "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P032",
       "nama": "Septian Budi Subroto",
       "unit": "PKCDT",
       "status_pengisian": "Sudah Mengisi",
-      "waktu_submit": "2025-05-16 10:08:56",
+      "waktu_submit": "2026-05-06 09:15:34",
       "integrity_score": 100,
       "risk_level": "Rendah",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P033",
@@ -6709,7 +7634,7 @@ const NGINGETKEN_DATA = {
       "waktu_submit": "-",
       "integrity_score": "-",
       "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P034",
@@ -6719,17 +7644,17 @@ const NGINGETKEN_DATA = {
       "waktu_submit": "-",
       "integrity_score": "-",
       "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P035",
       "nama": "Sucianto Wahyu Wicaksono",
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "status_pengisian": "Sudah Mengisi",
-      "waktu_submit": "2025-05-16 10:05:25",
+      "waktu_submit": "2026-05-04 09:36:01",
       "integrity_score": 100,
       "risk_level": "Rendah",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P036",
@@ -6739,7 +7664,7 @@ const NGINGETKEN_DATA = {
       "waktu_submit": "-",
       "integrity_score": "-",
       "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P037",
@@ -6749,17 +7674,17 @@ const NGINGETKEN_DATA = {
       "waktu_submit": "-",
       "integrity_score": "-",
       "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P038",
       "nama": "Temaaro Adeodatus Christian",
       "unit": "PKCDT",
-      "status_pengisian": "Belum Mengisi",
-      "waktu_submit": "-",
-      "integrity_score": "-",
-      "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Sudah Mengisi",
+      "waktu_submit": "2026-05-04 09:36:32",
+      "integrity_score": 100,
+      "risk_level": "Rendah",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P039",
@@ -6769,17 +7694,17 @@ const NGINGETKEN_DATA = {
       "waktu_submit": "-",
       "integrity_score": "-",
       "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P040",
       "nama": "Tri Purna Putra",
       "unit": "PERBEND",
-      "status_pengisian": "Sudah Mengisi",
-      "waktu_submit": "2025-05-16 10:07:03",
-      "integrity_score": 100,
-      "risk_level": "Rendah",
-      "periode_id": "PRD2026MEI"
+      "status_pengisian": "Belum Mengisi",
+      "waktu_submit": "-",
+      "integrity_score": "-",
+      "risk_level": "-",
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P041",
@@ -6789,17 +7714,17 @@ const NGINGETKEN_DATA = {
       "waktu_submit": "-",
       "integrity_score": "-",
       "risk_level": "-",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     },
     {
       "pegawai_id": "P042",
       "nama": "Welly Kristianto",
       "unit": "PKCDT",
       "status_pengisian": "Sudah Mengisi",
-      "waktu_submit": "2025-05-16 10:45:47",
+      "waktu_submit": "2026-05-06 09:31:52",
       "integrity_score": 100,
       "risk_level": "Rendah",
-      "periode_id": "PRD2026MEI"
+      "periode_id": "PRD2026APR"
     }
   ],
   "byUnit": [
@@ -6812,14 +7737,14 @@ const NGINGETKEN_DATA = {
     {
       "unit": "KEPATUHAN INTERNAL DAN PENYULUHAN",
       "total": 8,
-      "submitted": 3,
-      "pending": 5
+      "submitted": 7,
+      "pending": 1
     },
     {
       "unit": "PENINDAKAN DAN PENYIDIKAN",
       "total": 10,
-      "submitted": 1,
-      "pending": 9
+      "submitted": 7,
+      "pending": 3
     },
     {
       "unit": "PERBEND",
@@ -6830,40 +7755,40 @@ const NGINGETKEN_DATA = {
     {
       "unit": "PKCDT",
       "total": 7,
-      "submitted": 2,
-      "pending": 5
+      "submitted": 5,
+      "pending": 2
     },
     {
       "unit": "UMUM",
       "total": 13,
-      "submitted": 1,
-      "pending": 12
+      "submitted": 7,
+      "pending": 6
     }
   ],
   "followups": [],
   "auditLogs": [],
   "riskSummary": {
-    "rendah": 8,
+    "rendah": 27,
     "sedang": 0,
     "tinggi": 0
   },
   "summary": {
     "total": 42,
-    "submitted": 8,
-    "pending": 34,
-    "percentage": 19,
+    "submitted": 27,
+    "pending": 15,
+    "percentage": 64,
     "riskSummary": {
-      "rendah": 8,
+      "rendah": 27,
       "sedang": 0,
       "tinggi": 0
     }
   },
   "activePeriod": {
-    "periode_id": "PRD2026MEI",
-    "nama_periode": "Mei 2026",
-    "tanggal_mulai": "2026-05-01",
-    "tanggal_deadline": "2026-06-06",
-    "form_url": "https://forms.office.com/...",
+    "periode_id": "PRD2026APR",
+    "nama_periode": "April 2026",
+    "tanggal_mulai": "2026-04-01",
+    "tanggal_deadline": "2026-05-06",
+    "form_url": "isi.html",
     "status": "Aktif"
   }
 };
