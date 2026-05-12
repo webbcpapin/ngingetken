@@ -1,0 +1,15 @@
+{
+  "name": "ngingetken-mvp",
+  "version": "1.0.0",
+  "description": "MVP Aplikasi Ngingetken - Dashboard monitoring pengisian form integritas berbasis HTML, CSS, JavaScript, Google Apps Script, dan Google Sheet.",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve ."
+  },
+  "keywords": ["ngingetken", "dashboard", "google-apps-script", "github-pages"],
+  "author": "KPPBC TMP C Pangkalpinang",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

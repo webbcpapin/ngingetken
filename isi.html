@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Form Isi Aplikasi Ngingetken</title>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+    .hint{font-size:12px;color:#64748b;margin-top:6px}.question-help{font-size:13px;color:#475569;line-height:1.5;margin:8px 0 12px;padding:12px;background:#f8fafc;border-left:4px solid #f5b700;border-radius:12px}.history-box{display:none;margin-top:12px}.history-box.show{display:block}.copy-statement{background:#f8fafc;border:1px dashed #94a3b8;padding:14px;border-radius:14px;font-weight:600;line-height:1.6}.privacy-note{font-size:12px;color:#64748b;background:#f8fafc;border-radius:12px;padding:10px;margin-top:10px}.select-like{appearance:auto}.status-pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 10px;background:#eef2ff;color:#3730a3;font-size:12px;font-weight:700}.question-number{display:inline-flex;width:28px;height:28px;border-radius:999px;background:#0f2d52;color:#fff;align-items:center;justify-content:center;font-size:12px;margin-right:8px}.small-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  </style>
+</head>
+<body>
+<main class="public-page">
+  <section class="hero-card">
+    <div class="eyebrow">Form Isi Aplikasi</div>
+    <h1>Pengisian NGINGETKEN</h1>
+    <p id="periodInfo" class="lead">Memuat periode aktif...</p>
+    <div class="stepper">
+      <div class="step active" id="step1"><span class="step-number">1</span>Identitas</div>
+      <div class="step" id="step2"><span class="step-number">2</span>Pertanyaan</div>
+      <div class="step" id="step3"><span class="step-number">3</span>Pernyataan</div>
+      <div class="step" id="step4"><span class="step-number">4</span>Konfirmasi</div>
+    </div>
+  </section>
+
+  <section class="card" style="max-width:980px;margin:20px auto">
+    <form id="formNgingetken">
+      <div class="form-section active" data-section="1">
+        <h2>Identitas Awal</h2>
+        <p class="muted">Isian mengikuti format awal NGINGETKEN. Nama dan unit akan dirahasiakan pada tampilan publik.</p>
+        <div class="grid grid-2">
+          <label>1. Nama Pegawai <span class="muted">(akan dirahasiakan)</span>
+            <input class="input" name="nama" id="namaInput" required placeholder="Ketik nama pegawai" autocomplete="off" list="pegawaiList">
+            <datalist id="pegawaiList"></datalist>
+            <div class="hint">Setelah nama diketik, sistem akan membaca data pegawai dan histori pengisian sebelumnya.</div>
+          </label>
+          <label>2. UNIT <span class="muted">(*Akan dirahasiakan*)</span>
+            <select class="input select-like" name="unit" id="unitInput" required>
+              <option value="">Pilih Unit</option>
+              <option>PENINDAKAN DAN PENYIDIKAN</option>
+              <option>UMUM</option>
+              <option>KEPATUHAN INTERNAL DAN PENYULUHAN</option>
+              <option>PKCDT</option>
+              <option>PERBEND</option>
+            </select>
+          </label>
+          <label>3. Periode <span class="muted">(Tahun 2026)</span>
+            <select class="input select-like" name="periode_bulan" id="periodeBulan" required>
+              <option value="">Pilih Periode</option>
+              <option>Januari</option>
+              <option>Februari</option>
+              <option>Maret</option>
+              <option>April</option>
+              <option>Mei</option>
+              <option>Juni</option>
+              <option>Juli</option>
+              <option>Agustus</option>
+              <option>September</option>
+              <option>Oktober</option>
+              <option>November</option>
+              <option>Desember</option>
+            </select>
+          </label>
+        </div>
+        <div id="historyBox" class="history-box alert info"></div>
+        <div class="privacy-note">Catatan: fitur histori dipakai untuk mempercepat pengisian identitas dan menjaga konsistensi data pegawai.</div>
+        <div class="toolbar">
+          <button type="button" class="btn btn-secondary" onclick="lookupByName()">Cek Histori</button>
+          <button type="button" class="btn btn-primary" onclick="nextSection(2)">Lanjut</button>
+        </div>
+      </div>
+
+      <div class="form-section" data-section="2">
+        <h2>Pertanyaan Integritas</h2>
+        <p class="muted">Opsi jawaban diperluas menjadi <b>Ya</b>, <b>Tidak</b>, dan <b>Ragu-ragu</b>.</p>
+        <div id="questions"></div>
+        <div class="toolbar">
+          <button type="button" class="btn btn-secondary" onclick="nextSection(1)">Kembali</button>
+          <button type="button" class="btn btn-primary" onclick="nextSection(3)">Lanjut Pernyataan</button>
+        </div>
+      </div>
+
+      <div class="form-section" data-section="3">
+        <h2>Salin Pernyataan</h2>
+        <p>12. Salinlah teks di bawah ini:</p>
+        <div class="copy-statement" id="statementText">Saya tidak menerima uang, barang, dan atau apapun dari siapapun, yang pemberian tersebut berhubungan dengan posisi atau jabatan saya, baik diberikan secara langsung maupun tidak langsung</div>
+        <label>Tulis ulang pernyataan
+          <textarea class="input" name="salinan_pernyataan" id="salinanPernyataan" rows="5" required placeholder="Salin teks pernyataan di atas secara lengkap"></textarea>
+        </label>
+        <label>Catatan tambahan, jika ada
+          <textarea class="input" name="catatan" rows="4" placeholder="Tuliskan keterangan singkat bila diperlukan"></textarea>
+        </label>
+        <div class="toolbar">
+          <button type="button" class="btn btn-secondary" onclick="nextSection(2)">Kembali</button>
+          <button type="button" class="btn btn-primary" onclick="validateStatementAndNext()">Lanjut Konfirmasi</button>
+        </div>
+      </div>
+
+      <div class="form-section" data-section="4">
+        <h2>Konfirmasi Pengiriman</h2>
+        <div class="alert warning">Pastikan identitas dan jawaban sudah benar. Setelah dikirim, data akan masuk ke dashboard monitoring.</div>
+        <label class="radio-option" style="margin:16px 0"><input type="checkbox" name="persetujuan" required> Saya menyatakan data yang saya isi benar dan dapat digunakan untuk monitoring integritas internal.</label>
+        <div id="previewBox" class="mini-card"></div>
+        <div class="toolbar">
+          <button type="button" class="btn btn-secondary" onclick="nextSection(3)">Kembali</button>
+          <button class="btn btn-primary" type="submit">Kirim Pengisian</button>
+        </div>
+      </div>
+    </form>
+  </section>
+</main>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script>
+const integrityQuestions = [
+  {id:'q4_gratifikasi', no:4, title:'Apakah anda mengetahui adanya praktik gratifikasi?', help:'Gratifikasi adalah pemberian dalam arti luas, yakni meliputi pemberian uang, barang, rabat (discount), komisi, pinjaman tanpa bunga, tiket perjalanan, fasilitas penginapan, perjalanan wisata, pengobatan cuma-cuma, dan fasilitas lainnya.'},
+  {id:'q5_suap', no:5, title:'Apakah anda mengetahui adanya praktik suap menyuap?', help:'Suap-menyuap adalah tindakan yang dilakukan pengguna jasa secara aktif memberi atau menjanjikan sesuatu kepada pegawai negeri atau penyelenggara negara dengan maksud agar urusannya lebih cepat, walau melanggar prosedur. Suap-menyuap terjadi jika terjadi transaksi atau kesepakatan antara kedua belah pihak.'},
+  {id:'q6_curang', no:6, title:'Apakah anda mengetahui adanya praktik curang?', help:'Perbuatan curang dilakukan dengan sengaja untuk kepentingan pribadi yang dapat membahayakan orang lain.'},
+  {id:'q7_pemerasan', no:7, title:'Apakah anda mengetahui adanya praktik pemerasan?', help:'Pemerasan adalah perbuatan dimana petugas layanan yang secara aktif menawarkan jasa atau meminta imbalan kepada pengguna jasa untuk mempercepat layanannya, walau melanggar prosedur. Pemerasan memiliki unsur janji atau bertujuan menginginkan sesuatu dari pemberian tersebut.'},
+  {id:'q8_kode_etik', no:8, title:'Apakah anda mengetahui adanya praktik pelanggaran kode etik?', help:'Kegiatan melanggar kode etik yang berlaku bagi ASN/PNS sesuai perundang-undangan yang berlaku.'},
+  {id:'q9_gaya_hidup_mewah', no:9, title:'Apakah anda mengetahui adanya gaya hidup mewah?', help:'Gaya hidup yang jauh dari sifat bersahaja dan sederhana sehingga menimbulkan kecemburuan sosial.'},
+  {id:'q10_benturan_kepentingan', no:10, title:'Apakah anda mengetahui adanya benturan kepentingan?', help:'Benturan Kepentingan adalah situasi ketika penyelenggara negara memiliki kepentingan pribadi atau kepentingan lainnya yang memengaruhi atau terlihat memengaruhi kinerja profesional yang seharusnya objektif dan imparsial.'},
+  {id:'q11_penggelapan_jabatan', no:11, title:'Apakah anda mengetahui adanya penggelapan dalam jabatan?', help:'Penggelapan dalam jabatan adalah tindakan dengan sengaja menggelapkan uang atau surat berharga, melakukan pemalsuan buku-buku atau daftar-daftar yang khusus untuk pemeriksaan administrasi, merobek dan menghancurkan barang bukti suap untuk melindungi pemberi suap, dan lain-lain.'}
+];
+const answerOptions = ['Ya','Tidak','Ragu-ragu'];
+let activePeriod = {};
+let employeesCache = [];
+let latestHistory = null;
+
+async function init(){
+  try{ activePeriod = await requestApi('getActivePeriod'); } catch(e){ activePeriod = {periode_id:'PRD202604', nama_periode:'April 2026', tanggal_deadline:'2026-05-06'}; }
+  periodInfo.textContent = `${activePeriod.nama_periode || '-'} • Deadline ${formatDate(activePeriod.tanggal_deadline)}`;
+  setDefaultMonth(activePeriod.nama_periode || '');
+  renderQuestions();
+  loadEmployeeNames();
+}
+function renderQuestions(){
+  questions.innerHTML = integrityQuestions.map(q => `
+    <div class="question-card">
+      <label><span class="question-number">${q.no}</span>${q.title}</label>
+      <div class="question-help">${q.help}</div>
+      <div class="radio-grid">
+        ${answerOptions.map((o,i)=>`<label class="radio-option"><input type="radio" name="${q.id}" value="${o}" ${i===0?'required':''}> ${o}</label>`).join('')}
+      </div>
+    </div>`).join('');
+}
+function setDefaultMonth(periodName){
+  const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  const found = months.find(m => periodName.toLowerCase().includes(m.toLowerCase()));
+  if(found) periodeBulan.value = found;
+}
+async function loadEmployeeNames(){
+  try{
+    employeesCache = await requestApi('getEmployees');
+    pegawaiList.innerHTML = employeesCache.map(e => `<option value="${escapeHtml(e.nama || '')}"></option>`).join('');
+  }catch(e){}
+}
+let lookupTimer;
+namaInput.addEventListener('input', () => {
+  clearTimeout(lookupTimer);
+  lookupTimer = setTimeout(lookupByName, 700);
+});
+async function lookupByName(){
+  const nama = namaInput.value.trim();
+  if(!nama) return;
+  const local = employeesCache.find(e => String(e.nama||'').toLowerCase() === nama.toLowerCase());
+  if(local){ applyEmployee(local, false); }
+  try{
+    const data = await requestApi('lookupEmployeeHistory',{ nama });
+    latestHistory = data;
+    if(data.employee) applyEmployee(data.employee, false);
+    if(data.lastResponse) showHistory(data);
+    else showHistory({employee:data.employee, message:'Data pegawai ditemukan, tetapi belum ada histori pengisian sebelumnya.'});
+  }catch(err){
+    if(local) return;
+    historyBox.className = 'history-box show alert warning';
+    historyBox.innerHTML = 'Histori belum ditemukan. Silakan isi manual.';
+  }
+}
+function applyEmployee(emp, overwriteAnswers){
+  if(emp.unit) {
+    const match = Array.from(unitInput.options).find(o => o.value.toLowerCase() === String(emp.unit).toLowerCase());
+    if(match) unitInput.value = match.value;
+  }
+  if(overwriteAnswers && latestHistory && latestHistory.lastResponse){ applyPreviousAnswers(latestHistory.lastResponse); }
+}
+function showHistory(data){
+  const emp = data.employee || {};
+  const rsp = data.lastResponse;
+  historyBox.className = 'history-box show alert info';
+  historyBox.innerHTML = `
+    <span class="status-pill">Histori ditemukan</span>
+    <p><b>${escapeHtml(emp.nama || namaInput.value)}</b>${emp.unit ? ' • '+escapeHtml(emp.unit) : ''}</p>
+    ${rsp ? `<p>Pengisian terakhir: ${escapeHtml(rsp.periode_id || '-')} • ${escapeHtml(rsp.waktu_submit || '-')}</p>` : `<p>${data.message || 'Belum ada histori pengisian.'}</p>`}
+    <div class="small-actions">
+      <button type="button" class="btn btn-secondary" onclick="applyPreviousIdentity()">Pakai identitas histori</button>
+      ${rsp ? `<button type="button" class="btn btn-secondary" onclick="applyPreviousAnswers(latestHistory.lastResponse)">Pakai jawaban sebelumnya</button>` : ''}
+    </div>
+  `;
+}
+function applyPreviousIdentity(){ if(latestHistory && latestHistory.employee) applyEmployee(latestHistory.employee,false); }
+function applyPreviousAnswers(rsp){
+  try{
+    const answers = typeof rsp.answer_json === 'string' ? JSON.parse(rsp.answer_json) : (rsp.answer_json || rsp.answers || {});
+    Object.keys(answers).forEach(key => {
+      const value = answers[key];
+      const radio = document.querySelector(`input[name="${key}"][value="${value}"]`);
+      if(radio) radio.checked = true;
+    });
+    if(rsp.periode_bulan && !periodeBulan.value) periodeBulan.value = rsp.periode_bulan;
+  }catch(e){}
+}
+function nextSection(n){
+  if(n>1 && !formNgingetken.nama.value.trim()) return showToast('Nama pegawai wajib diisi');
+  document.querySelectorAll('.form-section').forEach(s=>s.classList.toggle('active',s.dataset.section==n));
+  document.querySelectorAll('.step').forEach((s,i)=>s.classList.toggle('active',i+1<=n));
+  if(n===4) preview();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function normalizeText(s){ return String(s||'').replace(/["“”]/g,'').replace(/\s+/g,' ').trim().toLowerCase(); }
+function validateStatementAndNext(){
+  const expected = normalizeText(statementText.textContent);
+  const actual = normalizeText(salinanPernyataan.value);
+  if(actual.length < 40) return showToast('Pernyataan wajib disalin terlebih dahulu.');
+  if(actual !== expected && !confirm('Teks pernyataan belum sama persis. Tetap lanjutkan?')) return;
+  nextSection(4);
+}
+function preview(){
+  const fd = new FormData(formNgingetken);
+  const answered = integrityQuestions.filter(q=>fd.get(q.id)).length;
+  previewBox.innerHTML = `<b>${escapeHtml(fd.get('nama')||'-')}</b><br>Unit: ${escapeHtml(fd.get('unit')||'-')}<br>Periode: ${escapeHtml(fd.get('periode_bulan')||'-')} 2026<br>Jawaban integritas terisi: ${answered}/${integrityQuestions.length}`;
+}
+formNgingetken.addEventListener('submit', async e => {
+  e.preventDefault();
+  const fd = new FormData(formNgingetken);
+  const answers = {};
+  integrityQuestions.forEach(q => answers[q.id] = fd.get(q.id) || '');
+  const response = {
+    periode_id: activePeriod.periode_id,
+    periode_bulan: fd.get('periode_bulan'),
+    nama: fd.get('nama'),
+    unit: fd.get('unit'),
+    catatan: fd.get('catatan'),
+    salinan_pernyataan: fd.get('salinan_pernyataan'),
+    answers
+  };
+  try{
+    const res = await requestApi('submitHtmlForm',{response});
+    document.querySelector('.card').innerHTML = `<div class="empty-state"><h2>Pengisian berhasil dikirim</h2><p>Status validasi: <b>${res.status_validasi || '-'}</b></p><p>Skor awal: <b>${res.integrity_score || '-'}</b> • Risiko: <b>${res.risk_level || '-'}</b></p><a class="btn btn-primary" href="index.html">Kembali ke Beranda</a></div>`;
+  }catch(err){ showToast(err.message); }
+});
+function escapeHtml(s){return String(s||'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+init();
+</script>
+</body>
+</html>
