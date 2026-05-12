@@ -7793,6 +7793,25 @@ const NGINGETKEN_DATA = {
   }
 };
 
+function formatPeriodName(value) {
+  const text = String(value || '');
+  const dateMatch = text.match(/^(\d{4})-(\d{2})-\d{2}/);
+  if (dateMatch) {
+    const d = new Date(Number(dateMatch[1]), Number(dateMatch[2]) - 1, 1);
+    return d.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
+  }
+  return text || '-';
+}
+
+function normalizeBackendPeriodNames(data) {
+  if (Array.isArray(data)) return data.map(normalizeBackendPeriodNames);
+  if (data && typeof data === 'object') {
+    Object.keys(data).forEach(key => { data[key] = normalizeBackendPeriodNames(data[key]); });
+    if (data.nama_periode) data.nama_periode = formatPeriodName(data.nama_periode);
+  }
+  return data;
+}
+
 function formatDate(dateStr) {
   if (!dateStr || dateStr === '-') return '-';
   try {
@@ -7861,7 +7880,7 @@ async function requestApi(action, payload = {}) {
       try { json = JSON.parse(text); }
       catch (err) { throw new Error('Respons backend tidak valid. Cek deployment Apps Script.'); }
       if (!json.success) throw new Error(json.message || 'Permintaan ke backend gagal');
-      return json.data;
+      return normalizeBackendPeriodNames(json.data);
     } catch (err) {
       console.warn('Backend Apps Script belum siap, memakai database lokal:', err.message);
     }
