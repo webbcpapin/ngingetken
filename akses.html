@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aplikasi Ngingetken</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <main class="hero">
+    <section class="card hero-card">
+      <div class="eyebrow">Monitoring Integritas Internal</div>
+      <h1>Aplikasi Ngingetken</h1>
+      <p class="lead">Halaman akses cepat untuk pengisian aplikasi NGINGETKEN dan akses admin.</p>
+      <div id="periodNotice" class="notice">Memuat periode aktif...</div>
+      <div class="grid grid-2" style="margin-top:18px">
+        <div class="card stat-card">
+          <div class="stat-label">Periode Aktif</div>
+          <div id="periodName" class="stat-value">-</div>
+          <div class="stat-note">Status pengisian berjalan sesuai periode yang ditetapkan admin.</div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-label">Deadline</div>
+          <div id="periodDeadline" class="stat-value">-</div>
+          <div class="stat-note">Pastikan pengisian dilakukan sebelum batas waktu.</div>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a id="formButton" class="btn btn-gold" href="isi.html">Form Isi Aplikasi Ngingetken</a>
+        <a href="login.html?next=dashboard.html" class="btn btn-secondary">Login Admin</a>
+      </div>
+      <p class="lead" style="margin-top:18px">Form ini merupakan bagian dari monitoring integritas pegawai di lingkungan KPPBC TMP C Pangkalpinang.</p>
+    </section></main>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script>
+    async function init() {
+      try {
+        const period = await requestApi("getActivePeriod");
+        document.getElementById("periodName").textContent = period.nama_periode || "-";
+        document.getElementById("periodDeadline").textContent = formatDate(period.tanggal_deadline);
+        document.getElementById("periodNotice").textContent = `Periode ${period.nama_periode} aktif sampai ${formatDate(period.tanggal_deadline)}.`;
+        const formButton = document.getElementById("formButton");
+        formButton.href = "isi.html";
+      } catch (error) {
+        document.getElementById("periodNotice").textContent = "Periode aktif belum tersedia. Hubungi admin integritas.";
+      }
+    }
+    init();
+  </script>
+</body>
+</html>
