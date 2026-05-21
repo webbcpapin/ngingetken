@@ -44,22 +44,9 @@
               <option>PERBEND</option>
             </select>
           </label>
-          <label>3. Periode <span class="muted">(Tahun 2026)</span>
-            <select class="input select-like" name="periode_bulan" id="periodeBulan" required>
-              <option value="">Pilih Periode</option>
-              <option>Januari</option>
-              <option>Februari</option>
-              <option>Maret</option>
-              <option>April</option>
-              <option>Mei</option>
-              <option>Juni</option>
-              <option>Juli</option>
-              <option>Agustus</option>
-              <option>September</option>
-              <option>Oktober</option>
-              <option>November</option>
-              <option>Desember</option>
-            </select>
+          <label>3. Periode aktif
+            <input class="input" name="periode_bulan" id="periodeBulan" required readonly>
+            <div class="hint">Periode ditentukan otomatis dari dashboard agar rekap tidak tertukar antar tahun.</div>
           </label>
         </div>
         <div id="historyBox" class="history-box alert info"></div>
@@ -128,9 +115,9 @@ let employeesCache = [];
 let latestHistory = null;
 
 async function init(){
-  try{ activePeriod = await requestApi('getActivePeriod'); } catch(e){ activePeriod = {periode_id:'PRD202604', nama_periode:'April 2026', tanggal_deadline:'2026-05-06'}; }
+  try{ activePeriod = await requestApi('getActivePeriod'); } catch(e){ activePeriod = {periode_id:'PRD2026MEI', nama_periode:'Mei 2026', tanggal_deadline:'2026-06-06'}; }
   periodInfo.textContent = `${activePeriod.nama_periode || '-'} • Deadline ${formatDate(activePeriod.tanggal_deadline)}`;
-  setDefaultMonth(activePeriod.nama_periode || '');
+  setActivePeriodField(activePeriod);
   renderQuestions();
   loadEmployeeNames();
 }
@@ -144,10 +131,8 @@ function renderQuestions(){
       </div>
     </div>`).join('');
 }
-function setDefaultMonth(periodName){
-  const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-  const found = months.find(m => periodName.toLowerCase().includes(m.toLowerCase()));
-  if(found) periodeBulan.value = found;
+function setActivePeriodField(period){
+  periodeBulan.value = period.nama_periode || period.periode_id || '';
 }
 async function loadEmployeeNames(){
   try{
@@ -207,7 +192,6 @@ function applyPreviousAnswers(rsp){
       const radio = document.querySelector(`input[name="${key}"][value="${value}"]`);
       if(radio) radio.checked = true;
     });
-    if(rsp.periode_bulan && !periodeBulan.value) periodeBulan.value = rsp.periode_bulan;
   }catch(e){}
 }
 function nextSection(n){
@@ -228,7 +212,7 @@ function validateStatementAndNext(){
 function preview(){
   const fd = new FormData(formNgingetken);
   const answered = integrityQuestions.filter(q=>fd.get(q.id)).length;
-  previewBox.innerHTML = `<b>${escapeHtml(fd.get('nama')||'-')}</b><br>Unit: ${escapeHtml(fd.get('unit')||'-')}<br>Periode: ${escapeHtml(fd.get('periode_bulan')||'-')} 2026<br>Jawaban integritas terisi: ${answered}/${integrityQuestions.length}`;
+  previewBox.innerHTML = `<b>${escapeHtml(fd.get('nama')||'-')}</b><br>Unit: ${escapeHtml(fd.get('unit')||'-')}<br>Periode: ${escapeHtml(fd.get('periode_bulan')||'-')}<br>Jawaban integritas terisi: ${answered}/${integrityQuestions.length}`;
 }
 formNgingetken.addEventListener('submit', async e => {
   e.preventDefault();
@@ -237,7 +221,7 @@ formNgingetken.addEventListener('submit', async e => {
   integrityQuestions.forEach(q => answers[q.id] = fd.get(q.id) || '');
   const response = {
     periode_id: activePeriod.periode_id,
-    periode_bulan: fd.get('periode_bulan'),
+    periode_bulan: activePeriod.nama_periode || fd.get('periode_bulan'),
     nama: fd.get('nama'),
     unit: fd.get('unit'),
     catatan: fd.get('catatan'),

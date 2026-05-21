@@ -7812,6 +7812,27 @@ function normalizeBackendPeriodNames(data) {
   return data;
 }
 
+function parseLocalDate(value) {
+  const match = String(value || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+  return match ? new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3])) : null;
+}
+
+function getLocalActivePeriod() {
+  const today = new Date();
+  const active = NGINGETKEN_DATA.periods.find(p => String(p.status).toLowerCase() === 'aktif');
+  if (active) {
+    const deadline = parseLocalDate(active.tanggal_deadline);
+    if (!deadline || today <= deadline) return active;
+  }
+  const current = NGINGETKEN_DATA.periods.find(p => {
+    const start = parseLocalDate(p.tanggal_mulai);
+    const deadline = parseLocalDate(p.tanggal_deadline);
+    return start && deadline && today >= start && today <= deadline;
+  });
+  if (current) return { ...current, status: String(current.status).toLowerCase() === 'aktif' ? current.status : 'Aktif' };
+  return active || NGINGETKEN_DATA.periods[0];
+}
+
 function formatDate(dateStr) {
   if (!dateStr || dateStr === '-') return '-';
   try {
@@ -7860,6 +7881,17 @@ function downloadCsv(filename, rows) {
 }
 
 
+const CLIENT_WRITE_ACTIONS = new Set([
+  'setupDatabase',
+  'resetDatabase',
+  'createEmployee',
+  'createPeriod',
+  'createFollowUp',
+  'updateFollowUp',
+  'updateMonitoringNote',
+  'submitHtmlForm'
+]);
+
 async function requestApi(action, payload = {}) {
   const config = window.NGINGETKEN_CONFIG || {};
   const apiUrl = config.API_URL || 'mock';
@@ -7882,7 +7914,10 @@ async function requestApi(action, payload = {}) {
       if (!json.success) throw new Error(json.message || 'Permintaan ke backend gagal');
       return normalizeBackendPeriodNames(json.data);
     } catch (err) {
-      console.warn('Backend Apps Script belum siap, memakai database lokal:', err.message);
+      console.warn('Backend Apps Script belum siap:', err.message);
+      if (CLIENT_WRITE_ACTIONS.has(action)) {
+        throw new Error('Data belum tersimpan ke Google Sheet. Cek koneksi/deployment Apps Script, lalu kirim ulang. Detail: ' + err.message);
+      }
     }
   }
 
@@ -7896,8 +7931,7 @@ async function requestApi(action, payload = {}) {
       return JSON.parse(JSON.stringify(NGINGETKEN_DATA.periods));
 
     case 'getActivePeriod': {
-      const active = NGINGETKEN_DATA.periods.find(p => p.status === 'Aktif');
-      return JSON.parse(JSON.stringify(active || NGINGETKEN_DATA.periods[4]));
+      return JSON.parse(JSON.stringify(getLocalActivePeriod()));
     }
 
     case 'getDashboardData':
@@ -7955,11 +7989,12 @@ async function requestApi(action, payload = {}) {
 
     case 'submitHtmlForm': {
       const { response } = payload;
+      const activePeriod = getLocalActivePeriod();
       const newId = 'R' + String(NGINGETKEN_DATA.responses.length + 1).padStart(3, '0');
       const newResponse = {
         response_id: newId,
-        periode_id: response.periode_id,
-        periode_bulan: response.periode_bulan,
+        periode_id: activePeriod.periode_id || response.periode_id,
+        periode_bulan: activePeriod.nama_periode || response.periode_bulan,
         pegawai_id: response.pegawai_id || null,
         nama: response.nama,
         unit: response.unit,
