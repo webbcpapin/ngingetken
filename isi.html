@@ -318,7 +318,12 @@ formNgingetken.addEventListener('submit', async e => {
   };
   try{
     const res = await requestApi('submitHtmlForm',{response});
-    document.querySelector('.card').innerHTML = `<div class="empty-state"><h2>Pengisian berhasil dikirim</h2><p>Status validasi: <b>${res.status_validasi || '-'}</b></p><p>Skor awal: <b>${res.integrity_score || '-'}</b> • Risiko: <b>${res.risk_level || '-'}</b></p><a class="btn btn-primary" href="index.html">Kembali ke Beranda</a></div>`;
+    sessionStorage.setItem('ngingetkenLastSubmit', JSON.stringify({
+      periode: res.periode_bulan || response.periode_bulan || '',
+      status_validasi: res.status_validasi || '',
+      risk_level: res.risk_level || ''
+    }));
+    window.location.href = 'sukses.html';
   }catch(err){ showToast(err.message); }
 });
 function escapeHtml(s){return String(s||'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}

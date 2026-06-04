@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Pengisian Berhasil - Ngingetken</title>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+    .success-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px}
+    .success-card{width:100%;max-width:760px;text-align:center;padding:42px 28px}
+    .success-mark{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;background:#d1fae5;color:#065f46;font-size:38px;font-weight:900}
+    .success-title{font-size:30px;margin-bottom:10px}
+    .success-message{max-width:560px;margin:0 auto 22px;color:#475569;font-size:16px}
+    .success-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px auto;max-width:640px;text-align:left}
+    .summary-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:14px}
+    .summary-label{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:#64748b;font-weight:700}
+    .summary-value{margin-top:6px;color:#0f2d52;font-weight:800}
+    @media (max-width:720px){.success-summary{grid-template-columns:1fr}.success-title{font-size:24px}}
+  </style>
+</head>
+<body>
+<main class="success-page">
+  <section class="card success-card">
+    <div class="success-mark">✓</div>
+    <div class="eyebrow">Pengisian Terkirim</div>
+    <h1 class="success-title">Terima kasih sudah mengisi aplikasi NGINGETKEN</h1>
+    <p class="success-message">Data pengisian sudah berhasil dikirim dan akan tercatat pada dashboard monitoring internal.</p>
+    <div class="success-summary" id="summaryBox"></div>
+    <div class="toolbar" style="justify-content:center">
+      <a class="btn btn-primary" href="index.html">Kembali ke Beranda</a>
+      <a class="btn btn-secondary" href="isi.html">Isi Lagi</a>
+    </div>
+  </section>
+</main>
+<script>
+function escapeHtml(s){return String(s||'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+const saved = sessionStorage.getItem('ngingetkenLastSubmit');
+let data = {};
+try { data = saved ? JSON.parse(saved) : {}; } catch(e) { data = {}; }
+const items = [
+  ['Periode', data.periode || '-'],
+  ['Status Validasi', data.status_validasi || '-'],
+  ['Risiko', data.risk_level || '-']
+];
+summaryBox.innerHTML = items.map(([label,value]) => `<div class="summary-item"><div class="summary-label">${label}</div><div class="summary-value">${escapeHtml(value)}</div></div>`).join('');
+</script>
+</body>
+</html>
