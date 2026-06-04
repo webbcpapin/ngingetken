@@ -1,4 +1,4 @@
 window.NGINGETKEN_CONFIG = {
-  API_URL: "https://script.google.com/macros/s/AKfycbwF7W8kM7uuOZkjOdB6KS_1NbiuCMyhSvseWnotfvRnv8DFiGZR23eSXokH2bbxjsmF_Q/exec",
+  API_URL: "https://script.google.com/macros/s/AKfycbz_1bKZdm_Jr5IRmkv7w8-65xnvxcg6MuAuoSnKTm7E9_RhuhYiz4QCofbKEdSLhKE37g/exec",
   ADMIN_TOKEN: "ganti-token-rahasia"
 };
