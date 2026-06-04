@@ -7911,10 +7911,15 @@ async function requestApi(action, payload = {}) {
       let json;
       try { json = JSON.parse(text); }
       catch (err) { throw new Error('Respons backend tidak valid. Cek deployment Apps Script.'); }
-      if (!json.success) throw new Error(json.message || 'Permintaan ke backend gagal');
+      if (!json.success) {
+        const backendError = new Error(json.message || 'Permintaan ke backend gagal');
+        backendError.backendHandled = true;
+        throw backendError;
+      }
       return normalizeBackendPeriodNames(json.data);
     } catch (err) {
       console.warn('Backend Apps Script belum siap:', err.message);
+      if (err.backendHandled) throw err;
       if (CLIENT_WRITE_ACTIONS.has(action)) {
         throw new Error('Data belum tersimpan ke Google Sheet. Cek koneksi/deployment Apps Script, lalu kirim ulang. Detail: ' + err.message);
       }

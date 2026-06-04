@@ -6,7 +6,7 @@
   <title>Form Isi Aplikasi Ngingetken</title>
   <link rel="stylesheet" href="assets/css/style.css"/>
   <style>
-    .hint{font-size:12px;color:#64748b;margin-top:6px}.question-help{font-size:13px;color:#475569;line-height:1.5;margin:8px 0 12px;padding:12px;background:#f8fafc;border-left:4px solid #f5b700;border-radius:12px}.history-box{display:none;margin-top:12px}.history-box.show{display:block}.copy-statement{background:#f8fafc;border:1px dashed #94a3b8;padding:14px;border-radius:14px;font-weight:600;line-height:1.6}.privacy-note{font-size:12px;color:#64748b;background:#f8fafc;border-radius:12px;padding:10px;margin-top:10px}.select-like{appearance:auto}.status-pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 10px;background:#eef2ff;color:#3730a3;font-size:12px;font-weight:700}.question-number{display:inline-flex;width:28px;height:28px;border-radius:999px;background:#0f2d52;color:#fff;align-items:center;justify-content:center;font-size:12px;margin-right:8px}.small-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .hint{font-size:12px;color:#64748b;margin-top:6px}.question-help{font-size:13px;color:#475569;line-height:1.5;margin:8px 0 12px;padding:12px;background:#f8fafc;border-left:4px solid #f5b700;border-radius:12px}.history-box{display:none;margin-top:12px}.history-box.show{display:block}.copy-statement{background:#f8fafc;border:1px dashed #94a3b8;padding:14px;border-radius:14px;font-weight:600;line-height:1.6}.privacy-note{font-size:12px;color:#64748b;background:#f8fafc;border-radius:12px;padding:10px;margin-top:10px}.select-like{appearance:auto}.status-pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 10px;background:#eef2ff;color:#3730a3;font-size:12px;font-weight:700}.question-number{display:inline-flex;width:28px;height:28px;border-radius:999px;background:#0f2d52;color:#fff;align-items:center;justify-content:center;font-size:12px;margin-right:8px}.small-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.question-group-title{margin:24px 0 10px;color:#0f2d52}.question-card textarea{margin-top:8px}.rating-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(116px,1fr));gap:10px}.rating-option input{position:absolute;opacity:0}.rating-option span{display:flex;align-items:center;justify-content:center;border:1px solid #dbe3ef;border-radius:12px;padding:12px 8px;background:#fff;font-size:18px;color:#94a3b8;font-weight:800;min-height:48px}.rating-option input:checked+span{border-color:#f5b700;background:#fff8db;color:#d28a00}.monthly-link{color:#0f2d52;font-weight:700;word-break:break-word}
   </style>
 </head>
 <body>
@@ -110,6 +110,54 @@ const integrityQuestions = [
   {id:'q11_penggelapan_jabatan', no:11, title:'Apakah anda mengetahui adanya penggelapan dalam jabatan?', help:'Penggelapan dalam jabatan adalah tindakan dengan sengaja menggelapkan uang atau surat berharga, melakukan pemalsuan buku-buku atau daftar-daftar yang khusus untuk pemeriksaan administrasi, merobek dan menghancurkan barang bukti suap untuk melindungi pemberi suap, dan lain-lain.'}
 ];
 const answerOptions = ['Ya','Tidak','Ragu-ragu'];
+const monthlyQuestions = [
+  {
+    id: 'q12_hris_accuracy',
+    no: 12,
+    type: 'radio',
+    title: 'Konfirmasi akurasi HRIS',
+    help: 'AKURASI HRIS - Periode: JUNI 2026. Mohon klik deklarasi akurasi HRIS jika data sudah sesuai. Akurasi melalui <a class="monthly-link" href="https://hris.e-prime.kemenkeu.go.id" target="_blank" rel="noopener">https://hris.e-prime.kemenkeu.go.id</a>',
+    options: ['Sudah klik deklarasi akurasi HRIS', 'Belum, saya akan akses HRIS terlebih dahulu']
+  },
+  {
+    id: 'q13_employee_advocacy',
+    no: 13,
+    type: 'radio',
+    title: 'Konfirmasi pengisian Employee Advocacy terakhir',
+    help: 'Content amplification guidelines dapat diakses melalui <a class="monthly-link" href="https://kemenkeu.sharepoint.com/sites/EmployeeAdvocacy" target="_blank" rel="noopener">https://kemenkeu.sharepoint.com/sites/EmployeeAdvocacy</a>. Jika sudah bisa lanjut, jika belum silakan akses link tersebut.',
+    options: ['Sudah menyelesaikan EA terakhir', 'Belum, saya akan akses panduan EA terlebih dahulu']
+  },
+  {
+    id: 'q14_daily_steps',
+    no: 14,
+    type: 'radio',
+    title: 'Imbauan jalan kaki 5.000 langkah per hari',
+    help: 'Konfirmasi secara jujur rata-rata langkah harian bulan ini.',
+    options: ['Melebihi 5.000 langkah', '3.000-5.000 langkah', '1.000-2.000 langkah', 'Kurang dari 1.000 langkah']
+  },
+  {
+    id: 'q15_internal_info_satisfaction',
+    no: 15,
+    type: 'rating',
+    title: 'Survei Kepuasan atas Layanan Informasi Internal',
+    help: 'Beri nilai 1 sampai 5 bintang.'
+  },
+  {
+    id: 'q16_innovation_idea',
+    no: 16,
+    type: 'textarea',
+    title: 'Ide Inovasi',
+    help: 'Tuliskan ide inovasi yang ingin disampaikan.'
+  },
+  {
+    id: 'q17_app_feedback',
+    no: 17,
+    type: 'textarea',
+    title: 'Saran dan masukan aplikasi Ngingetken',
+    help: 'Tuliskan saran agar aplikasi Ngingetken lebih mudah dipakai.'
+  }
+];
+const requiredAnswerIds = [...integrityQuestions.map(q => q.id), ...monthlyQuestions.filter(q => q.type !== 'textarea').map(q => q.id)];
 let activePeriod = {};
 let employeesCache = [];
 let latestHistory = null;
@@ -122,7 +170,7 @@ async function init(){
   loadEmployeeNames();
 }
 function renderQuestions(){
-  questions.innerHTML = integrityQuestions.map(q => `
+  const integrityHtml = integrityQuestions.map(q => `
     <div class="question-card">
       <label><span class="question-number">${q.no}</span>${q.title}</label>
       <div class="question-help">${q.help}</div>
@@ -130,6 +178,22 @@ function renderQuestions(){
         ${answerOptions.map((o,i)=>`<label class="radio-option"><input type="radio" name="${q.id}" value="${o}" ${i===0?'required':''}> ${o}</label>`).join('')}
       </div>
     </div>`).join('');
+  const monthlyHtml = monthlyQuestions.map(q => `
+    <div class="question-card">
+      <label><span class="question-number">${q.no}</span>${q.title}</label>
+      <div class="question-help">${q.help}</div>
+      ${renderMonthlyQuestion(q)}
+    </div>`).join('');
+  questions.innerHTML = `<h3 class="question-group-title">Integritas</h3>${integrityHtml}<h3 class="question-group-title">Konfirmasi Bulanan</h3>${monthlyHtml}`;
+}
+function renderMonthlyQuestion(q){
+  if(q.type === 'rating') {
+    return `<div class="rating-grid">${[1,2,3,4,5].map(v => `<label class="rating-option"><input type="radio" name="${q.id}" value="${v}" ${v===1?'required':''}><span>${'★'.repeat(v)}</span></label>`).join('')}</div>`;
+  }
+  if(q.type === 'textarea') {
+    return `<textarea class="input" name="${q.id}" rows="4" placeholder="Tulis jawaban di sini"></textarea>`;
+  }
+  return `<div class="radio-grid">${q.options.map((o,i)=>`<label class="radio-option"><input type="radio" name="${q.id}" value="${o}" ${i===0?'required':''}> ${o}</label>`).join('')}</div>`;
 }
 function setActivePeriodField(period){
   periodeBulan.value = period.nama_periode || period.periode_id || '';
@@ -191,11 +255,35 @@ function applyPreviousAnswers(rsp){
       const value = answers[key];
       const radio = document.querySelector(`input[name="${key}"][value="${value}"]`);
       if(radio) radio.checked = true;
+      const field = document.querySelector(`textarea[name="${key}"]`);
+      if(field) field.value = value;
     });
   }catch(e){}
 }
+function validateActiveSection(){
+  const active = document.querySelector('.form-section.active');
+  if(!active) return true;
+  const required = [...active.querySelectorAll('[required]')];
+  const radioNames = [...new Set(required.filter(el => el.type === 'radio').map(el => el.name))];
+  for(const name of radioNames) {
+    if(!active.querySelector(`input[name="${name}"]:checked`)) {
+      showToast('Lengkapi semua pilihan wajib sebelum lanjut.');
+      return false;
+    }
+  }
+  for(const field of required.filter(el => el.type !== 'radio')) {
+    if((field.type === 'checkbox' && !field.checked) || (field.type !== 'checkbox' && !field.value.trim())) {
+      field.focus();
+      showToast('Lengkapi isian wajib sebelum lanjut.');
+      return false;
+    }
+  }
+  return true;
+}
 function nextSection(n){
   if(n>1 && !formNgingetken.nama.value.trim()) return showToast('Nama pegawai wajib diisi');
+  const current = Number(document.querySelector('.form-section.active')?.dataset.section || 1);
+  if(n > current && !validateActiveSection()) return;
   document.querySelectorAll('.form-section').forEach(s=>s.classList.toggle('active',s.dataset.section==n));
   document.querySelectorAll('.step').forEach((s,i)=>s.classList.toggle('active',i+1<=n));
   if(n===4) preview();
@@ -211,14 +299,14 @@ function validateStatementAndNext(){
 }
 function preview(){
   const fd = new FormData(formNgingetken);
-  const answered = integrityQuestions.filter(q=>fd.get(q.id)).length;
-  previewBox.innerHTML = `<b>${escapeHtml(fd.get('nama')||'-')}</b><br>Unit: ${escapeHtml(fd.get('unit')||'-')}<br>Periode: ${escapeHtml(fd.get('periode_bulan')||'-')}<br>Jawaban integritas terisi: ${answered}/${integrityQuestions.length}`;
+  const answered = requiredAnswerIds.filter(id=>fd.get(id)).length;
+  previewBox.innerHTML = `<b>${escapeHtml(fd.get('nama')||'-')}</b><br>Unit: ${escapeHtml(fd.get('unit')||'-')}<br>Periode: ${escapeHtml(fd.get('periode_bulan')||'-')}<br>Jawaban wajib terisi: ${answered}/${requiredAnswerIds.length}`;
 }
 formNgingetken.addEventListener('submit', async e => {
   e.preventDefault();
   const fd = new FormData(formNgingetken);
   const answers = {};
-  integrityQuestions.forEach(q => answers[q.id] = fd.get(q.id) || '');
+  [...integrityQuestions, ...monthlyQuestions].forEach(q => answers[q.id] = fd.get(q.id) || '');
   const response = {
     periode_id: activePeriod.periode_id,
     periode_bulan: activePeriod.nama_periode || fd.get('periode_bulan'),
