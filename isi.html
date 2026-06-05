@@ -155,6 +155,14 @@ const monthlyQuestions = [
     type: 'textarea',
     title: 'Saran dan masukan aplikasi Ngingetken',
     help: 'Tuliskan saran agar aplikasi Ngingetken lebih mudah dipakai.'
+  },
+  {
+    id: 'q18_english_day',
+    no: 18,
+    type: 'radio',
+    title: 'Konfirmasi quest Aplikasi English Day',
+    help: 'Apakah anda sudah login dan menyelesaikan quest dari Aplikasi English Day? Akses aplikasi melalui <a class="monthly-link" href="https://webbcpapin.github.io/englishday/" target="_blank" rel="noopener">https://webbcpapin.github.io/englishday/</a>',
+    options: ['Sudah login dan menyelesaikan quest English Day', 'Belum, saya akan akses English Day terlebih dahulu']
   }
 ];
 const requiredAnswerIds = [...integrityQuestions.map(q => q.id), ...monthlyQuestions.filter(q => q.type !== 'textarea').map(q => q.id)];
@@ -198,6 +206,21 @@ function renderMonthlyQuestion(q){
 function setActivePeriodField(period){
   periodeBulan.value = period.nama_periode || period.periode_id || '';
 }
+function responseIsCurrentPeriod(rsp){
+  if(!rsp || !activePeriod) return false;
+  const rspPeriod = String(rsp.periode_id || '').trim();
+  const currentId = String(activePeriod.periode_id || '').trim();
+  const rspName = String(rsp.periode_bulan || '').trim().toLowerCase();
+  const currentName = String(activePeriod.nama_periode || '').trim().toLowerCase();
+  return (rspPeriod && currentId && rspPeriod === currentId) || (rspName && currentName && rspName === currentName);
+}
+function goAlreadySubmitted(nama, periode){
+  sessionStorage.setItem('ngingetkenAlreadySubmitted', JSON.stringify({
+    nama: nama || namaInput.value || '',
+    periode: periode || activePeriod.nama_periode || periodeBulan.value || ''
+  }));
+  window.location.href = 'sudah-mengisi.html';
+}
 async function loadEmployeeNames(){
   try{
     employeesCache = await requestApi('getEmployees');
@@ -218,6 +241,10 @@ async function lookupByName(){
     const data = await requestApi('lookupEmployeeHistory',{ nama });
     latestHistory = data;
     if(data.employee) applyEmployee(data.employee, false);
+    if(responseIsCurrentPeriod(data.lastResponse)) {
+      goAlreadySubmitted(data.employee?.nama || nama, data.lastResponse?.periode_bulan || activePeriod.nama_periode);
+      return;
+    }
     if(data.lastResponse) showHistory(data);
     else showHistory({employee:data.employee, message:'Data pegawai ditemukan, tetapi belum ada histori pengisian sebelumnya.'});
   }catch(err){
@@ -324,7 +351,13 @@ formNgingetken.addEventListener('submit', async e => {
       risk_level: res.risk_level || ''
     }));
     window.location.href = 'sukses.html';
-  }catch(err){ showToast(err.message); }
+  }catch(err){
+    if(String(err.message || '').toLowerCase().includes('sudah tercatat')) {
+      goAlreadySubmitted(response.nama, response.periode_bulan);
+      return;
+    }
+    showToast(err.message);
+  }
 });
 function escapeHtml(s){return String(s||'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
 init();

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Sudah Mengisi - Ngingetken</title>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+    .done-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px}
+    .done-card{width:100%;max-width:760px;text-align:center;padding:42px 28px}
+    .done-mark{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;background:#dbeafe;color:#1e40af;font-size:26px;font-weight:900}
+    .done-title{font-size:30px;margin-bottom:10px}
+    .done-message{max-width:560px;margin:0 auto 22px;color:#475569;font-size:16px}
+    .done-summary{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:24px auto;max-width:560px;text-align:left}
+    .summary-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:14px}
+    .summary-label{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:#64748b;font-weight:700}
+    .summary-value{margin-top:6px;color:#0f2d52;font-weight:800}
+    @media (max-width:720px){.done-summary{grid-template-columns:1fr}.done-title{font-size:24px}}
+  </style>
+</head>
+<body>
+<main class="done-page">
+  <section class="card done-card">
+    <div class="done-mark">OK</div>
+    <div class="eyebrow">Pengisian Sudah Tercatat</div>
+    <h1 class="done-title">Anda sudah mengisi aplikasi NGINGETKEN</h1>
+    <p class="done-message">Data pengisian untuk periode ini sudah tercatat. Tidak perlu mengisi ulang, kecuali admin meminta perbaikan data.</p>
+    <div class="done-summary" id="summaryBox"></div>
+    <div class="toolbar" style="justify-content:center">
+      <a class="btn btn-primary" href="index.html">Kembali ke Beranda</a>
+    </div>
+  </section>
+</main>
+<script>
+function escapeHtml(s){return String(s||'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+const saved = sessionStorage.getItem('ngingetkenAlreadySubmitted');
+let data = {};
+try { data = saved ? JSON.parse(saved) : {}; } catch(e) { data = {}; }
+const items = [
+  ['Nama', data.nama || '-'],
+  ['Periode', data.periode || '-']
+];
+summaryBox.innerHTML = items.map(([label,value]) => `<div class="summary-item"><div class="summary-label">${label}</div><div class="summary-value">${escapeHtml(value)}</div></div>`).join('');
+</script>
+</body>
+</html>
