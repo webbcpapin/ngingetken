@@ -1,8 +1,115 @@
 <!doctype html>
 <html lang="id">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Periode - Ngingetken</title><link rel="stylesheet" href="assets/css/style.css"><script src="assets/js/auth.js"></script><script>requireAdminAccess();</script></head>
-<body><div class="app-shell"><aside class="sidebar"><div class="brand"><div class="brand-mark">N</div><div><div class="brand-title">Ngingetken</div><div class="brand-subtitle">KPPBC TMP C Pangkalpinang</div></div></div><nav class="nav"><a href="dashboard.html">📊 Dashboard</a><a href="pegawai.html">👥 Pegawai</a><a class="active" href="periode.html">🗓️ Periode</a><a href="laporan.html">📄 Laporan</a><a href="index.html">🏠 Landing</a></nav></aside><main class="main"><div class="topbar"><div><div class="eyebrow">Konfigurasi</div><h1>Manajemen Periode</h1><p class="lead">Buat dan kelola periode pengisian NGINGETKEN beserta link form aktif.</p></div><button class="btn btn-primary" onclick="openModal()">Tambah Periode</button></div><section class="card"><div class="table-wrap"><table><thead><tr><th>Periode</th><th>Mulai</th><th>Deadline</th><th>Link Form</th><th>Status</th></tr></thead><tbody id="periodBody"><tr><td colspan="5" class="empty">Memuat data...</td></tr></tbody></table></div></section></main></div>
-<div id="periodModal" class="modal-backdrop"><div class="card modal"><h2>Tambah Periode</h2><form id="periodForm" class="form-grid"><div class="form-field"><label>Nama Periode</label><input required name="nama_periode" class="input" placeholder="Mei 2026"></div><div class="form-field"><label>Tanggal Mulai</label><input required type="date" name="tanggal_mulai" class="input"></div><div class="form-field"><label>Deadline</label><input required readonly type="date" name="tanggal_deadline" id="deadlineInput" class="input"><div class="hint">Otomatis tanggal 6 bulan berikutnya.</div></div><div class="form-field"><label>Status</label><select name="status"><option>Draft</option><option>Aktif</option><option>Selesai</option></select></div><div class="form-field" style="grid-column:1/-1"><label>URL Form</label><input required type="url" name="form_url" class="input" placeholder="https://forms.office.com/..."></div><div class="toolbar" style="grid-column:1/-1"><button class="btn btn-primary">Simpan</button><button type="button" class="btn btn-secondary" onclick="closeModal()">Batal</button></div></form></div></div>
-<script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script>
-let periods=[]; async function init(){ periods=await requestApi('getPeriods'); renderPeriods(); } function renderPeriods(){ const body=document.getElementById('periodBody'); if(!periods.length){body.innerHTML='<tr><td colspan="5" class="empty">Belum ada periode.</td></tr>'; return;} body.innerHTML=periods.map(p=>`<tr><td><strong>${p.nama_periode}</strong></td><td>${formatDate(p.tanggal_mulai)}</td><td>${formatDate(p.tanggal_deadline)}</td><td><a href="${p.form_url}" target="_blank">Buka Form</a></td><td><span class="badge ${badgeStatus(p.status)}">${p.status}</span></td></tr>`).join(''); } function openModal(){document.getElementById('periodModal').classList.add('show'); updateDeadline();} function closeModal(){document.getElementById('periodModal').classList.remove('show')} function deadlineNextMonthSix(startDate){ if(!startDate) return ''; const d=new Date(startDate+'T00:00:00'); const deadline=new Date(d.getFullYear(),d.getMonth()+1,6); return `${deadline.getFullYear()}-${String(deadline.getMonth()+1).padStart(2,'0')}-06`; } function updateDeadline(){ const start=document.querySelector('[name="tanggal_mulai"]'); const deadline=document.getElementById('deadlineInput'); if(start&&deadline) deadline.value=deadlineNextMonthSix(start.value); } document.querySelector('[name="tanggal_mulai"]').addEventListener('change', updateDeadline); document.getElementById('periodForm').addEventListener('submit', async e=>{e.preventDefault(); updateDeadline(); const period=Object.fromEntries(new FormData(e.target).entries()); const saved=await requestApi('createPeriod',{period}); periods.push(saved); e.target.reset(); closeModal(); renderPeriods(); showToast('Periode berhasil ditambahkan');}); init().catch(err=>showToast(err.message));
-</script></body></html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Periode - Ngingetken</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/auth.js"></script>
+  <script>requireAdminAccess();</script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">N</div><div><div class="brand-title">Ngingetken</div><div class="brand-subtitle">KPPBC TMP C Pangkalpinang</div></div></div>
+    <nav class="nav">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="pegawai.html">Pegawai</a>
+      <a class="active" href="periode.html">Periode</a>
+      <a href="laporan.html">Laporan</a>
+      <a href="index.html">Landing</a>
+    </nav>
+  </aside>
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">Konfigurasi</div>
+        <h1>Manajemen Periode</h1>
+        <p class="lead">Buat, kelola, dan buka rekap setiap periode pengisian NGINGETKEN.</p>
+      </div>
+      <button class="btn btn-primary" onclick="openModal()">Tambah Periode</button>
+    </div>
+
+    <section class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Periode</th><th>Mulai</th><th>Deadline</th><th>Link Form</th><th>Status</th><th>Aksi</th></tr></thead>
+          <tbody id="periodBody"><tr><td colspan="6" class="empty">Memuat data...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="periodModal" class="modal-backdrop">
+  <div class="card modal">
+    <h2>Tambah Periode</h2>
+    <form id="periodForm" class="form-grid">
+      <div class="form-field"><label>Nama Periode</label><input required name="nama_periode" class="input" placeholder="Mei 2026"></div>
+      <div class="form-field"><label>Tanggal Mulai</label><input required type="date" name="tanggal_mulai" class="input"></div>
+      <div class="form-field"><label>Deadline</label><input required readonly type="date" name="tanggal_deadline" id="deadlineInput" class="input"><div class="hint">Otomatis tanggal 6 bulan berikutnya.</div></div>
+      <div class="form-field"><label>Status</label><select name="status"><option>Draft</option><option>Aktif</option><option>Selesai</option></select></div>
+      <div class="form-field" style="grid-column:1/-1"><label>URL Form</label><input required type="url" name="form_url" class="input" placeholder="https://forms.office.com/..."></div>
+      <div class="toolbar" style="grid-column:1/-1"><button class="btn btn-primary">Simpan</button><button type="button" class="btn btn-secondary" onclick="closeModal()">Batal</button></div>
+    </form>
+  </div>
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script>
+let periods = [];
+
+async function init() {
+  periods = await requestApi('getPeriods');
+  renderPeriods();
+}
+
+function renderPeriods() {
+  const body = document.getElementById('periodBody');
+  if (!periods.length) {
+    body.innerHTML = '<tr><td colspan="6" class="empty">Belum ada periode.</td></tr>';
+    return;
+  }
+  body.innerHTML = periods.map(p => `<tr><td><strong>${p.nama_periode}</strong></td><td>${formatDate(p.tanggal_mulai)}</td><td>${formatDate(p.tanggal_deadline)}</td><td><a href="${p.form_url}" target="_blank">Buka Form</a></td><td><span class="badge ${badgeStatus(p.status)}">${p.status}</span></td><td class="table-actions"><a class="btn btn-secondary" href="dashboard.html?periode_id=${p.periode_id}">Dashboard</a><a class="btn btn-secondary" href="riwayat.html?periode_id=${p.periode_id}">Riwayat</a><a class="btn btn-secondary" href="laporan.html?periode_id=${p.periode_id}">Laporan</a></td></tr>`).join('');
+}
+
+function openModal() {
+  document.getElementById('periodModal').classList.add('show');
+  updateDeadline();
+}
+
+function closeModal() {
+  document.getElementById('periodModal').classList.remove('show');
+}
+
+function deadlineNextMonthSix(startDate) {
+  if (!startDate) return '';
+  const d = new Date(startDate + 'T00:00:00');
+  const deadline = new Date(d.getFullYear(), d.getMonth() + 1, 6);
+  return `${deadline.getFullYear()}-${String(deadline.getMonth() + 1).padStart(2, '0')}-06`;
+}
+
+function updateDeadline() {
+  const start = document.querySelector('[name="tanggal_mulai"]');
+  const deadline = document.getElementById('deadlineInput');
+  if (start && deadline) deadline.value = deadlineNextMonthSix(start.value);
+}
+
+document.querySelector('[name="tanggal_mulai"]').addEventListener('change', updateDeadline);
+document.getElementById('periodForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  updateDeadline();
+  const period = Object.fromEntries(new FormData(e.target).entries());
+  const saved = await requestApi('createPeriod', { period });
+  periods.push(saved);
+  e.target.reset();
+  closeModal();
+  renderPeriods();
+  showToast('Periode berhasil ditambahkan');
+});
+
+init().catch(err => showToast(err.message));
+</script>
+</body>
+</html>

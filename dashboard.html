@@ -1,19 +1,176 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Dashboard Admin - Ngingetken v4</title><link rel="stylesheet" href="assets/css/style.css"/><script src="assets/js/auth.js"></script><script>requireAdminAccess();</script></head><body><div class="app-shell">
-<aside class="sidebar"><div class="brand"><div class="brand-mark">N</div><div><div class="brand-title">Ngingetken</div><div class="brand-subtitle">KPPBC TMP C Pangkalpinang</div></div></div><nav class="nav"><a class="active" href="dashboard.html">📊 Dashboard</a><a href="viewer.html">👔 Viewer Pimpinan</a><a href="isi.html">📝 Form Isi Aplikasi</a><a href="pegawai.html">👥 Pegawai</a><a href="periode.html">🗓️ Periode</a><a href="tindak-lanjut.html">✅ Tindak Lanjut</a><a href="riwayat.html">🧾 Riwayat</a><a href="laporan.html">📄 Laporan</a><a href="audit.html">🔐 Audit Log</a></nav></aside>
-<main class="main"><div class="topbar"><div><div class="eyebrow">Dashboard Admin v4</div><h1>Command Center Ngingetken</h1><p id="periodInfo" class="lead">Memuat data periode...</p></div><div class="toolbar"><button class="btn btn-secondary" onclick="setupDb()">Setup DB</button><button class="btn btn-secondary" onclick="resetDb()">Reset DB Excel</button><button class="btn btn-secondary" onclick="copyReminder()">Salin Reminder</button><button class="btn btn-primary" onclick="exportMonitoring()">Export CSV</button></div></div>
-<section class="grid grid-4"><div class="card stat-card"><div class="stat-label">Total Pegawai</div><div id="total" class="stat-value">0</div><div class="stat-note">Pegawai aktif</div></div><div class="card stat-card"><div class="stat-label">Sudah Mengisi</div><div id="submitted" class="stat-value">0</div><div class="stat-note">Respons valid</div></div><div class="card stat-card"><div class="stat-label">Belum Mengisi</div><div id="pending" class="stat-value">0</div><div class="stat-note">Perlu reminder</div></div><div class="card stat-card"><div class="stat-label">Kepatuhan</div><div id="percentage" class="stat-value">0%</div><div class="progress"><span id="progressBar"></span></div></div></section>
-<section class="grid grid-3" style="margin-top:16px"><div class="card"><h3>Progress Periode</h3><div class="progress-ring" id="ring" style="--value:0%">0%</div><p class="muted">Persentase pegawai yang sudah tercatat mengisi.</p></div><div class="card"><h3>Ringkasan Risiko</h3><div id="riskSummary" class="grid"></div></div><div class="card"><h3>Aksi Cepat</h3><div class="toolbar"><a class="btn btn-primary" href="isi.html">Buka Form</a><a class="btn btn-secondary" href="viewer.html">Mode Pimpinan</a><a class="btn btn-secondary" href="tindak-lanjut.html">Tindak Lanjut</a></div><p class="muted">Form Isi Aplikasi menjadi kanal utama pengisian pegawai.</p></div></section>
-<section class="grid grid-2" style="margin-top:16px"><div class="card"><h3>Kepatuhan per Unit</h3><div class="table-wrap"><table><thead><tr><th>Unit</th><th>Total</th><th>Sudah</th><th>Belum</th><th>%</th></tr></thead><tbody id="unitBody"></tbody></table></div></div><div class="card"><h3>Open Tindak Lanjut</h3><div id="followupBox"></div></div></section>
-<section class="card" style="margin-top:16px"><div class="toolbar"><input id="searchInput" class="input" style="max-width:330px" placeholder="Cari nama atau unit..." oninput="renderTable()"/><select id="statusFilter" style="max-width:220px" onchange="renderTable()"><option value="">Semua Status</option><option>Sudah Mengisi</option><option>Belum Mengisi</option></select><select id="unitFilter" style="max-width:220px" onchange="renderTable()"><option value="">Semua Unit</option></select><select id="riskFilter" style="max-width:220px" onchange="renderTable()"><option value="">Semua Risiko</option><option>Rendah</option><option>Sedang</option><option>Tinggi</option></select></div><div class="table-wrap"><table><thead><tr><th>Nama</th><th>Unit</th><th>Status</th><th>Waktu Isi</th><th>Skor</th><th>Risiko</th><th>Aksi</th></tr></thead><tbody id="monitoringBody"><tr><td colspan="7" class="empty">Memuat data...</td></tr></tbody></table></div></section>
-</main></div><script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script>
-let dashboardData=null;async function init(){dashboardData=await requestApi('getDashboardData');const p=dashboardData.activePeriod||{};periodInfo.textContent=`${p.nama_periode||'-'} • Deadline ${formatDate(p.tanggal_deadline)} • Status ${p.status||'-'}`;total.textContent=dashboardData.summary.total;submitted.textContent=dashboardData.summary.submitted;pending.textContent=dashboardData.summary.pending;percentage.textContent=`${dashboardData.summary.percentage}%`;progressBar.style.width=`${dashboardData.summary.percentage}%`;ring.style.setProperty('--value',`${dashboardData.summary.percentage}%`);ring.textContent=`${dashboardData.summary.percentage}%`;const units=[...new Set(dashboardData.monitoring.map(x=>x.unit).filter(Boolean))].sort();unitFilter.innerHTML='<option value="">Semua Unit</option>'+units.map(u=>`<option>${u}</option>`).join('');renderUnits();renderRisk();renderFollowups();renderTable();}
-function renderRisk(){const r=dashboardData.summary.riskSummary||{};riskSummary.innerHTML=`<div class="mini-card"><b class="risk-low">${r.rendah||0}</b><br>Rendah</div><div class="mini-card"><b class="risk-medium">${r.sedang||0}</b><br>Sedang</div><div class="mini-card"><b class="risk-high">${r.tinggi||0}</b><br>Tinggi</div>`}
-function renderUnits(){const rows=dashboardData.byUnit||[];unitBody.innerHTML=rows.map(r=>`<tr><td>${r.unit}</td><td>${r.total}</td><td>${r.submitted}</td><td>${r.pending}</td><td>${r.total?Math.round(r.submitted/r.total*100):0}%</td></tr>`).join('')||'<tr><td colspan="5" class="empty">Belum ada data.</td></tr>'}
-function renderFollowups(){const rows=dashboardData.followups||[];followupBox.innerHTML=rows.length?rows.slice(0,4).map(f=>`<div class="kanban-item"><b>${f.nama||'-'}</b><br><span class="badge ${badgeStatus(f.status)}">${f.status}</span> <span class="badge ${badgeStatus(f.prioritas)}">${f.prioritas}</span><p>${f.catatan||''}</p></div>`).join(''):'<div class="empty-state">Belum ada tindak lanjut terbuka.</div>'}
-function filteredRows(){const q=searchInput.value.toLowerCase(),status=statusFilter.value,unit=unitFilter.value,risk=riskFilter.value;return(dashboardData?.monitoring||[]).filter(row=>{const text=Object.values(row).join(' ').toLowerCase();return(!q||text.includes(q))&&(!status||row.status_pengisian===status)&&(!unit||row.unit===unit)&&(!risk||row.risk_level===risk);});}
-function renderTable(){const rows=filteredRows();monitoringBody.innerHTML=rows.length?rows.map(row=>`<tr><td><strong>${row.nama}</strong></td><td>${row.unit||'-'}</td><td><span class="badge ${badgeStatus(row.status_pengisian)}">${row.status_pengisian}</span></td><td>${row.waktu_submit||'-'}</td><td>${row.integrity_score||'-'}</td><td><span class="badge ${badgeStatus(row.risk_level)}">${row.risk_level||'-'}</span></td><td class="table-actions"><button class="btn btn-secondary" onclick="createTl('${row.pegawai_id}','${row.nama}','${row.periode_id}')">TL</button><a class="btn btn-secondary" href="riwayat.html?pegawai_id=${row.pegawai_id}">Riwayat</a></td></tr>`).join(''):'<tr><td colspan="7" class="empty">Tidak ada data sesuai filter.</td></tr>';}
-async function createTl(pegawai_id,nama,periode_id){const catatan=prompt('Catatan tindak lanjut untuk '+nama);if(!catatan)return;await requestApi('createFollowUp',{followup:{pegawai_id,nama,periode_id,prioritas:'Medium',status:'Open',catatan}});showToast('Tindak lanjut dibuat');init();}
-function exportMonitoring(){downloadCsv('monitoring-ngingetken-v4.csv',filteredRows())}async function setupDb(){try{const r=await requestApi('setupDatabase');showToast(r.message||'Database siap')}catch(e){showToast(e.message)}}
-async function resetDb(){if(!confirm('Reset Google Sheet dan isi ulang dari data Excel awal?'))return;try{const r=await requestApi('resetDatabase');showToast(r.message||'Database berhasil direset');init()}catch(e){showToast(e.message)}}
-async function copyReminder(){const p=dashboardData.activePeriod||{};const pending=(dashboardData.monitoring||[]).filter(x=>x.status_pengisian==='Belum Mengisi');const names=pending.map(x=>`- ${x.nama} (${x.unit})`).join('\n');const message=`Assalamualaikum Bapak/Ibu.\n\nMengingatkan kembali pengisian Form NGINGETKEN periode ${p.nama_periode}. Nama yang belum tercatat:\n${names||'Tidak ada.'}\n\nLink pengisian: ${location.origin+location.pathname.replace('dashboard.html','isi.html')}\nBatas pengisian: ${formatDate(p.tanggal_deadline)}.\n\nTerima kasih.`;await navigator.clipboard.writeText(message);showToast('Template reminder disalin')}
-init().catch(e=>showToast(e.message));</script></body></html>
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Dashboard Admin - Ngingetken v4</title>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <script src="assets/js/auth.js"></script>
+  <script>requireAdminAccess();</script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">N</div><div><div class="brand-title">Ngingetken</div><div class="brand-subtitle">KPPBC TMP C Pangkalpinang</div></div></div>
+    <nav class="nav">
+      <a class="active" href="dashboard.html">Dashboard</a>
+      <a href="viewer.html">Viewer Pimpinan</a>
+      <a href="isi.html">Form Isi Aplikasi</a>
+      <a href="pegawai.html">Pegawai</a>
+      <a href="periode.html">Periode</a>
+      <a href="tindak-lanjut.html">Tindak Lanjut</a>
+      <a href="riwayat.html">Riwayat</a>
+      <a href="laporan.html">Laporan</a>
+      <a href="audit.html">Audit Log</a>
+    </nav>
+  </aside>
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">Dashboard Admin v4</div>
+        <h1>Command Center Ngingetken</h1>
+        <p id="periodInfo" class="lead">Memuat data periode...</p>
+      </div>
+      <div class="toolbar">
+        <select id="periodSelect" style="max-width:220px" onchange="changePeriod()"></select>
+        <button class="btn btn-secondary" onclick="setupDb()">Setup DB</button>
+        <button class="btn btn-secondary" onclick="resetDb()">Reset DB Excel</button>
+        <button class="btn btn-secondary" onclick="copyReminder()">Salin Reminder</button>
+        <button class="btn btn-primary" onclick="exportMonitoring()">Export CSV</button>
+      </div>
+    </div>
+
+    <section class="grid grid-4">
+      <div class="card stat-card"><div class="stat-label">Total Pegawai</div><div id="total" class="stat-value">0</div><div class="stat-note">Pegawai aktif</div></div>
+      <div class="card stat-card"><div class="stat-label">Sudah Mengisi</div><div id="submitted" class="stat-value">0</div><div class="stat-note">Respons valid</div></div>
+      <div class="card stat-card"><div class="stat-label">Belum Mengisi</div><div id="pending" class="stat-value">0</div><div class="stat-note">Perlu reminder</div></div>
+      <div class="card stat-card"><div class="stat-label">Kepatuhan</div><div id="percentage" class="stat-value">0%</div><div class="progress"><span id="progressBar"></span></div></div>
+    </section>
+
+    <section class="grid grid-3" style="margin-top:16px">
+      <div class="card"><h3>Progress Periode</h3><div class="progress-ring" id="ring" style="--value:0%">0%</div><p class="muted">Persentase pegawai yang sudah tercatat mengisi.</p></div>
+      <div class="card"><h3>Ringkasan Risiko</h3><div id="riskSummary" class="grid"></div></div>
+      <div class="card"><h3>Aksi Cepat</h3><div class="toolbar"><a class="btn btn-primary" href="isi.html">Buka Form</a><a class="btn btn-secondary" href="viewer.html">Mode Pimpinan</a><a class="btn btn-secondary" href="tindak-lanjut.html">Tindak Lanjut</a></div><p class="muted">Form Isi Aplikasi menjadi kanal utama pengisian pegawai.</p></div>
+    </section>
+
+    <section class="grid grid-2" style="margin-top:16px">
+      <div class="card"><h3>Kepatuhan per Unit</h3><div class="table-wrap"><table><thead><tr><th>Unit</th><th>Total</th><th>Sudah</th><th>Belum</th><th>%</th></tr></thead><tbody id="unitBody"></tbody></table></div></div>
+      <div class="card"><h3>Open Tindak Lanjut</h3><div id="followupBox"></div></div>
+    </section>
+
+    <section class="card" style="margin-top:16px">
+      <div class="toolbar">
+        <input id="searchInput" class="input" style="max-width:330px" placeholder="Cari nama atau unit..." oninput="renderTable()"/>
+        <select id="statusFilter" style="max-width:220px" onchange="renderTable()"><option value="">Semua Status</option><option>Sudah Mengisi</option><option>Belum Mengisi</option></select>
+        <select id="unitFilter" style="max-width:220px" onchange="renderTable()"><option value="">Semua Unit</option></select>
+        <select id="riskFilter" style="max-width:220px" onchange="renderTable()"><option value="">Semua Risiko</option><option>Rendah</option><option>Sedang</option><option>Tinggi</option></select>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>Nama</th><th>Unit</th><th>Status</th><th>Waktu Isi</th><th>Skor</th><th>Risiko</th><th>Aksi</th></tr></thead><tbody id="monitoringBody"><tr><td colspan="7" class="empty">Memuat data...</td></tr></tbody></table></div>
+    </section>
+  </main>
+</div>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script>
+let dashboardData = null;
+let periods = [];
+
+async function init() {
+  periods = await requestApi('getPeriods');
+  periodSelect.innerHTML = periods.map(p => `<option value="${p.periode_id}">${p.nama_periode}</option>`).join('');
+  const selected = new URLSearchParams(location.search).get('periode_id') || periodSelect.value;
+  await loadDashboard(selected);
+}
+
+async function changePeriod() {
+  const params = new URLSearchParams(location.search);
+  params.set('periode_id', periodSelect.value);
+  history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
+  await loadDashboard(periodSelect.value);
+}
+
+async function loadDashboard(periode_id) {
+  dashboardData = await requestApi('getDashboardData', { periode_id });
+  const p = dashboardData.activePeriod || {};
+  periodSelect.value = p.periode_id || periode_id || '';
+  periodInfo.textContent = `${p.nama_periode || '-'} - Deadline ${formatDate(p.tanggal_deadline)} - Status ${p.status || '-'}`;
+  total.textContent = dashboardData.summary.total;
+  submitted.textContent = dashboardData.summary.submitted;
+  pending.textContent = dashboardData.summary.pending;
+  percentage.textContent = `${dashboardData.summary.percentage}%`;
+  progressBar.style.width = `${dashboardData.summary.percentage}%`;
+  ring.style.setProperty('--value', `${dashboardData.summary.percentage}%`);
+  ring.textContent = `${dashboardData.summary.percentage}%`;
+  const units = [...new Set(dashboardData.monitoring.map(x => x.unit).filter(Boolean))].sort();
+  unitFilter.innerHTML = '<option value="">Semua Unit</option>' + units.map(u => `<option>${u}</option>`).join('');
+  renderUnits();
+  renderRisk();
+  renderFollowups();
+  renderTable();
+}
+
+function renderRisk() {
+  const r = dashboardData.summary.riskSummary || {};
+  riskSummary.innerHTML = `<div class="mini-card"><b class="risk-low">${r.rendah || 0}</b><br>Rendah</div><div class="mini-card"><b class="risk-medium">${r.sedang || 0}</b><br>Sedang</div><div class="mini-card"><b class="risk-high">${r.tinggi || 0}</b><br>Tinggi</div>`;
+}
+
+function renderUnits() {
+  const rows = dashboardData.byUnit || [];
+  unitBody.innerHTML = rows.map(r => `<tr><td>${r.unit}</td><td>${r.total}</td><td>${r.submitted}</td><td>${r.pending}</td><td>${r.total ? Math.round(r.submitted / r.total * 100) : 0}%</td></tr>`).join('') || '<tr><td colspan="5" class="empty">Belum ada data.</td></tr>';
+}
+
+function renderFollowups() {
+  const rows = dashboardData.followups || [];
+  followupBox.innerHTML = rows.length ? rows.slice(0, 4).map(f => `<div class="kanban-item"><b>${f.nama || '-'}</b><br><span class="badge ${badgeStatus(f.status)}">${f.status}</span> <span class="badge ${badgeStatus(f.prioritas)}">${f.prioritas}</span><p>${f.catatan || ''}</p></div>`).join('') : '<div class="empty-state">Belum ada tindak lanjut terbuka.</div>';
+}
+
+function filteredRows() {
+  const q = searchInput.value.toLowerCase(), status = statusFilter.value, unit = unitFilter.value, risk = riskFilter.value;
+  return (dashboardData?.monitoring || []).filter(row => {
+    const text = Object.values(row).join(' ').toLowerCase();
+    return (!q || text.includes(q)) && (!status || row.status_pengisian === status) && (!unit || row.unit === unit) && (!risk || row.risk_level === risk);
+  });
+}
+
+function renderTable() {
+  const rows = filteredRows();
+  monitoringBody.innerHTML = rows.length ? rows.map(row => `<tr><td><strong>${row.nama}</strong></td><td>${row.unit || '-'}</td><td><span class="badge ${badgeStatus(row.status_pengisian)}">${row.status_pengisian}</span></td><td>${row.waktu_submit || '-'}</td><td>${row.integrity_score || '-'}</td><td><span class="badge ${badgeStatus(row.risk_level)}">${row.risk_level || '-'}</span></td><td class="table-actions"><button class="btn btn-secondary" onclick="createTl('${row.pegawai_id}','${row.nama}','${row.periode_id}')">TL</button><a class="btn btn-secondary" href="riwayat.html?pegawai_id=${row.pegawai_id}">Riwayat</a></td></tr>`).join('') : '<tr><td colspan="7" class="empty">Tidak ada data sesuai filter.</td></tr>';
+}
+
+async function createTl(pegawai_id, nama, periode_id) {
+  const catatan = prompt('Catatan tindak lanjut untuk ' + nama);
+  if (!catatan) return;
+  await requestApi('createFollowUp', { followup: { pegawai_id, nama, periode_id, prioritas: 'Medium', status: 'Open', catatan } });
+  showToast('Tindak lanjut dibuat');
+  await loadDashboard(periodSelect.value);
+}
+
+function exportMonitoring() {
+  const p = dashboardData.activePeriod || {};
+  downloadCsv(`monitoring-ngingetken-${p.periode_id || 'periode'}.csv`, filteredRows());
+}
+
+async function setupDb() {
+  try { const r = await requestApi('setupDatabase'); showToast(r.message || 'Database siap'); }
+  catch (e) { showToast(e.message); }
+}
+
+async function resetDb() {
+  if (!confirm('Reset Google Sheet dan isi ulang dari data Excel awal?')) return;
+  try { const r = await requestApi('resetDatabase'); showToast(r.message || 'Database berhasil direset'); await loadDashboard(periodSelect.value); }
+  catch (e) { showToast(e.message); }
+}
+
+async function copyReminder() {
+  const p = dashboardData.activePeriod || {};
+  const pending = (dashboardData.monitoring || []).filter(x => x.status_pengisian === 'Belum Mengisi');
+  const names = pending.map(x => `- ${x.nama} (${x.unit})`).join('\n');
+  const message = `Assalamualaikum Bapak/Ibu.\n\nMengingatkan kembali pengisian Form NGINGETKEN periode ${p.nama_periode}. Nama yang belum tercatat:\n${names || 'Tidak ada.'}\n\nLink pengisian: ${location.origin + location.pathname.replace('dashboard.html', 'isi.html')}\nBatas pengisian: ${formatDate(p.tanggal_deadline)}.\n\nTerima kasih.`;
+  await navigator.clipboard.writeText(message);
+  showToast('Template reminder disalin');
+}
+
+init().catch(e => showToast(e.message));
+</script>
+</body>
+</html>

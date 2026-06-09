@@ -1,6 +1,97 @@
 <!doctype html>
 <html lang="id">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Laporan - Ngingetken</title><link rel="stylesheet" href="assets/css/style.css"><script src="assets/js/auth.js"></script><script>requireAdminAccess();</script></head>
-<body><div class="app-shell"><aside class="sidebar"><div class="brand"><div class="brand-mark">N</div><div><div class="brand-title">Ngingetken</div><div class="brand-subtitle">KPPBC TMP C Pangkalpinang</div></div></div><nav class="nav"><a href="dashboard.html">📊 Dashboard</a><a href="pegawai.html">👥 Pegawai</a><a href="periode.html">🗓️ Periode</a><a class="active" href="laporan.html">📄 Laporan</a><a href="index.html">🏠 Landing</a></nav></aside><main class="main"><div class="topbar"><div><div class="eyebrow">Rekap Bulanan</div><h1>Laporan Ngingetken</h1><p id="reportPeriod" class="lead">Memuat laporan...</p></div><div class="toolbar"><button class="btn btn-secondary" onclick="window.print()">Print</button><button class="btn btn-primary" onclick="exportReport()">Export CSV</button></div></div><section class="grid grid-4"><div class="card stat-card"><div class="stat-label">Total Pegawai</div><div id="total" class="stat-value">0</div></div><div class="card stat-card"><div class="stat-label">Sudah Mengisi</div><div id="submitted" class="stat-value">0</div></div><div class="card stat-card"><div class="stat-label">Belum Mengisi</div><div id="pending" class="stat-value">0</div></div><div class="card stat-card"><div class="stat-label">Kepatuhan</div><div id="percentage" class="stat-value">0%</div></div></section><section class="card" style="margin-top:16px"><h2>Daftar Belum Mengisi</h2><div class="table-wrap"><table><thead><tr><th>Nama</th><th>Unit</th></tr></thead><tbody id="pendingBody"><tr><td colspan="2" class="empty">Memuat data...</td></tr></tbody></table></div></section><section class="card" style="margin-top:16px"><h2>Narasi Singkat Laporan</h2><p id="narrative" class="lead"></p></section></main></div><script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script>
-let data=null; async function init(){ data=await requestApi('getDashboardData'); const p=data.activePeriod; document.getElementById('reportPeriod').textContent=`Periode ${p.nama_periode} dengan deadline ${formatDate(p.tanggal_deadline)}.`; document.getElementById('total').textContent=data.summary.total; document.getElementById('submitted').textContent=data.summary.submitted; document.getElementById('pending').textContent=data.summary.pending; document.getElementById('percentage').textContent=`${data.summary.percentage}%`; const pending=data.monitoring.filter(x=>x.status_pengisian==='Belum Mengisi'); document.getElementById('pendingBody').innerHTML=pending.length?pending.map(x=>`<tr><td><strong>${x.nama}</strong></td><td>${x.unit||'-'}</td></tr>`).join(''):'<tr><td colspan="2" class="empty">Seluruh pegawai sudah mengisi.</td></tr>'; document.getElementById('narrative').textContent=`Pada periode ${p.nama_periode}, jumlah pegawai aktif yang menjadi target pengisian adalah ${data.summary.total} orang. Sebanyak ${data.summary.submitted} pegawai telah mengisi, sedangkan ${data.summary.pending} pegawai belum tercatat mengisi. Persentase kepatuhan sementara adalah ${data.summary.percentage}%.`; } function exportReport(){ downloadCsv('laporan-ngingetken.csv', data.monitoring || []); } init().catch(err=>showToast(err.message));
-</script></body></html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laporan - Ngingetken</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/auth.js"></script>
+  <script>requireAdminAccess();</script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">N</div><div><div class="brand-title">Ngingetken</div><div class="brand-subtitle">KPPBC TMP C Pangkalpinang</div></div></div>
+    <nav class="nav">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="pegawai.html">Pegawai</a>
+      <a href="periode.html">Periode</a>
+      <a class="active" href="laporan.html">Laporan</a>
+      <a href="index.html">Landing</a>
+    </nav>
+  </aside>
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">Rekap Bulanan</div>
+        <h1>Laporan Ngingetken</h1>
+        <p id="reportPeriod" class="lead">Memuat laporan...</p>
+      </div>
+      <div class="toolbar">
+        <select id="periodSelect" style="max-width:220px" onchange="changePeriod()"></select>
+        <button class="btn btn-secondary" onclick="window.print()">Print</button>
+        <button class="btn btn-primary" onclick="exportReport()">Export CSV</button>
+      </div>
+    </div>
+
+    <section class="grid grid-4">
+      <div class="card stat-card"><div class="stat-label">Total Pegawai</div><div id="total" class="stat-value">0</div></div>
+      <div class="card stat-card"><div class="stat-label">Sudah Mengisi</div><div id="submitted" class="stat-value">0</div></div>
+      <div class="card stat-card"><div class="stat-label">Belum Mengisi</div><div id="pending" class="stat-value">0</div></div>
+      <div class="card stat-card"><div class="stat-label">Kepatuhan</div><div id="percentage" class="stat-value">0%</div></div>
+    </section>
+
+    <section class="card" style="margin-top:16px">
+      <h2>Daftar Belum Mengisi</h2>
+      <div class="table-wrap"><table><thead><tr><th>Nama</th><th>Unit</th></tr></thead><tbody id="pendingBody"><tr><td colspan="2" class="empty">Memuat data...</td></tr></tbody></table></div>
+    </section>
+
+    <section class="card" style="margin-top:16px">
+      <h2>Narasi Singkat Laporan</h2>
+      <p id="narrative" class="lead"></p>
+    </section>
+  </main>
+</div>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script>
+let data = null;
+let periods = [];
+
+async function init() {
+  periods = await requestApi('getPeriods');
+  periodSelect.innerHTML = periods.map(p => `<option value="${p.periode_id}">${p.nama_periode}</option>`).join('');
+  const selected = new URLSearchParams(location.search).get('periode_id') || periodSelect.value;
+  await loadReport(selected);
+}
+
+async function changePeriod() {
+  const params = new URLSearchParams(location.search);
+  params.set('periode_id', periodSelect.value);
+  history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
+  await loadReport(periodSelect.value);
+}
+
+async function loadReport(periode_id) {
+  data = await requestApi('getDashboardData', { periode_id });
+  const p = data.activePeriod || {};
+  periodSelect.value = p.periode_id || periode_id || '';
+  document.getElementById('reportPeriod').textContent = `Periode ${p.nama_periode || '-'} dengan deadline ${formatDate(p.tanggal_deadline)}.`;
+  document.getElementById('total').textContent = data.summary.total;
+  document.getElementById('submitted').textContent = data.summary.submitted;
+  document.getElementById('pending').textContent = data.summary.pending;
+  document.getElementById('percentage').textContent = `${data.summary.percentage}%`;
+  const pendingRows = data.monitoring.filter(x => x.status_pengisian === 'Belum Mengisi');
+  document.getElementById('pendingBody').innerHTML = pendingRows.length ? pendingRows.map(x => `<tr><td><strong>${x.nama}</strong></td><td>${x.unit || '-'}</td></tr>`).join('') : '<tr><td colspan="2" class="empty">Seluruh pegawai sudah mengisi.</td></tr>';
+  document.getElementById('narrative').textContent = `Pada periode ${p.nama_periode || '-'}, jumlah pegawai aktif yang menjadi target pengisian adalah ${data.summary.total} orang. Sebanyak ${data.summary.submitted} pegawai telah mengisi, sedangkan ${data.summary.pending} pegawai belum tercatat mengisi. Persentase kepatuhan adalah ${data.summary.percentage}%.`;
+}
+
+function exportReport() {
+  const p = data.activePeriod || {};
+  downloadCsv(`laporan-ngingetken-${p.periode_id || 'periode'}.csv`, data.monitoring || []);
+}
+
+init().catch(err => showToast(err.message));
+</script>
+</body>
+</html>

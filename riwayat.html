@@ -1,1 +1,131 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Riwayat Pegawai - Ngingetken</title><link rel="stylesheet" href="assets/css/style.css"/><script src="assets/js/auth.js"></script><script>requireAdminAccess();</script></head><body><div class="app-shell"><aside class="sidebar"><div class="brand"><div class="brand-mark">N</div><div><div class="brand-title">Ngingetken</div><div class="brand-subtitle">Riwayat</div></div></div><nav class="nav"><a href="dashboard.html">📊 Dashboard</a><a href="pegawai.html">👥 Pegawai</a><a class="active" href="riwayat.html">🧾 Riwayat</a></nav></aside><main class="main"><div class="topbar"><div><div class="eyebrow">Employee History</div><h1 id="title">Riwayat Pegawai</h1><p class="lead">Melihat histori pengisian dan tindak lanjut per pegawai.</p></div><select id="employeeSelect" onchange="loadHistory()"></select></div><section class="grid grid-3"><div class="card"><h3>Profil</h3><div id="profile"></div></div><div class="card"><h3>Statistik</h3><div id="stats"></div></div><div class="card"><h3>Status Terakhir</h3><div id="lastStatus"></div></div></section><section class="card" style="margin-top:16px"><h3>Timeline</h3><div id="timeline" class="timeline"></div></section></main></div><script src="assets/js/config.js"></script><script src="assets/js/api.js"></script><script>let employees=[];async function init(){employees=await requestApi('getEmployees');employeeSelect.innerHTML=employees.map(e=>`<option value="${e.pegawai_id}">${e.nama} - ${e.unit}</option>`).join('');const p=new URLSearchParams(location.search).get('pegawai_id');if(p)employeeSelect.value=p;loadHistory()}async function loadHistory(){const pegawai_id=employeeSelect.value;const data=await requestApi('getEmployeeHistory',{pegawai_id});const emp=data.employee||employees.find(e=>e.pegawai_id===pegawai_id)||{};title.textContent='Riwayat '+(emp.nama||'Pegawai');profile.innerHTML=`<b>${emp.nama||'-'}</b><br>Unit: ${emp.unit||'-'}`;const responses=(data.responses||[]).filter(r=>!r.pegawai_id||r.pegawai_id===pegawai_id);stats.innerHTML=`<div class="stat-value">${responses.length}</div><div class="stat-note">Total pengisian tercatat</div>`;lastStatus.innerHTML=responses.length?`<span class="badge ${badgeStatus(responses.at(-1).risk_level)}">${responses.at(-1).risk_level||'-'}</span><p>Skor: ${responses.at(-1).integrity_score||'-'}</p>`:'<div class="empty-state">Belum ada respons</div>';timeline.innerHTML=[...responses.map(r=>`<div class="timeline-item"><b>Pengisian ${r.periode_id||''}</b><br>${r.waktu_submit||''}<br>Status: ${r.status_validasi||'-'} • Risiko: ${r.risk_level||'-'}</div>`),...(data.followups||[]).filter(f=>f.pegawai_id===pegawai_id).map(f=>`<div class="timeline-item"><b>Tindak Lanjut</b><br>${f.created_at||''}<br>${f.catatan||''}</div>`)].join('')||'<div class="empty-state">Belum ada riwayat.</div>'}init().catch(e=>showToast(e.message));</script></body></html>
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Riwayat Pengisian - Ngingetken</title>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <script src="assets/js/auth.js"></script>
+  <script>requireAdminAccess();</script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">N</div><div><div class="brand-title">Ngingetken</div><div class="brand-subtitle">KPPBC TMP C Pangkalpinang</div></div></div>
+    <nav class="nav">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="viewer.html">Viewer Pimpinan</a>
+      <a href="isi.html">Form Isi Aplikasi</a>
+      <a href="pegawai.html">Pegawai</a>
+      <a href="periode.html">Periode</a>
+      <a href="tindak-lanjut.html">Tindak Lanjut</a>
+      <a class="active" href="riwayat.html">Riwayat</a>
+      <a href="laporan.html">Laporan</a>
+      <a href="audit.html">Audit Log</a>
+    </nav>
+  </aside>
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">Histori Pengisian</div>
+        <h1>Riwayat Semua Bulan</h1>
+        <p id="historyInfo" class="lead">Memuat histori pengisian...</p>
+      </div>
+      <div class="toolbar">
+        <select id="periodSelect" style="max-width:220px" onchange="changePeriod()"></select>
+        <button class="btn btn-primary" onclick="exportHistory()">Export CSV</button>
+      </div>
+    </div>
+
+    <section class="grid grid-4">
+      <div class="card stat-card"><div class="stat-label">Total Respons</div><div id="totalResponses" class="stat-value">0</div><div class="stat-note">Sesuai filter</div></div>
+      <div class="card stat-card"><div class="stat-label">Pegawai Unik</div><div id="uniqueEmployees" class="stat-value">0</div><div class="stat-note">Nama/ID tercatat</div></div>
+      <div class="card stat-card"><div class="stat-label">Periode Terlihat</div><div id="visiblePeriods" class="stat-value">0</div><div class="stat-note">Bulan pengisian</div></div>
+      <div class="card stat-card"><div class="stat-label">Risiko Tinggi</div><div id="highRisk" class="stat-value">0</div><div class="stat-note">Perlu perhatian</div></div>
+    </section>
+
+    <section class="card" style="margin-top:16px">
+      <div class="toolbar">
+        <input id="searchInput" class="input" style="max-width:330px" placeholder="Cari nama, unit, atau periode..." oninput="renderHistory()"/>
+        <select id="unitFilter" style="max-width:220px" onchange="renderHistory()"><option value="">Semua Unit</option></select>
+        <select id="riskFilter" style="max-width:220px" onchange="renderHistory()"><option value="">Semua Risiko</option><option>Rendah</option><option>Sedang</option><option>Tinggi</option></select>
+        <select id="statusFilter" style="max-width:220px" onchange="renderHistory()"><option value="">Semua Validasi</option><option>Valid</option><option>Perlu Cek</option></select>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Periode</th><th>Waktu Isi</th><th>Nama</th><th>Unit</th><th>Validasi</th><th>Skor</th><th>Risiko</th><th>Catatan</th></tr></thead>
+          <tbody id="historyBody"><tr><td colspan="8" class="empty">Memuat data...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script>
+let historyData = { responses: [], periods: [] };
+
+async function init() {
+  const periodParam = new URLSearchParams(location.search).get('periode_id') || '';
+  await loadHistory(periodParam);
+}
+
+async function loadHistory(periode_id = '') {
+  historyData = await requestApi('getResponseHistory', { periode_id });
+  const periods = historyData.periods || [];
+  periodSelect.innerHTML = '<option value="">Semua Bulan</option>' + periods.map(p => `<option value="${p.periode_id}">${p.nama_periode}</option>`).join('');
+  periodSelect.value = periode_id || '';
+  buildUnitFilter();
+  renderHistory();
+}
+
+async function changePeriod() {
+  const params = new URLSearchParams(location.search);
+  if (periodSelect.value) params.set('periode_id', periodSelect.value);
+  else params.delete('periode_id');
+  history.replaceState(null, '', params.toString() ? `${location.pathname}?${params.toString()}` : location.pathname);
+  await loadHistory(periodSelect.value);
+}
+
+function buildUnitFilter() {
+  const selected = unitFilter.value;
+  const units = [...new Set((historyData.responses || []).map(r => r.unit).filter(Boolean))].sort();
+  unitFilter.innerHTML = '<option value="">Semua Unit</option>' + units.map(u => `<option>${u}</option>`).join('');
+  if (units.includes(selected)) unitFilter.value = selected;
+}
+
+function filteredRows() {
+  const q = searchInput.value.trim().toLowerCase();
+  const unit = unitFilter.value;
+  const risk = riskFilter.value;
+  const status = statusFilter.value;
+  return (historyData.responses || []).filter(row => {
+    const text = [row.nama_periode, row.waktu_submit, row.nama, row.unit, row.status_validasi, row.risk_level, row.catatan].join(' ').toLowerCase();
+    return (!q || text.includes(q)) &&
+      (!unit || row.unit === unit) &&
+      (!risk || row.risk_level === risk) &&
+      (!status || row.status_validasi === status);
+  });
+}
+
+function renderHistory() {
+  const rows = filteredRows();
+  const uniqueKeys = new Set(rows.map(r => r.pegawai_id || r.nama).filter(Boolean));
+  const periodKeys = new Set(rows.map(r => r.periode_id).filter(Boolean));
+  totalResponses.textContent = rows.length;
+  uniqueEmployees.textContent = uniqueKeys.size;
+  visiblePeriods.textContent = periodKeys.size;
+  highRisk.textContent = rows.filter(r => r.risk_level === 'Tinggi').length;
+  historyInfo.textContent = periodSelect.value ? `Histori pengisian periode ${periodSelect.options[periodSelect.selectedIndex]?.text || '-'}.` : 'Histori pengisian seluruh periode yang tercatat.';
+  historyBody.innerHTML = rows.length ? rows.map(row => `<tr><td><strong>${row.nama_periode || '-'}</strong></td><td>${row.waktu_submit || '-'}</td><td>${row.nama || '-'}</td><td>${row.unit || '-'}</td><td><span class="badge ${badgeStatus(row.status_validasi)}">${row.status_validasi || '-'}</span></td><td>${row.integrity_score || '-'}</td><td><span class="badge ${badgeStatus(row.risk_level)}">${row.risk_level || '-'}</span></td><td>${row.catatan || '-'}</td></tr>`).join('') : '<tr><td colspan="8" class="empty">Tidak ada histori sesuai filter.</td></tr>';
+}
+
+function exportHistory() {
+  const suffix = periodSelect.value || 'semua-bulan';
+  downloadCsv(`riwayat-pengisian-${suffix}.csv`, filteredRows());
+}
+
+init().catch(e => showToast(e.message));
+</script>
+</body>
+</html>

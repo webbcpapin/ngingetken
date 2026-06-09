@@ -7833,6 +7833,103 @@ function getLocalActivePeriod() {
   return active || NGINGETKEN_DATA.periods[0];
 }
 
+function getLocalPeriod(periodId) {
+  if (periodId) {
+    const selected = NGINGETKEN_DATA.periods.find(p => p.periode_id === periodId);
+    if (selected) return selected;
+  }
+  return getLocalActivePeriod();
+}
+
+function responseMatchesLocalPeriod(response, period) {
+  return String(response.periode_id || '') === String(period.periode_id || '');
+}
+
+function buildLocalMonitoringRows(period) {
+  const responses = NGINGETKEN_DATA.responses.filter(r => responseMatchesLocalPeriod(r, period));
+  return NGINGETKEN_DATA.employees
+    .filter(emp => emp.status_aktif !== false)
+    .map(emp => {
+      const rsp = responses.find(r =>
+        r.pegawai_id === emp.pegawai_id ||
+        String(r.nama || '').trim().toLowerCase() === String(emp.nama || '').trim().toLowerCase()
+      );
+      return {
+        pegawai_id: emp.pegawai_id,
+        nama: emp.nama,
+        unit: emp.unit,
+        status_pengisian: rsp ? 'Sudah Mengisi' : 'Belum Mengisi',
+        waktu_submit: rsp ? rsp.waktu_submit : '-',
+        integrity_score: rsp ? rsp.integrity_score : '-',
+        risk_level: rsp ? rsp.risk_level : '-',
+        periode_id: period.periode_id
+      };
+    });
+}
+
+function buildLocalDashboardData(periodId) {
+  const activePeriod = getLocalPeriod(periodId);
+  const monitoring = buildLocalMonitoringRows(activePeriod);
+  const total = monitoring.length;
+  const submitted = monitoring.filter(m => m.status_pengisian === 'Sudah Mengisi').length;
+  const pending = total - submitted;
+  const percentage = total ? Math.round(submitted / total * 1000) / 10 : 0;
+  const byUnit = {};
+  monitoring.forEach(m => {
+    const unit = m.unit || '-';
+    byUnit[unit] = byUnit[unit] || { unit, total: 0, submitted: 0, pending: 0 };
+    byUnit[unit].total += 1;
+    if (m.status_pengisian === 'Sudah Mengisi') byUnit[unit].submitted += 1;
+    else byUnit[unit].pending += 1;
+  });
+  const riskSummary = { rendah: 0, sedang: 0, tinggi: 0 };
+  monitoring.forEach(m => {
+    if (m.risk_level === 'Rendah') riskSummary.rendah += 1;
+    if (m.risk_level === 'Sedang') riskSummary.sedang += 1;
+    if (m.risk_level === 'Tinggi') riskSummary.tinggi += 1;
+  });
+  const followups = (NGINGETKEN_DATA.followups || []).filter(f =>
+    String(f.status || '').toLowerCase() !== 'closed' &&
+    (!f.periode_id || f.periode_id === activePeriod.periode_id)
+  );
+  return {
+    activePeriod,
+    summary: { total, submitted, pending, percentage, riskSummary },
+    monitoring,
+    byUnit: Object.values(byUnit),
+    followups,
+    riskSummary
+  };
+}
+
+function buildLocalResponseHistory(periodId) {
+  const periodMap = Object.fromEntries(NGINGETKEN_DATA.periods.map(p => [p.periode_id, p]));
+  const rows = NGINGETKEN_DATA.responses
+    .filter(r => !periodId || r.periode_id === periodId)
+    .map(r => {
+      const period = periodMap[r.periode_id] || {};
+      return {
+        response_id: r.response_id || '',
+        periode_id: r.periode_id || '',
+        nama_periode: period.nama_periode || r.periode_bulan || r.periode_id || '-',
+        pegawai_id: r.pegawai_id || '',
+        nama: r.nama || '-',
+        unit: r.unit || '-',
+        waktu_submit: r.waktu_submit || '',
+        status_validasi: r.status_validasi || '-',
+        integrity_score: r.integrity_score ?? '-',
+        risk_level: r.risk_level || '-',
+        catatan: r.catatan || ''
+      };
+    })
+    .sort((a, b) => String(b.waktu_submit || '').localeCompare(String(a.waktu_submit || '')));
+  return {
+    period: periodId ? (periodMap[periodId] || null) : null,
+    periods: JSON.parse(JSON.stringify(NGINGETKEN_DATA.periods)),
+    responses: rows
+  };
+}
+
 function formatDate(dateStr) {
   if (!dateStr || dateStr === '-') return '-';
   try {
@@ -7940,27 +8037,19 @@ async function requestApi(action, payload = {}) {
     }
 
     case 'getDashboardData':
-      return JSON.parse(JSON.stringify({
-        activePeriod: NGINGETKEN_DATA.activePeriod,
-        summary: NGINGETKEN_DATA.summary,
-        monitoring: NGINGETKEN_DATA.monitoring,
-        byUnit: NGINGETKEN_DATA.byUnit,
-        followups: NGINGETKEN_DATA.followups,
-        riskSummary: NGINGETKEN_DATA.riskSummary
-      }));
+      return JSON.parse(JSON.stringify(buildLocalDashboardData(payload.periode_id || payload.periodId)));
 
     case 'getExecutiveSummary':
-      return JSON.parse(JSON.stringify({
-        activePeriod: NGINGETKEN_DATA.activePeriod,
-        summary: NGINGETKEN_DATA.summary,
-        byUnit: NGINGETKEN_DATA.byUnit
-      }));
+      return JSON.parse(JSON.stringify(buildLocalDashboardData(payload.periode_id || payload.periodId)));
 
     case 'getFollowUps':
       return JSON.parse(JSON.stringify(NGINGETKEN_DATA.followups));
 
     case 'getAuditLogs':
       return JSON.parse(JSON.stringify(NGINGETKEN_DATA.auditLogs));
+
+    case 'getResponseHistory':
+      return JSON.parse(JSON.stringify(buildLocalResponseHistory(payload.periode_id || payload.periodId)));
 
     case 'getEmployeeHistory': {
       const { pegawai_id, nama } = payload;
