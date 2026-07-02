@@ -11,7 +11,7 @@
 <body>
 <div class="app-shell">
   <aside class="sidebar">
-    <div class="brand"><div class="brand-mark">N</div><div><div class="brand-title">Ngingetken</div><div class="brand-subtitle">KPPBC TMP C Pangkalpinang</div></div></div>
+    <div class="brand"><div class="brand-mark"><img src="assets/img/logo-ngingetken.png" alt="Logo Ngingetken"></div><div><div class="brand-title">Ngingetken</div><div class="brand-subtitle">KPPBC TMP C Pangkalpinang</div></div></div>
     <nav class="nav">
       <a href="dashboard.html">Dashboard</a>
       <a href="pegawai.html">Pegawai</a>
@@ -62,6 +62,11 @@
 let periods = [];
 
 async function init() {
+  periods = sortPeriods(await requestApi('getPeriods'));
+  renderPeriods();
+}
+
+async function reloadPeriods() {
   periods = sortPeriods(await requestApi('getPeriods'));
   renderPeriods();
 }
@@ -134,14 +139,8 @@ async function setPeriodStatus(periodId, status) {
   const label = status === 'Aktif' ? 'mengaktifkan' : 'menutup';
   if (!confirm(`Yakin ingin ${label} periode ini?`)) return;
   try {
-    const updated = await requestApi('updatePeriodStatus', { periode_id: periodId, status });
-    if (status === 'Aktif') {
-      periods = periods.map(p => ({ ...p, status: p.periode_id === periodId ? 'Aktif' : (String(p.status).toLowerCase() === 'aktif' ? 'Selesai' : p.status) }));
-    } else {
-      periods = periods.map(p => p.periode_id === periodId ? { ...p, status } : p);
-    }
-    periods = periods.map(p => p.periode_id === periodId ? { ...p, ...updated } : p);
-    renderPeriods();
+    await requestApi('updatePeriodStatus', { periode_id: periodId, status });
+    await reloadPeriods();
     showToast(status === 'Aktif' ? 'Periode berhasil dibuka' : 'Periode berhasil ditutup');
   } catch (err) {
     showToast(err.message);
@@ -161,7 +160,7 @@ document.getElementById('periodForm').addEventListener('submit', async e => {
     periods.push(saved);
     e.target.reset();
     closeModal();
-    renderPeriods();
+    await reloadPeriods();
     showToast('Periode berhasil ditambahkan');
   } catch (err) {
     showToast(err.message);
