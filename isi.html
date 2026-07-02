@@ -171,9 +171,16 @@ let employeesCache = [];
 let latestHistory = null;
 
 async function init(){
-  try{ activePeriod = await requestApi('getActivePeriod'); } catch(e){ activePeriod = {periode_id:'PRD2026MEI', nama_periode:'Mei 2026', tanggal_deadline:'2026-06-06'}; }
-  periodInfo.textContent = `${activePeriod.nama_periode || '-'} • Deadline ${formatDate(activePeriod.tanggal_deadline)}`;
-  setActivePeriodField(activePeriod);
+  try{
+    activePeriod = await requestApi('getActivePeriod');
+    periodInfo.textContent = `${activePeriod.nama_periode || '-'} • Deadline ${formatDate(activePeriod.tanggal_deadline)}`;
+    setActivePeriodField(activePeriod);
+  } catch(e){
+    activePeriod = {};
+    periodInfo.textContent = 'Periode aktif belum dibuka admin. Silakan hubungi admin NGINGETKEN.';
+    periodeBulan.value = '';
+    showToast(e.message);
+  }
   renderQuestions();
   loadEmployeeNames();
 }
@@ -308,6 +315,7 @@ function validateActiveSection(){
   return true;
 }
 function nextSection(n){
+  if(n>1 && !activePeriod.periode_id) return showToast('Periode aktif belum dibuka admin.');
   if(n>1 && !formNgingetken.nama.value.trim()) return showToast('Nama pegawai wajib diisi');
   const current = Number(document.querySelector('.form-section.active')?.dataset.section || 1);
   if(n > current && !validateActiveSection()) return;
@@ -331,6 +339,7 @@ function preview(){
 }
 formNgingetken.addEventListener('submit', async e => {
   e.preventDefault();
+  if(!activePeriod.periode_id) return showToast('Periode aktif belum dibuka admin.');
   const fd = new FormData(formNgingetken);
   const answers = {};
   [...integrityQuestions, ...monthlyQuestions].forEach(q => answers[q.id] = fd.get(q.id) || '');

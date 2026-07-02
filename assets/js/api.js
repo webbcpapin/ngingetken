@@ -286,7 +286,7 @@ const NGINGETKEN_DATA = {
       "tanggal_mulai": "2026-04-01",
       "tanggal_deadline": "2026-05-06",
       "form_url": "isi.html",
-      "status": "Aktif"
+      "status": "Selesai"
     },
     {
       "periode_id": "PRD2026MEI",
@@ -294,7 +294,7 @@ const NGINGETKEN_DATA = {
       "tanggal_mulai": "2026-05-01",
       "tanggal_deadline": "2026-06-06",
       "form_url": "isi.html",
-      "status": "Draft"
+      "status": "Selesai"
     },
     {
       "periode_id": "PRD2026JUN",
@@ -302,7 +302,7 @@ const NGINGETKEN_DATA = {
       "tanggal_mulai": "2026-06-01",
       "tanggal_deadline": "2026-07-06",
       "form_url": "isi.html",
-      "status": "Draft"
+      "status": "Aktif"
     },
     {
       "periode_id": "PRD2026JUL",
@@ -7784,10 +7784,10 @@ const NGINGETKEN_DATA = {
     }
   },
   "activePeriod": {
-    "periode_id": "PRD2026APR",
-    "nama_periode": "April 2026",
-    "tanggal_mulai": "2026-04-01",
-    "tanggal_deadline": "2026-05-06",
+    "periode_id": "PRD2026JUN",
+    "nama_periode": "Juni 2026",
+    "tanggal_mulai": "2026-06-01",
+    "tanggal_deadline": "2026-07-06",
     "form_url": "isi.html",
     "status": "Aktif"
   }
@@ -7817,20 +7817,28 @@ function parseLocalDate(value) {
   return match ? new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3])) : null;
 }
 
+function periodSortKey(period) {
+  const start = parseLocalDate(period?.tanggal_mulai);
+  if (start) return start.getTime();
+  const months = ['januari','februari','maret','april','mei','juni','juli','agustus','september','oktober','november','desember'];
+  const text = String(period?.nama_periode || period?.periode_id || '').toLowerCase();
+  const yearMatch = text.match(/(20\d{2})/);
+  const year = yearMatch ? Number(yearMatch[1]) : 9999;
+  const month = months.findIndex(m => text.includes(m));
+  return new Date(year, month >= 0 ? month : 11, 1).getTime();
+}
+
+function sortPeriods(periods) {
+  return [...(periods || [])].sort((a, b) =>
+    periodSortKey(a) - periodSortKey(b) ||
+    String(a.nama_periode || '').localeCompare(String(b.nama_periode || ''), 'id-ID')
+  );
+}
+
 function getLocalActivePeriod() {
-  const today = new Date();
-  const active = NGINGETKEN_DATA.periods.find(p => String(p.status).toLowerCase() === 'aktif');
-  if (active) {
-    const deadline = parseLocalDate(active.tanggal_deadline);
-    if (!deadline || today <= deadline) return active;
-  }
-  const current = NGINGETKEN_DATA.periods.find(p => {
-    const start = parseLocalDate(p.tanggal_mulai);
-    const deadline = parseLocalDate(p.tanggal_deadline);
-    return start && deadline && today >= start && today <= deadline;
-  });
-  if (current) return { ...current, status: String(current.status).toLowerCase() === 'aktif' ? current.status : 'Aktif' };
-  return active || NGINGETKEN_DATA.periods[0];
+  const active = sortPeriods(NGINGETKEN_DATA.periods).find(p => String(p.status).toLowerCase() === 'aktif');
+  if (active) return active;
+  throw new Error('Periode aktif belum dibuka admin');
 }
 
 function getLocalPeriod(periodId) {
@@ -7983,6 +7991,7 @@ const CLIENT_WRITE_ACTIONS = new Set([
   'resetDatabase',
   'createEmployee',
   'createPeriod',
+  'updatePeriodStatus',
   'createFollowUp',
   'updateFollowUp',
   'updateMonitoringNote',
@@ -8030,7 +8039,7 @@ async function requestApi(action, payload = {}) {
       return JSON.parse(JSON.stringify(NGINGETKEN_DATA.employees));
 
     case 'getPeriods':
-      return JSON.parse(JSON.stringify(NGINGETKEN_DATA.periods));
+      return JSON.parse(JSON.stringify(sortPeriods(NGINGETKEN_DATA.periods)));
 
     case 'getActivePeriod': {
       return JSON.parse(JSON.stringify(getLocalActivePeriod()));
@@ -8156,8 +8165,30 @@ async function requestApi(action, payload = {}) {
       const { period } = payload;
       const newPerId = 'PRD' + String(NGINGETKEN_DATA.periods.length + 1).padStart(3, '0');
       const newPer = { ...period, tanggal_deadline: deadlineNextMonthSix(period.tanggal_mulai), periode_id: newPerId };
+      if (newPer.status === 'Aktif') {
+        NGINGETKEN_DATA.periods.forEach(p => {
+          if (String(p.status).toLowerCase() === 'aktif') p.status = 'Selesai';
+        });
+      }
       NGINGETKEN_DATA.periods.push(newPer);
+      NGINGETKEN_DATA.periods = sortPeriods(NGINGETKEN_DATA.periods);
       return newPer;
+    }
+
+    case 'updatePeriodStatus': {
+      const statusMap = { draft: 'Draft', aktif: 'Aktif', selesai: 'Selesai' };
+      const nextStatus = statusMap[String(payload.status || '').trim().toLowerCase()];
+      if (!nextStatus) throw new Error('Status periode tidak valid');
+      const period = NGINGETKEN_DATA.periods.find(p => p.periode_id === payload.periode_id || p.periode_id === payload.periodId);
+      if (!period) throw new Error('Periode tidak ditemukan');
+      if (nextStatus === 'Aktif') {
+        NGINGETKEN_DATA.periods.forEach(p => {
+          if (String(p.status).toLowerCase() === 'aktif') p.status = 'Selesai';
+        });
+      }
+      period.status = nextStatus;
+      NGINGETKEN_DATA.periods = sortPeriods(NGINGETKEN_DATA.periods);
+      return period;
     }
 
     case 'setupDatabase':

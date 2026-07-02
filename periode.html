@@ -25,12 +25,13 @@
       <div>
         <div class="eyebrow">Konfigurasi</div>
         <h1>Manajemen Periode</h1>
-        <p class="lead">Buat, kelola, dan buka rekap setiap periode pengisian NGINGETKEN.</p>
+        <p class="lead">Buat, urutkan, buka/tutup periode, dan buka rekap setiap periode pengisian NGINGETKEN.</p>
       </div>
       <button class="btn btn-primary" onclick="openModal()">Tambah Periode</button>
     </div>
 
     <section class="card">
+      <div id="activePeriodNotice" class="alert info" style="margin-bottom:14px">Memuat periode aktif...</div>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Periode</th><th>Mulai</th><th>Deadline</th><th>Link Form</th><th>Status</th><th>Aksi</th></tr></thead>
@@ -61,17 +62,50 @@
 let periods = [];
 
 async function init() {
-  periods = await requestApi('getPeriods');
+  periods = sortPeriods(await requestApi('getPeriods'));
   renderPeriods();
+}
+
+function renderActiveNotice() {
+  const active = periods.find(p => String(p.status).toLowerCase() === 'aktif');
+  const notice = document.getElementById('activePeriodNotice');
+  if (!active) {
+    notice.className = 'alert warning';
+    notice.textContent = 'Belum ada periode yang dibuka. Klik Aktifkan pada periode yang akan digunakan di form.';
+    return;
+  }
+  notice.className = 'alert info';
+  notice.textContent = `Periode aktif: ${active.nama_periode} dengan deadline ${formatDate(active.tanggal_deadline)}.`;
 }
 
 function renderPeriods() {
   const body = document.getElementById('periodBody');
+  periods = sortPeriods(periods);
+  renderActiveNotice();
   if (!periods.length) {
     body.innerHTML = '<tr><td colspan="6" class="empty">Belum ada periode.</td></tr>';
     return;
   }
-  body.innerHTML = periods.map(p => `<tr><td><strong>${p.nama_periode}</strong></td><td>${formatDate(p.tanggal_mulai)}</td><td>${formatDate(p.tanggal_deadline)}</td><td><a href="${p.form_url}" target="_blank">Buka Form</a></td><td><span class="badge ${badgeStatus(p.status)}">${p.status}</span></td><td class="table-actions"><a class="btn btn-secondary" href="dashboard.html?periode_id=${p.periode_id}">Dashboard</a><a class="btn btn-secondary" href="riwayat.html?periode_id=${p.periode_id}">Riwayat</a><a class="btn btn-secondary" href="laporan.html?periode_id=${p.periode_id}">Laporan</a></td></tr>`).join('');
+  body.innerHTML = periods.map(p => {
+    const isActive = String(p.status).toLowerCase() === 'aktif';
+    const safeId = JSON.stringify(p.periode_id);
+    const formUrl = p.form_url || 'isi.html';
+    return `<tr>
+      <td><strong>${p.nama_periode}</strong></td>
+      <td>${formatDate(p.tanggal_mulai)}</td>
+      <td>${formatDate(p.tanggal_deadline)}</td>
+      <td><a href="${formUrl}" target="_blank">Buka Form</a></td>
+      <td><span class="badge ${badgeStatus(p.status)}">${p.status || '-'}</span></td>
+      <td class="table-actions">
+        ${isActive
+          ? `<button class="btn btn-secondary" onclick="setPeriodStatus(${safeId}, 'Selesai')">Tutup</button>`
+          : `<button class="btn btn-primary" onclick="setPeriodStatus(${safeId}, 'Aktif')">Aktifkan</button>`}
+        <a class="btn btn-secondary" href="dashboard.html?periode_id=${p.periode_id}">Dashboard</a>
+        <a class="btn btn-secondary" href="riwayat.html?periode_id=${p.periode_id}">Riwayat</a>
+        <a class="btn btn-secondary" href="laporan.html?periode_id=${p.periode_id}">Laporan</a>
+      </td>
+    </tr>`;
+  }).join('');
 }
 
 function openModal() {
@@ -96,17 +130,42 @@ function updateDeadline() {
   if (start && deadline) deadline.value = deadlineNextMonthSix(start.value);
 }
 
+async function setPeriodStatus(periodId, status) {
+  const label = status === 'Aktif' ? 'mengaktifkan' : 'menutup';
+  if (!confirm(`Yakin ingin ${label} periode ini?`)) return;
+  try {
+    const updated = await requestApi('updatePeriodStatus', { periode_id: periodId, status });
+    if (status === 'Aktif') {
+      periods = periods.map(p => ({ ...p, status: p.periode_id === periodId ? 'Aktif' : (String(p.status).toLowerCase() === 'aktif' ? 'Selesai' : p.status) }));
+    } else {
+      periods = periods.map(p => p.periode_id === periodId ? { ...p, status } : p);
+    }
+    periods = periods.map(p => p.periode_id === periodId ? { ...p, ...updated } : p);
+    renderPeriods();
+    showToast(status === 'Aktif' ? 'Periode berhasil dibuka' : 'Periode berhasil ditutup');
+  } catch (err) {
+    showToast(err.message);
+  }
+}
+
 document.querySelector('[name="tanggal_mulai"]').addEventListener('change', updateDeadline);
 document.getElementById('periodForm').addEventListener('submit', async e => {
   e.preventDefault();
   updateDeadline();
   const period = Object.fromEntries(new FormData(e.target).entries());
-  const saved = await requestApi('createPeriod', { period });
-  periods.push(saved);
-  e.target.reset();
-  closeModal();
-  renderPeriods();
-  showToast('Periode berhasil ditambahkan');
+  try {
+    const saved = await requestApi('createPeriod', { period });
+    if (saved.status === 'Aktif') {
+      periods = periods.map(p => String(p.status).toLowerCase() === 'aktif' ? { ...p, status: 'Selesai' } : p);
+    }
+    periods.push(saved);
+    e.target.reset();
+    closeModal();
+    renderPeriods();
+    showToast('Periode berhasil ditambahkan');
+  } catch (err) {
+    showToast(err.message);
+  }
 });
 
 init().catch(err => showToast(err.message));
