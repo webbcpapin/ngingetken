@@ -7940,6 +7940,209 @@ function buildLocalResponseHistory(periodId) {
   };
 }
 
+const INTEGRITY_FIELDS = [
+  ['q4_gratifikasi', 'Gratifikasi'],
+  ['q5_suap', 'Suap menyuap'],
+  ['q6_curang', 'Perbuatan curang'],
+  ['q7_pemerasan', 'Pemerasan'],
+  ['q8_kode_etik', 'Pelanggaran kode etik'],
+  ['q9_gaya_hidup_mewah', 'Gaya hidup mewah'],
+  ['q10_benturan_kepentingan', 'Benturan kepentingan'],
+  ['q11_penggelapan_jabatan', 'Penggelapan dalam jabatan']
+];
+
+const MONTHLY_FIELDS = {
+  hris: 'q12_hris_accuracy',
+  advocacy: 'q13_employee_advocacy',
+  steps: 'q14_daily_steps',
+  satisfaction: 'q15_internal_info_satisfaction',
+  idea: 'q16_innovation_idea',
+  feedback: 'q17_app_feedback',
+  english: 'q18_english_day'
+};
+
+function parseAnswers(row) {
+  if (row && row.answers && typeof row.answers === 'object') return row.answers;
+  try {
+    return JSON.parse((row && row.answer_json) || '{}') || {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function normalizeAnswer(value) {
+  const text = String(value ?? '').trim();
+  const low = text.toLowerCase();
+  if (!text) return 'Kosong';
+  if (low === 'ya') return 'Ya';
+  if (low === 'tidak') return 'Tidak';
+  if (low.includes('ragu')) return 'Ragu-ragu';
+  return text;
+}
+
+function isDoneAnswer(value) {
+  const text = String(value ?? '').trim().toLowerCase();
+  if (!text) return false;
+  return text.includes('sudah') || text.includes('melebihi') || text.includes('selesai') || text.includes('menyelesaikan');
+}
+
+function classifyIdea(text) {
+  const value = String(text || '').trim();
+  if (!value) return '';
+  const low = value.toLowerCase();
+  const contentWords = ['konten', 'publikasi', 'reels', 'video', 'instagram', 'poster', 'caption', 'edukasi', 'sosialisasi', 'infografis', 'media sosial'];
+  const innovationWords = ['inovasi', 'aplikasi', 'sistem', 'fitur', 'dashboard', 'layanan', 'otomatis', 'reminder', 'monitoring', 'alur', 'database', 'integrasi'];
+  const isContent = contentWords.some(w => low.includes(w));
+  const isInnovation = innovationWords.some(w => low.includes(w));
+  if (isContent && !isInnovation) return 'Ide Konten';
+  if (isInnovation && !isContent) return 'Ide Inovasi';
+  if (isContent && isInnovation) return 'Ide Inovasi';
+  return 'Ide Lainnya';
+}
+
+function summarizeIntegrityStats(responses) {
+  const totals = { ya: 0, tidak: 0, ragu: 0, kosong: 0 };
+  const items = INTEGRITY_FIELDS.map(([key, label]) => {
+    const row = { key, label, ya: 0, tidak: 0, ragu: 0, kosong: 0 };
+    responses.forEach(r => {
+      const normalized = normalizeAnswer(parseAnswers(r)[key]);
+      if (normalized === 'Ya') row.ya += 1;
+      else if (normalized === 'Tidak') row.tidak += 1;
+      else if (normalized === 'Ragu-ragu') row.ragu += 1;
+      else row.kosong += 1;
+    });
+    totals.ya += row.ya;
+    totals.tidak += row.tidak;
+    totals.ragu += row.ragu;
+    totals.kosong += row.kosong;
+    return row;
+  });
+  return { items, totals };
+}
+
+function summarizeMonthlyStats(responses) {
+  const stats = {
+    hris: { label: 'Akurasi HRIS', sudah: 0, belum: 0 },
+    advocacy: { label: 'Employee Advocacy', sudah: 0, belum: 0 },
+    steps: { label: 'Langkah harian', categories: {} },
+    satisfaction: { label: 'Kepuasan layanan informasi internal', average: 0, distribution: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 } },
+    english: { label: 'English Day', sudah: 0, belum: 0 }
+  };
+  let ratingTotal = 0;
+  let ratingCount = 0;
+  responses.forEach(r => {
+    const answers = parseAnswers(r);
+    isDoneAnswer(answers[MONTHLY_FIELDS.hris]) ? stats.hris.sudah++ : stats.hris.belum++;
+    isDoneAnswer(answers[MONTHLY_FIELDS.advocacy]) ? stats.advocacy.sudah++ : stats.advocacy.belum++;
+    isDoneAnswer(answers[MONTHLY_FIELDS.english]) ? stats.english.sudah++ : stats.english.belum++;
+
+    const step = String(answers[MONTHLY_FIELDS.steps] || 'Kosong').trim() || 'Kosong';
+    stats.steps.categories[step] = (stats.steps.categories[step] || 0) + 1;
+
+    const rating = Number(String(answers[MONTHLY_FIELDS.satisfaction] || '').match(/[1-5]/)?.[0] || 0);
+    if (rating >= 1 && rating <= 5) {
+      stats.satisfaction.distribution[rating] += 1;
+      ratingTotal += rating;
+      ratingCount += 1;
+    }
+  });
+  stats.satisfaction.average = ratingCount ? Math.round((ratingTotal / ratingCount) * 10) / 10 : 0;
+  return stats;
+}
+
+function buildIdeaItems(responses) {
+  return responses
+    .map(r => {
+      const text = String(parseAnswers(r)[MONTHLY_FIELDS.idea] || '').trim();
+      const category = classifyIdea(text);
+      return text ? { nama: r.nama || '-', unit: r.unit || '-', usulan: text, waktu_submit: r.waktu_submit || '', kategori: category } : null;
+    })
+    .filter(Boolean);
+}
+
+function buildAppFeedback(responses) {
+  return responses
+    .map(r => {
+      const text = String(parseAnswers(r)[MONTHLY_FIELDS.feedback] || '').trim();
+      return text ? { nama: r.nama || '-', unit: r.unit || '-', saran: text, waktu_submit: r.waktu_submit || '' } : null;
+    })
+    .filter(Boolean);
+}
+
+function buildReportAnalyticsFromParts(parts) {
+  const activePeriod = parts.activePeriod || {};
+  const summaryBase = parts.summary || {};
+  const byUnit = (parts.byUnit || []).map(u => ({ ...u, percentage: u.total ? Math.round((u.submitted / u.total) * 1000) / 10 : 0 }));
+  const monitoring = parts.monitoring || [];
+  const responses = (parts.responses || [])
+    .map(r => ({ ...r, answers: parseAnswers(r), answer_json: r.answer_json || JSON.stringify(parseAnswers(r)) }))
+    .sort((a, b) => String(b.waktu_submit || '').localeCompare(String(a.waktu_submit || '')));
+  const riskSummary = { rendah: 0, sedang: 0, tinggi: 0 };
+  responses.forEach(r => {
+    const risk = String(r.risk_level || '').toLowerCase();
+    if (risk.includes('rendah')) riskSummary.rendah += 1;
+    else if (risk.includes('sedang')) riskSummary.sedang += 1;
+    else if (risk.includes('tinggi')) riskSummary.tinggi += 1;
+  });
+  const valid = responses.filter(r => String(r.status_validasi || '').toLowerCase().includes('valid')).length;
+  const perluCek = responses.length - valid;
+  const scores = responses.map(r => Number(r.integrity_score)).filter(n => !Number.isNaN(n));
+  const integrityStats = summarizeIntegrityStats(responses);
+  const ideaItems = buildIdeaItems(responses);
+  const appFeedback = buildAppFeedback(responses);
+  const analytics = {
+    activePeriod,
+    summary: {
+      ...summaryBase,
+      valid,
+      perluCek,
+      riskSummary,
+      averageIntegrityScore: scores.length ? Math.round((scores.reduce((a, b) => a + b, 0) / scores.length) * 10) / 10 : 0,
+      integrityYa: integrityStats.totals.ya,
+      integrityRagu: integrityStats.totals.ragu,
+      totalIdeas: ideaItems.length,
+      totalAppFeedback: appFeedback.length
+    },
+    byUnit,
+    monitoring,
+    responses,
+    integrityStats,
+    monthlyStats: summarizeMonthlyStats(responses),
+    riskSummary,
+    ideaItems,
+    contentIdeas: ideaItems.filter(i => i.kategori === 'Ide Konten'),
+    innovationIdeas: ideaItems.filter(i => i.kategori === 'Ide Inovasi'),
+    otherIdeas: ideaItems.filter(i => i.kategori === 'Ide Lainnya'),
+    appFeedback
+  };
+  analytics.narrative = buildReportNarrative(analytics);
+  return analytics;
+}
+
+function buildReportNarrative(analytics) {
+  const s = analytics.summary || {};
+  const p = analytics.activePeriod || {};
+  const unitHighest = [...(analytics.byUnit || [])].sort((a, b) => (b.percentage || 0) - (a.percentage || 0))[0] || {};
+  const unitPending = [...(analytics.byUnit || [])].sort((a, b) => (b.pending || 0) - (a.pending || 0))[0] || {};
+  const integrity = analytics.integrityStats?.totals || {};
+  return `Pada periode ${p.nama_periode || '-'}, dari ${s.total || 0} pegawai target, ${s.submitted || 0} pegawai telah mengisi atau ${s.percentage || 0}%. Unit dengan kepatuhan tertinggi adalah ${unitHighest.unit || '-'} (${unitHighest.percentage || 0}%). Masih terdapat ${s.pending || 0} pegawai belum mengisi, paling banyak pada unit ${unitPending.unit || '-'} sebanyak ${unitPending.pending || 0} pegawai. Dari jawaban unsur integritas, terdapat ${integrity.ya || 0} jawaban Ya dan ${integrity.ragu || 0} jawaban Ragu-ragu yang perlu ditelaah admin. Terdapat ${(analytics.contentIdeas || []).length} ide konten, ${(analytics.innovationIdeas || []).length} ide inovasi, dan ${(analytics.appFeedback || []).length} saran aplikasi yang dapat dipertimbangkan untuk tindak lanjut.`;
+}
+
+function buildLocalReportAnalytics(periodId) {
+  const dashboard = buildLocalDashboardData(periodId);
+  const period = dashboard.activePeriod;
+  const responses = NGINGETKEN_DATA.responses
+    .filter(r => responseMatchesLocalPeriod(r, period))
+    .map(r => ({ ...r }));
+  return buildReportAnalyticsFromParts({
+    activePeriod: period,
+    summary: dashboard.summary,
+    byUnit: dashboard.byUnit,
+    monitoring: dashboard.monitoring,
+    responses
+  });
+}
+
 function formatDate(dateStr) {
   if (!dateStr || dateStr === '-') return '-';
   try {
@@ -8004,7 +8207,8 @@ const REQUIRED_BACKEND_ACTIONS = new Set([
   'getDashboardData',
   'getExecutiveSummary',
   'getResponseHistory',
-  'getMonitoringData'
+  'getMonitoringData',
+  'getReportAnalytics'
 ]);
 
 async function requestApi(action, payload = {}) {
@@ -8062,6 +8266,9 @@ async function requestApi(action, payload = {}) {
 
     case 'getExecutiveSummary':
       return JSON.parse(JSON.stringify(buildLocalDashboardData(payload.periode_id || payload.periodId)));
+
+    case 'getReportAnalytics':
+      return JSON.parse(JSON.stringify(buildLocalReportAnalytics(payload.periode_id || payload.periodId)));
 
     case 'getFollowUps':
       return JSON.parse(JSON.stringify(NGINGETKEN_DATA.followups));

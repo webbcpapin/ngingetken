@@ -14,48 +14,112 @@
     <div class="brand"><div class="brand-mark"><img src="assets/img/logo-ngingetken.png" alt="Logo Ngingetken"></div><div><div class="brand-title">Ngingetken</div><div class="brand-subtitle">KPPBC TMP C Pangkalpinang</div></div></div>
     <nav class="nav">
       <a href="dashboard.html">Dashboard</a>
+      <a href="viewer.html">Viewer Pimpinan</a>
+      <a href="isi.html">Form Isi Aplikasi</a>
       <a href="pegawai.html">Pegawai</a>
       <a href="periode.html">Periode</a>
+      <a href="tindak-lanjut.html">Tindak Lanjut</a>
+      <a href="riwayat.html">Riwayat</a>
       <a class="active" href="laporan.html">Laporan</a>
-      <a href="index.html">Landing</a>
+      <a href="audit.html">Audit Log</a>
     </nav>
   </aside>
   <main class="main">
     <div class="topbar">
       <div>
-        <div class="eyebrow">Rekap Bulanan</div>
-        <h1>Laporan Ngingetken</h1>
+        <div class="eyebrow">Dashboard Laporan Detail</div>
+        <h1>Laporan Manajerial Ngingetken</h1>
         <p id="reportPeriod" class="lead">Memuat laporan...</p>
       </div>
       <div class="toolbar">
         <select id="periodSelect" style="max-width:220px" onchange="changePeriod()"></select>
         <button class="btn btn-secondary" onclick="window.print()">Print</button>
-        <button class="btn btn-primary" onclick="exportReport()">Export CSV</button>
+        <button class="btn btn-primary" onclick="exportMonitoring()">Export Monitoring CSV</button>
+        <button class="btn btn-secondary" onclick="exportDetailResponses()">Export Detail Respons CSV</button>
+        <button class="btn btn-secondary" onclick="exportIdeas()">Export Ide CSV</button>
+        <button class="btn btn-secondary" onclick="exportFeedback()">Export Saran CSV</button>
       </div>
     </div>
 
-    <section class="grid grid-4">
+    <section class="grid report-stat-grid">
       <div class="card stat-card"><div class="stat-label">Total Pegawai</div><div id="total" class="stat-value">0</div></div>
       <div class="card stat-card"><div class="stat-label">Sudah Mengisi</div><div id="submitted" class="stat-value">0</div></div>
       <div class="card stat-card"><div class="stat-label">Belum Mengisi</div><div id="pending" class="stat-value">0</div></div>
       <div class="card stat-card"><div class="stat-label">Kepatuhan</div><div id="percentage" class="stat-value">0%</div></div>
+      <div class="card stat-card"><div class="stat-label">Respons Valid</div><div id="valid" class="stat-value">0</div></div>
+      <div class="card stat-card"><div class="stat-label">Perlu Cek</div><div id="perluCek" class="stat-value">0</div></div>
+      <div class="card stat-card"><div class="stat-label">Risk Rendah</div><div id="riskLow" class="stat-value">0</div></div>
+      <div class="card stat-card"><div class="stat-label">Risk Sedang</div><div id="riskMedium" class="stat-value">0</div></div>
+      <div class="card stat-card"><div class="stat-label">Risk Tinggi</div><div id="riskHigh" class="stat-value">0</div></div>
+      <div class="card stat-card"><div class="stat-label">Rata-rata Skor</div><div id="avgScore" class="stat-value">0</div></div>
+      <div class="card stat-card"><div class="stat-label">Jawaban Ya Integritas</div><div id="integrityYa" class="stat-value">0</div></div>
+      <div class="card stat-card"><div class="stat-label">Ragu-ragu Integritas</div><div id="integrityRagu" class="stat-value">0</div></div>
+      <div class="card stat-card"><div class="stat-label">Ide Masuk</div><div id="ideasTotal" class="stat-value">0</div></div>
+      <div class="card stat-card"><div class="stat-label">Saran Aplikasi</div><div id="feedbackTotal" class="stat-value">0</div></div>
     </section>
 
-    <section class="card" style="margin-top:16px">
-      <h2>Daftar Belum Mengisi</h2>
-      <div class="table-wrap"><table><thead><tr><th>Nama</th><th>Unit</th></tr></thead><tbody id="pendingBody"><tr><td colspan="2" class="empty">Memuat data...</td></tr></tbody></table></div>
+    <section class="grid grid-2 report-section">
+      <div class="card">
+        <h2>Kepatuhan per Unit</h2>
+        <div id="unitChart" class="bar-list"></div>
+      </div>
+      <div class="card">
+        <h2>Distribusi Risk Level</h2>
+        <div id="riskChart" class="bar-list"></div>
+      </div>
     </section>
 
-    <section class="card" style="margin-top:16px">
-      <h2>Narasi Singkat Laporan</h2>
-      <p id="narrative" class="lead"></p>
+    <section class="grid grid-2 report-section">
+      <div class="card">
+        <h2>Unsur Integritas</h2>
+        <div class="table-wrap"><table><thead><tr><th>Unsur</th><th>Ya</th><th>Tidak</th><th>Ragu-ragu</th><th>Kosong</th></tr></thead><tbody id="integrityBody"></tbody></table></div>
+      </div>
+      <div class="card">
+        <h2>Pertanyaan Bulanan</h2>
+        <div id="monthlyStats" class="metric-list"></div>
+      </div>
+    </section>
+
+    <section class="grid grid-3 report-section">
+      <div class="card"><h2>Ide Konten</h2><div id="contentIdeas" class="idea-list"></div></div>
+      <div class="card"><h2>Ide Inovasi</h2><div id="innovationIdeas" class="idea-list"></div></div>
+      <div class="card"><h2>Ide Lainnya</h2><div id="otherIdeas" class="idea-list"></div></div>
+    </section>
+
+    <section class="card report-section">
+      <h2>Saran Aplikasi</h2>
+      <div id="appFeedback" class="idea-list wide"></div>
+    </section>
+
+    <section class="card report-section">
+      <h2>Detail Respons</h2>
+      <div class="toolbar report-filters">
+        <input id="searchInput" class="input" placeholder="Cari nama..." oninput="renderResponseTable()">
+        <select id="unitFilter" class="input" onchange="renderResponseTable()"><option value="">Semua Unit</option></select>
+        <select id="riskFilter" class="input" onchange="renderResponseTable()"><option value="">Semua Risk</option><option>Rendah</option><option>Sedang</option><option>Tinggi</option></select>
+        <select id="statusFilter" class="input" onchange="renderResponseTable()"><option value="">Semua Status</option><option>Valid</option><option>Perlu Cek</option></select>
+        <select id="ideaFilter" class="input" onchange="renderResponseTable()"><option value="">Semua Ide</option><option value="yes">Ada Ide</option><option value="no">Tanpa Ide</option></select>
+        <select id="feedbackFilter" class="input" onchange="renderResponseTable()"><option value="">Semua Saran</option><option value="yes">Ada Saran</option><option value="no">Tanpa Saran</option></select>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>Nama</th><th>Unit</th><th>Waktu Submit</th><th>Status</th><th>Skor</th><th>Risk</th><th>Ringkasan q4-q11</th><th>Ide</th><th>Saran</th></tr></thead><tbody id="responseBody"><tr><td colspan="9" class="empty">Memuat data...</td></tr></tbody></table></div>
+    </section>
+
+    <section class="grid grid-2 report-section">
+      <div class="card">
+        <h2>Daftar Belum Mengisi</h2>
+        <div class="table-wrap"><table><thead><tr><th>Nama</th><th>Unit</th></tr></thead><tbody id="pendingBody"></tbody></table></div>
+      </div>
+      <div class="card">
+        <h2>Narasi Otomatis</h2>
+        <p id="narrative" class="lead"></p>
+      </div>
     </section>
   </main>
 </div>
 <script src="assets/js/config.js"></script>
 <script src="assets/js/api.js"></script>
 <script>
-let data = null;
+let reportData = null;
 let periods = [];
 
 async function init() {
@@ -67,28 +131,195 @@ async function init() {
 
 async function changePeriod() {
   const params = new URLSearchParams(location.search);
-  params.set('periode_id', periodSelect.value);
+  if (periodSelect.value) params.set('periode_id', periodSelect.value);
+  else params.delete('periode_id');
   history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
   await loadReport(periodSelect.value);
 }
 
 async function loadReport(periode_id) {
-  data = await requestApi('getDashboardData', periode_id ? { periode_id } : {});
-  const p = data.activePeriod || {};
+  reportData = await loadReportAnalytics(periode_id);
+  const p = reportData.activePeriod || {};
   periodSelect.value = p.periode_id || periode_id || '';
-  document.getElementById('reportPeriod').textContent = `Periode ${p.nama_periode || '-'} dengan deadline ${formatDate(p.tanggal_deadline)}.`;
-  document.getElementById('total').textContent = data.summary.total;
-  document.getElementById('submitted').textContent = data.summary.submitted;
-  document.getElementById('pending').textContent = data.summary.pending;
-  document.getElementById('percentage').textContent = `${data.summary.percentage}%`;
-  const pendingRows = data.monitoring.filter(x => x.status_pengisian === 'Belum Mengisi');
-  document.getElementById('pendingBody').innerHTML = pendingRows.length ? pendingRows.map(x => `<tr><td><strong>${x.nama}</strong></td><td>${x.unit || '-'}</td></tr>`).join('') : '<tr><td colspan="2" class="empty">Seluruh pegawai sudah mengisi.</td></tr>';
-  document.getElementById('narrative').textContent = `Pada periode ${p.nama_periode || '-'}, jumlah pegawai aktif yang menjadi target pengisian adalah ${data.summary.total} orang. Sebanyak ${data.summary.submitted} pegawai telah mengisi, sedangkan ${data.summary.pending} pegawai belum tercatat mengisi. Persentase kepatuhan adalah ${data.summary.percentage}%.`;
+  reportPeriod.textContent = `Periode ${p.nama_periode || '-'} dengan deadline ${formatDate(p.tanggal_deadline)}.`;
+  renderSummary();
+  renderCharts();
+  renderIntegrity();
+  renderMonthly();
+  renderIdeaList('contentIdeas', reportData.contentIdeas || []);
+  renderIdeaList('innovationIdeas', reportData.innovationIdeas || []);
+  renderIdeaList('otherIdeas', reportData.otherIdeas || []);
+  renderFeedback();
+  buildFilters();
+  renderResponseTable();
+  renderPending();
+  narrative.textContent = reportData.narrative || '';
 }
 
-function exportReport() {
-  const p = data.activePeriod || {};
-  downloadCsv(`laporan-ngingetken-${p.periode_id || 'periode'}.csv`, data.monitoring || []);
+async function loadReportAnalytics(periode_id) {
+  try {
+    return await requestApi('getReportAnalytics', periode_id ? { periode_id } : {});
+  } catch (err) {
+    if (!String(err.message || '').includes('getReportAnalytics') && !String(err.message || '').includes('Action tidak dikenal')) throw err;
+    showToast('Memakai mode kompatibilitas laporan.');
+    const dashboard = await requestApi('getDashboardData', periode_id ? { periode_id } : {});
+    const activeId = dashboard.activePeriod?.periode_id || periode_id;
+    let history = await requestApi('getResponseHistory', { periode_id: activeId });
+    if (needsAnswerCompat(history.responses || [])) {
+      history = { responses: await loadResponseCompat(activeId) };
+    }
+    return buildReportAnalyticsFromParts({
+      activePeriod: dashboard.activePeriod,
+      summary: dashboard.summary,
+      byUnit: dashboard.byUnit,
+      monitoring: dashboard.monitoring,
+      responses: history.responses || []
+    });
+  }
+}
+
+function needsAnswerCompat(responses) {
+  return responses.some(r => {
+    const raw = String(r.answer_json || '').trim();
+    return !raw || raw === '{}' || raw === '[]';
+  });
+}
+
+async function loadResponseCompat(periode_id) {
+  const employees = await requestApi('getEmployees');
+  const seen = new Set();
+  const batches = await Promise.all((employees || []).map(emp =>
+    requestApi('getEmployeeHistory', { pegawai_id: emp.pegawai_id }).catch(() => ({ responses: [] }))
+  ));
+  const rows = [];
+  batches.forEach(data => {
+    (data.responses || []).forEach(r => {
+      if (periode_id && r.periode_id !== periode_id) return;
+      const key = r.response_id || `${r.periode_id}-${r.pegawai_id || r.nama}-${r.waktu_submit}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+      rows.push(r);
+    });
+  });
+  return rows;
+}
+
+function renderSummary() {
+  const s = reportData.summary || {};
+  total.textContent = s.total || 0;
+  submitted.textContent = s.submitted || 0;
+  pending.textContent = s.pending || 0;
+  percentage.textContent = `${s.percentage || 0}%`;
+  valid.textContent = s.valid || 0;
+  perluCek.textContent = s.perluCek || 0;
+  riskLow.textContent = reportData.riskSummary?.rendah || 0;
+  riskMedium.textContent = reportData.riskSummary?.sedang || 0;
+  riskHigh.textContent = reportData.riskSummary?.tinggi || 0;
+  avgScore.textContent = s.averageIntegrityScore || 0;
+  integrityYa.textContent = s.integrityYa || 0;
+  integrityRagu.textContent = s.integrityRagu || 0;
+  ideasTotal.textContent = s.totalIdeas || 0;
+  feedbackTotal.textContent = s.totalAppFeedback || 0;
+}
+
+function renderCharts() {
+  unitChart.innerHTML = (reportData.byUnit || []).map(u => barRow(u.unit, `${u.submitted}/${u.total} isi - ${u.pending} belum`, u.percentage || 0)).join('');
+  const risk = reportData.riskSummary || {};
+  const maxRisk = Math.max(risk.rendah || 0, risk.sedang || 0, risk.tinggi || 0, 1);
+  riskChart.innerHTML = [
+    barRow('Rendah', `${risk.rendah || 0} respons`, (risk.rendah || 0) / maxRisk * 100),
+    barRow('Sedang', `${risk.sedang || 0} respons`, (risk.sedang || 0) / maxRisk * 100),
+    barRow('Tinggi', `${risk.tinggi || 0} respons`, (risk.tinggi || 0) / maxRisk * 100)
+  ].join('');
+}
+
+function barRow(label, meta, percent) {
+  const width = Math.max(0, Math.min(100, Number(percent) || 0));
+  return `<div class="bar-row"><div class="bar-meta"><strong>${escapeHtml(label)}</strong><span>${escapeHtml(meta)} (${Math.round(width * 10) / 10}%)</span></div><div class="bar-track"><span style="width:${width}%"></span></div></div>`;
+}
+
+function renderIntegrity() {
+  const rows = reportData.integrityStats?.items || [];
+  integrityBody.innerHTML = rows.length ? rows.map(x => `<tr><td><strong>${x.label}</strong></td><td>${x.ya}</td><td>${x.tidak}</td><td>${x.ragu}</td><td>${x.kosong}</td></tr>`).join('') : '<tr><td colspan="5" class="empty">Belum ada respons.</td></tr>';
+}
+
+function renderMonthly() {
+  const m = reportData.monthlyStats || {};
+  const stepRows = Object.entries(m.steps?.categories || {}).map(([k, v]) => `<span class="mini-metric">${escapeHtml(k)}: <strong>${v}</strong></span>`).join('');
+  const ratingRows = Object.entries(m.satisfaction?.distribution || {}).map(([k, v]) => `<span class="mini-metric">${k}: <strong>${v}</strong></span>`).join('');
+  monthlyStats.innerHTML = `
+    ${monthlyRow(m.hris?.label || 'Akurasi HRIS', `${m.hris?.sudah || 0} sudah, ${m.hris?.belum || 0} belum`)}
+    ${monthlyRow(m.advocacy?.label || 'Employee Advocacy', `${m.advocacy?.sudah || 0} sudah, ${m.advocacy?.belum || 0} belum`)}
+    ${monthlyRow(m.steps?.label || 'Langkah harian', stepRows || 'Belum ada data')}
+    ${monthlyRow(m.satisfaction?.label || 'Kepuasan', `Rata-rata ${m.satisfaction?.average || 0} - ${ratingRows || 'Belum ada data'}`)}
+    ${monthlyRow(m.english?.label || 'English Day', `${m.english?.sudah || 0} sudah, ${m.english?.belum || 0} belum`)}
+  `;
+}
+
+function monthlyRow(label, value) {
+  return `<div class="metric-row"><span>${escapeHtml(label)}</span><strong>${value}</strong></div>`;
+}
+
+function renderIdeaList(id, rows) {
+  document.getElementById(id).innerHTML = rows.length ? rows.map(item => `<article class="idea-item"><div><strong>${escapeHtml(item.nama)}</strong><span>${escapeHtml(item.unit)} - ${escapeHtml(item.waktu_submit)}</span></div><p>${escapeHtml(item.usulan)}</p><small>${escapeHtml(item.kategori)}</small></article>`).join('') : '<div class="empty-state">Belum ada data.</div>';
+}
+
+function renderFeedback() {
+  const rows = reportData.appFeedback || [];
+  appFeedback.innerHTML = rows.length ? rows.map(item => `<article class="idea-item"><div><strong>${escapeHtml(item.nama)}</strong><span>${escapeHtml(item.unit)} - ${escapeHtml(item.waktu_submit)}</span></div><p>${escapeHtml(item.saran)}</p></article>`).join('') : '<div class="empty-state">Belum ada saran aplikasi.</div>';
+}
+
+function buildFilters() {
+  const units = [...new Set((reportData.responses || []).map(r => r.unit).filter(Boolean))].sort();
+  unitFilter.innerHTML = '<option value="">Semua Unit</option>' + units.map(u => `<option>${escapeHtml(u)}</option>`).join('');
+}
+
+function renderResponseTable() {
+  const q = searchInput.value.trim().toLowerCase();
+  const rows = (reportData.responses || []).filter(r => {
+    const answers = parseAnswers(r);
+    const hasIdea = !!String(answers.q16_innovation_idea || '').trim();
+    const hasFeedback = !!String(answers.q17_app_feedback || '').trim();
+    return (!q || String(r.nama || '').toLowerCase().includes(q)) &&
+      (!unitFilter.value || r.unit === unitFilter.value) &&
+      (!riskFilter.value || r.risk_level === riskFilter.value) &&
+      (!statusFilter.value || r.status_validasi === statusFilter.value) &&
+      (!ideaFilter.value || (ideaFilter.value === 'yes' ? hasIdea : !hasIdea)) &&
+      (!feedbackFilter.value || (feedbackFilter.value === 'yes' ? hasFeedback : !hasFeedback));
+  });
+  responseBody.innerHTML = rows.length ? rows.map(r => {
+    const answers = parseAnswers(r);
+    const integrity = INTEGRITY_FIELDS.map(([key, label]) => `${label}: ${normalizeAnswer(answers[key])}`).join('; ');
+    const hasIdea = !!String(answers.q16_innovation_idea || '').trim();
+    const hasFeedback = !!String(answers.q17_app_feedback || '').trim();
+    return `<tr><td><strong>${escapeHtml(r.nama || '-')}</strong></td><td>${escapeHtml(r.unit || '-')}</td><td>${escapeHtml(r.waktu_submit || '-')}</td><td><span class="badge ${badgeStatus(r.status_validasi)}">${escapeHtml(r.status_validasi || '-')}</span></td><td>${r.integrity_score ?? '-'}</td><td><span class="badge ${badgeStatus(r.risk_level)}">${escapeHtml(r.risk_level || '-')}</span></td><td>${escapeHtml(integrity)}</td><td>${hasIdea ? 'Ada' : '-'}</td><td>${hasFeedback ? 'Ada' : '-'}</td></tr>`;
+  }).join('') : '<tr><td colspan="9" class="empty">Tidak ada respons sesuai filter.</td></tr>';
+}
+
+function renderPending() {
+  const rows = (reportData.monitoring || []).filter(x => x.status_pengisian === 'Belum Mengisi');
+  pendingBody.innerHTML = rows.length ? rows.map(x => `<tr><td><strong>${escapeHtml(x.nama)}</strong></td><td>${escapeHtml(x.unit || '-')}</td></tr>`).join('') : '<tr><td colspan="2" class="empty">Seluruh pegawai sudah mengisi.</td></tr>';
+}
+
+function exportMonitoring() {
+  downloadCsv(`monitoring-${reportData.activePeriod?.periode_id || 'periode'}.csv`, reportData.monitoring || []);
+}
+
+function exportDetailResponses() {
+  const rows = (reportData.responses || []).map(r => ({ ...r, answers: parseAnswers(r) }));
+  downloadCsv(`detail-respons-${reportData.activePeriod?.periode_id || 'periode'}.csv`, rows);
+}
+
+function exportIdeas() {
+  downloadCsv(`ide-${reportData.activePeriod?.periode_id || 'periode'}.csv`, reportData.ideaItems || []);
+}
+
+function exportFeedback() {
+  downloadCsv(`saran-aplikasi-${reportData.activePeriod?.periode_id || 'periode'}.csv`, reportData.appFeedback || []);
+}
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
 init().catch(err => showToast(err.message));
