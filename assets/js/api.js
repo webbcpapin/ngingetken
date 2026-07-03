@@ -7927,6 +7927,8 @@ function buildLocalResponseHistory(periodId) {
         status_validasi: r.status_validasi || '-',
         integrity_score: r.integrity_score ?? '-',
         risk_level: r.risk_level || '-',
+        answer_json: r.answer_json || (r.answers ? JSON.stringify(r.answers) : '{}'),
+        answers: r.answers || {},
         catatan: r.catatan || ''
       };
     })
@@ -7998,6 +8000,13 @@ const CLIENT_WRITE_ACTIONS = new Set([
   'submitHtmlForm'
 ]);
 
+const REQUIRED_BACKEND_ACTIONS = new Set([
+  'getDashboardData',
+  'getExecutiveSummary',
+  'getResponseHistory',
+  'getMonitoringData'
+]);
+
 async function requestApi(action, payload = {}) {
   const config = window.NGINGETKEN_CONFIG || {};
   const apiUrl = config.API_URL || 'mock';
@@ -8028,6 +8037,9 @@ async function requestApi(action, payload = {}) {
       if (err.backendHandled) throw err;
       if (CLIENT_WRITE_ACTIONS.has(action)) {
         throw new Error('Data belum tersimpan ke Google Sheet. Cek koneksi/deployment Apps Script, lalu kirim ulang. Detail: ' + err.message);
+      }
+      if (REQUIRED_BACKEND_ACTIONS.has(action)) {
+        throw new Error('Data Google Sheet belum terbaca. Cek URL/deployment Apps Script, lalu muat ulang. Detail: ' + err.message);
       }
     }
   }

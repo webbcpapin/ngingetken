@@ -78,7 +78,7 @@ let periods = [];
 async function init() {
   periods = await requestApi('getPeriods');
   periodSelect.innerHTML = periods.map(p => `<option value="${p.periode_id}">${p.nama_periode}</option>`).join('');
-  const selected = new URLSearchParams(location.search).get('periode_id') || periodSelect.value;
+  const selected = new URLSearchParams(location.search).get('periode_id') || '';
   await loadDashboard(selected);
 }
 
@@ -90,7 +90,7 @@ async function changePeriod() {
 }
 
 async function loadDashboard(periode_id) {
-  dashboardData = await requestApi('getDashboardData', { periode_id });
+  dashboardData = await requestApi('getDashboardData', periode_id ? { periode_id } : {});
   const p = dashboardData.activePeriod || {};
   periodSelect.value = p.periode_id || periode_id || '';
   periodInfo.textContent = `${p.nama_periode || '-'} - Deadline ${formatDate(p.tanggal_deadline)} - Status ${p.status || '-'}`;

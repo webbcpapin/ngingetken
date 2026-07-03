@@ -53,8 +53,8 @@
       </div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Periode</th><th>Waktu Isi</th><th>Nama</th><th>Unit</th><th>Validasi</th><th>Skor</th><th>Risiko</th><th>Catatan</th></tr></thead>
-          <tbody id="historyBody"><tr><td colspan="8" class="empty">Memuat data...</td></tr></tbody>
+          <thead><tr><th>Periode</th><th>Waktu Isi</th><th>Nama</th><th>Unit</th><th>Validasi</th><th>Skor</th><th>Risiko</th><th>Hasil Isian</th><th>Catatan</th></tr></thead>
+          <tbody id="historyBody"><tr><td colspan="9" class="empty">Memuat data...</td></tr></tbody>
         </table>
       </div>
     </section>
@@ -71,12 +71,68 @@ async function init() {
 }
 
 async function loadHistory(periode_id = '') {
-  historyData = await requestApi('getResponseHistory', { periode_id });
+  try {
+    historyData = await requestApi('getResponseHistory', { periode_id });
+    if (needsAnswerCompat(historyData.responses || [])) {
+      showToast('Melengkapi detail hasil isian dari histori pegawai.');
+      historyData = await loadHistoryCompat(periode_id);
+    }
+  } catch (e) {
+    if (!String(e.message || '').includes('getResponseHistory')) throw e;
+    showToast('Memakai mode kompatibilitas histori Google Sheet.');
+    historyData = await loadHistoryCompat(periode_id);
+  }
   const periods = historyData.periods || [];
   periodSelect.innerHTML = '<option value="">Semua Bulan</option>' + periods.map(p => `<option value="${p.periode_id}">${p.nama_periode}</option>`).join('');
   periodSelect.value = periode_id || '';
   buildUnitFilter();
   renderHistory();
+}
+
+function needsAnswerCompat(responses) {
+  return responses.some(r => {
+    const raw = String(r.answer_json || '').trim();
+    return !raw || raw === '{}' || raw === '[]';
+  });
+}
+
+async function loadHistoryCompat(periode_id = '') {
+  const [periods, employees] = await Promise.all([
+    requestApi('getPeriods'),
+    requestApi('getEmployees')
+  ]);
+  const periodMap = Object.fromEntries((periods || []).map(p => [p.periode_id, p]));
+  const seen = new Set();
+  const batches = await Promise.all((employees || []).map(emp =>
+    requestApi('getEmployeeHistory', { pegawai_id: emp.pegawai_id }).catch(() => ({ responses: [] }))
+  ));
+  const responses = [];
+  batches.forEach(data => {
+    (data.responses || []).forEach(r => {
+      if (periode_id && r.periode_id !== periode_id) return;
+      const key = r.response_id || `${r.periode_id}-${r.pegawai_id || r.nama}-${r.waktu_submit}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+      const period = periodMap[r.periode_id] || {};
+      responses.push({
+        response_id: r.response_id || '',
+        periode_id: r.periode_id || '',
+        nama_periode: period.nama_periode || r.periode_bulan || r.periode_id || '-',
+        pegawai_id: r.pegawai_id || '',
+        nama: r.nama || '-',
+        unit: r.unit || '-',
+        waktu_submit: r.waktu_submit || '',
+        status_validasi: r.status_validasi || '-',
+        integrity_score: r.integrity_score ?? '-',
+        risk_level: r.risk_level || '-',
+        answer_json: r.answer_json || (r.answers ? JSON.stringify(r.answers) : '{}'),
+        answers: r.answers || {},
+        catatan: r.catatan || ''
+      });
+    });
+  });
+  responses.sort((a, b) => String(b.waktu_submit || '').localeCompare(String(a.waktu_submit || '')));
+  return { period: periode_id ? (periodMap[periode_id] || null) : null, periods, responses };
 }
 
 async function changePeriod() {
@@ -100,7 +156,7 @@ function filteredRows() {
   const risk = riskFilter.value;
   const status = statusFilter.value;
   return (historyData.responses || []).filter(row => {
-    const text = [row.nama_periode, row.waktu_submit, row.nama, row.unit, row.status_validasi, row.risk_level, row.catatan].join(' ').toLowerCase();
+    const text = [row.nama_periode, row.waktu_submit, row.nama, row.unit, row.status_validasi, row.risk_level, answerText(row), row.catatan].join(' ').toLowerCase();
     return (!q || text.includes(q)) &&
       (!unit || row.unit === unit) &&
       (!risk || row.risk_level === risk) &&
@@ -117,7 +173,29 @@ function renderHistory() {
   visiblePeriods.textContent = periodKeys.size;
   highRisk.textContent = rows.filter(r => r.risk_level === 'Tinggi').length;
   historyInfo.textContent = periodSelect.value ? `Histori pengisian periode ${periodSelect.options[periodSelect.selectedIndex]?.text || '-'}.` : 'Histori pengisian seluruh periode yang tercatat.';
-  historyBody.innerHTML = rows.length ? rows.map(row => `<tr><td><strong>${row.nama_periode || '-'}</strong></td><td>${row.waktu_submit || '-'}</td><td>${row.nama || '-'}</td><td>${row.unit || '-'}</td><td><span class="badge ${badgeStatus(row.status_validasi)}">${row.status_validasi || '-'}</span></td><td>${row.integrity_score || '-'}</td><td><span class="badge ${badgeStatus(row.risk_level)}">${row.risk_level || '-'}</span></td><td>${row.catatan || '-'}</td></tr>`).join('') : '<tr><td colspan="8" class="empty">Tidak ada histori sesuai filter.</td></tr>';
+  historyBody.innerHTML = rows.length ? rows.map(row => `<tr><td><strong>${row.nama_periode || '-'}</strong></td><td>${row.waktu_submit || '-'}</td><td>${row.nama || '-'}</td><td>${row.unit || '-'}</td><td><span class="badge ${badgeStatus(row.status_validasi)}">${row.status_validasi || '-'}</span></td><td>${row.integrity_score || '-'}</td><td><span class="badge ${badgeStatus(row.risk_level)}">${row.risk_level || '-'}</span></td><td>${answerDetails(row)}</td><td>${row.catatan || '-'}</td></tr>`).join('') : '<tr><td colspan="9" class="empty">Tidak ada histori sesuai filter.</td></tr>';
+}
+
+function parseAnswers(row) {
+  if (row.answers && typeof row.answers === 'object') return row.answers;
+  try { return JSON.parse(row.answer_json || '{}'); }
+  catch (e) { return {}; }
+}
+
+function answerText(row) {
+  const answers = parseAnswers(row);
+  return Object.entries(answers).map(([key, value]) => `${key}: ${value}`).join(' | ');
+}
+
+function answerDetails(row) {
+  const text = answerText(row);
+  if (!text) return '-';
+  const preview = text.length > 80 ? text.slice(0, 80) + '...' : text;
+  return `<details><summary>${escapeHtml(preview)}</summary><div class="mini-card" style="margin-top:8px;white-space:pre-wrap">${escapeHtml(text)}</div></details>`;
+}
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
 function exportHistory() {

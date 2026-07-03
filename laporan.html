@@ -61,7 +61,7 @@ let periods = [];
 async function init() {
   periods = await requestApi('getPeriods');
   periodSelect.innerHTML = periods.map(p => `<option value="${p.periode_id}">${p.nama_periode}</option>`).join('');
-  const selected = new URLSearchParams(location.search).get('periode_id') || periodSelect.value;
+  const selected = new URLSearchParams(location.search).get('periode_id') || '';
   await loadReport(selected);
 }
 
@@ -73,7 +73,7 @@ async function changePeriod() {
 }
 
 async function loadReport(periode_id) {
-  data = await requestApi('getDashboardData', { periode_id });
+  data = await requestApi('getDashboardData', periode_id ? { periode_id } : {});
   const p = data.activePeriod || {};
   periodSelect.value = p.periode_id || periode_id || '';
   document.getElementById('reportPeriod').textContent = `Periode ${p.nama_periode || '-'} dengan deadline ${formatDate(p.tanggal_deadline)}.`;
