@@ -7808,6 +7808,7 @@ function normalizeBackendPeriodNames(data) {
   if (data && typeof data === 'object') {
     Object.keys(data).forEach(key => { data[key] = normalizeBackendPeriodNames(data[key]); });
     if (data.nama_periode) data.nama_periode = formatPeriodName(data.nama_periode);
+    if (data.periode_id === 'PRD2026JUL') data.tanggal_deadline = '2026-08-10';
   }
   return data;
 }
@@ -8255,20 +8256,20 @@ async function requestApi(action, payload = {}) {
       return JSON.parse(JSON.stringify(NGINGETKEN_DATA.employees));
 
     case 'getPeriods':
-      return JSON.parse(JSON.stringify(sortPeriods(NGINGETKEN_DATA.periods)));
+      return normalizeBackendPeriodNames(JSON.parse(JSON.stringify(sortPeriods(NGINGETKEN_DATA.periods))));
 
     case 'getActivePeriod': {
       return JSON.parse(JSON.stringify(getLocalActivePeriod()));
     }
 
     case 'getDashboardData':
-      return JSON.parse(JSON.stringify(buildLocalDashboardData(payload.periode_id || payload.periodId)));
+      return normalizeBackendPeriodNames(JSON.parse(JSON.stringify(buildLocalDashboardData(payload.periode_id || payload.periodId))));
 
     case 'getExecutiveSummary':
-      return JSON.parse(JSON.stringify(buildLocalDashboardData(payload.periode_id || payload.periodId)));
+      return normalizeBackendPeriodNames(JSON.parse(JSON.stringify(buildLocalDashboardData(payload.periode_id || payload.periodId))));
 
     case 'getReportAnalytics':
-      return JSON.parse(JSON.stringify(buildLocalReportAnalytics(payload.periode_id || payload.periodId)));
+      return normalizeBackendPeriodNames(JSON.parse(JSON.stringify(buildLocalReportAnalytics(payload.periode_id || payload.periodId))));
 
     case 'getFollowUps':
       return JSON.parse(JSON.stringify(NGINGETKEN_DATA.followups));
@@ -8277,7 +8278,7 @@ async function requestApi(action, payload = {}) {
       return JSON.parse(JSON.stringify(NGINGETKEN_DATA.auditLogs));
 
     case 'getResponseHistory':
-      return JSON.parse(JSON.stringify(buildLocalResponseHistory(payload.periode_id || payload.periodId)));
+      return normalizeBackendPeriodNames(JSON.parse(JSON.stringify(buildLocalResponseHistory(payload.periode_id || payload.periodId))));
 
     case 'getEmployeeHistory': {
       const { pegawai_id, nama } = payload;
