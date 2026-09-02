@@ -1,24 +1,149 @@
 <!doctype html>
 <html lang="id">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Data Pegawai - Ngingetken</title><link rel="stylesheet" href="assets/css/style.css"><script src="assets/js/auth.js"></script><script>requireAdminAccess();</script></head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Pegawai - Ngingetken</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/auth.js"></script>
+  <script>requireAdminAccess();</script>
+</head>
 <body>
 <div class="app-shell">
-  <aside class="sidebar"><div class="brand"><div class="brand-mark"><img src="assets/img/logo-ngingetken.png" alt="Logo Ngingetken"></div><div><div class="brand-title">Ngingetken</div><div class="brand-subtitle">KPPBC TMP C Pangkalpinang</div></div></div><nav class="nav"><a href="dashboard.html">📊 Dashboard</a><a class="active" href="pegawai.html">👥 Pegawai</a><a href="periode.html">🗓️ Periode</a><a href="laporan.html">📄 Laporan</a><a href="index.html">🏠 Landing</a></nav></aside>
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark"><img src="assets/img/logo-ngingetken.png" alt="Logo Ngingetken"></div><div><div class="brand-title">Ngingetken</div><div class="brand-subtitle">KPPBC TMP C Pangkalpinang</div></div></div>
+    <nav class="nav"><a href="dashboard.html">Dashboard</a><a class="active" href="pegawai.html">Pegawai</a><a href="periode.html">Periode</a><a href="laporan.html">Laporan</a><a href="index.html">Landing</a></nav>
+  </aside>
   <main class="main">
-    <div class="topbar"><div><div class="eyebrow">Master Data</div><h1>Data Pegawai</h1><p class="lead">Kelola daftar pegawai aktif sebagai basis pencocokan status pengisian.</p></div><div class="toolbar"><button class="btn btn-primary" onclick="openModal()">Tambah Pegawai</button><button class="btn btn-secondary" onclick="exportEmployees()">Export CSV</button></div></div>
-    <section class="card"><div class="toolbar"><input id="searchInput" class="input" style="max-width:360px" placeholder="Cari pegawai..." oninput="renderEmployees()"></div><div class="table-wrap"><table><thead><tr><th>Nama</th><th>Unit</th><th>Status</th></tr></thead><tbody id="employeeBody"><tr><td colspan="3" class="empty">Memuat data...</td></tr></tbody></table></div></section>
+    <div class="topbar"><div><div class="eyebrow">Master Data</div><h1>Data Pegawai</h1><p class="lead">Kelola pegawai aktif, status mutasi, dan perubahan unit.</p></div><div class="toolbar"><button class="btn btn-primary" onclick="openAddModal()">Tambah Pegawai</button><button class="btn btn-secondary" onclick="exportEmployees()">Export CSV</button></div></div>
+    <section class="card"><div class="toolbar"><input id="searchInput" class="input" style="max-width:360px" placeholder="Cari pegawai..." oninput="renderEmployees()"></div><div class="table-wrap"><table><thead><tr><th>Nama</th><th>Unit</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="employeeBody"><tr><td colspan="4" class="empty">Memuat data...</td></tr></tbody></table></div></section>
   </main>
 </div>
-<div id="employeeModal" class="modal-backdrop"><div class="card modal"><h2>Tambah Pegawai</h2><form id="employeeForm" class="form-grid"><div class="form-field"><label>Nama</label><input required name="nama" class="input"></div><div class="form-field"><label>Unit</label><input required name="unit" class="input"></div><div class="form-field"><label>Status Aktif</label><select name="status_aktif"><option value="true">Aktif</option><option value="false">Nonaktif</option></select></div><div class="toolbar" style="grid-column:1/-1"><button class="btn btn-primary">Simpan</button><button type="button" class="btn btn-secondary" onclick="closeModal()">Batal</button></div></form></div></div>
+
+<div id="employeeModal" class="modal-backdrop">
+  <div class="card modal">
+    <h2 id="employeeModalTitle">Tambah Pegawai</h2>
+    <form id="employeeForm" class="form-grid">
+      <input type="hidden" name="pegawai_id">
+      <div class="form-field"><label>Nama</label><input required name="nama" class="input"></div>
+      <div class="form-field"><label>Unit</label><input required name="unit" class="input"></div>
+      <div class="form-field"><label>Status Aktif</label><select name="status_aktif"><option value="true">Aktif</option><option value="false">Nonaktif</option></select></div>
+      <div class="toolbar" style="grid-column:1/-1"><button id="employeeSubmitBtn" class="btn btn-primary">Simpan</button><button type="button" class="btn btn-secondary" onclick="closeModal()">Batal</button></div>
+    </form>
+  </div>
+</div>
+
 <script src="assets/js/config.js"></script><script src="assets/js/api.js"></script>
 <script>
-let employees=[];
-async function init(){ employees = await requestApi("getEmployees"); renderEmployees(); }
-function renderEmployees(){ const q=document.getElementById("searchInput").value.toLowerCase(); const rows=employees.filter(e=>Object.values(e).join(" ").toLowerCase().includes(q)); const body=document.getElementById("employeeBody"); if(!rows.length){body.innerHTML='<tr><td colspan="3" class="empty">Tidak ada data pegawai.</td></tr>'; return;} body.innerHTML=rows.map(e=>`<tr><td><strong>${e.nama}</strong></td><td>${e.unit||'-'}</td><td><span class="badge ${e.status_aktif ? 'success':'muted'}">${e.status_aktif ? 'Aktif':'Nonaktif'}</span></td></tr>`).join(''); }
-function openModal(){document.getElementById('employeeModal').classList.add('show')}
-function closeModal(){document.getElementById('employeeModal').classList.remove('show')}
-document.getElementById('employeeForm').addEventListener('submit', async e => { e.preventDefault(); const form=Object.fromEntries(new FormData(e.target).entries()); form.status_aktif=form.status_aktif==='true'; try { await requestApi('createEmployee',{employee:form}); employees=await requestApi('getEmployees'); e.target.reset(); closeModal(); renderEmployees(); showToast('Pegawai berhasil ditambahkan'); } catch (err) { showToast('Gagal menambah pegawai: '+err.message); } });
-function exportEmployees(){ downloadCsv('data-pegawai-ngingetken.csv', employees); }
-init().catch(err=>showToast(err.message));
+let employees = [];
+let editingEmployeeId = '';
+
+async function init() {
+  employees = await requestApi('getEmployees');
+  renderEmployees();
+}
+
+function isActiveEmployee(employee) {
+  return employee.status_aktif === true || String(employee.status_aktif).toLowerCase() === 'true' || String(employee.status_aktif).toLowerCase() === 'aktif';
+}
+
+function renderEmployees() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const rows = employees.filter(e => Object.values(e).join(' ').toLowerCase().includes(q));
+  const body = document.getElementById('employeeBody');
+  if (!rows.length) {
+    body.innerHTML = '<tr><td colspan="4" class="empty">Tidak ada data pegawai.</td></tr>';
+    return;
+  }
+  body.innerHTML = rows.map(e => {
+    const active = isActiveEmployee(e);
+    const safeId = JSON.stringify(e.pegawai_id);
+    return `<tr>
+      <td><strong>${e.nama}</strong></td>
+      <td>${e.unit || '-'}</td>
+      <td><span class="badge ${active ? 'success':'muted'}">${active ? 'Aktif':'Nonaktif'}</span></td>
+      <td class="table-actions">
+        <button class="btn btn-secondary" onclick="openEditModal(${safeId})">Edit</button>
+        <button class="btn btn-secondary" onclick="toggleEmployeeStatus(${safeId})">${active ? 'Nonaktifkan':'Aktifkan'}</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function openAddModal() {
+  editingEmployeeId = '';
+  document.getElementById('employeeModalTitle').textContent = 'Tambah Pegawai';
+  document.getElementById('employeeSubmitBtn').textContent = 'Simpan';
+  document.getElementById('employeeForm').reset();
+  document.querySelector('[name="pegawai_id"]').value = '';
+  document.getElementById('employeeModal').classList.add('show');
+}
+
+function openEditModal(employeeId) {
+  const employee = employees.find(e => e.pegawai_id === employeeId);
+  if (!employee) return showToast('Pegawai tidak ditemukan');
+  editingEmployeeId = employeeId;
+  document.getElementById('employeeModalTitle').textContent = 'Edit Pegawai';
+  document.getElementById('employeeSubmitBtn').textContent = 'Update Pegawai';
+  const form = document.getElementById('employeeForm');
+  form.pegawai_id.value = employee.pegawai_id || '';
+  form.nama.value = employee.nama || '';
+  form.unit.value = employee.unit || '';
+  form.status_aktif.value = isActiveEmployee(employee) ? 'true' : 'false';
+  document.getElementById('employeeModal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('employeeModal').classList.remove('show');
+}
+
+async function saveEmployee(formEl) {
+  const employee = Object.fromEntries(new FormData(formEl).entries());
+  employee.status_aktif = employee.status_aktif === 'true';
+  const action = editingEmployeeId ? 'updateEmployee' : 'createEmployee';
+  await requestApi(action, { employee });
+  employees = await requestApi('getEmployees');
+  formEl.reset();
+  closeModal();
+  renderEmployees();
+  showToast(editingEmployeeId ? 'Data pegawai berhasil diperbarui' : 'Pegawai berhasil ditambahkan');
+  editingEmployeeId = '';
+}
+
+async function toggleEmployeeStatus(employeeId) {
+  const employee = employees.find(e => e.pegawai_id === employeeId);
+  if (!employee) return showToast('Pegawai tidak ditemukan');
+  const active = isActiveEmployee(employee);
+  const nextLabel = active ? 'menonaktifkan' : 'mengaktifkan';
+  if (!confirm(`Yakin ingin ${nextLabel} ${employee.nama}?`)) return;
+  try {
+    await requestApi('updateEmployee', { employee: { ...employee, status_aktif: !active } });
+    employees = await requestApi('getEmployees');
+    renderEmployees();
+    showToast(active ? 'Pegawai dinonaktifkan' : 'Pegawai diaktifkan');
+  } catch (err) {
+    showToast('Gagal memperbarui pegawai: ' + err.message);
+  }
+}
+
+document.getElementById('employeeForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const submitBtn = document.getElementById('employeeSubmitBtn');
+  submitBtn.disabled = true;
+  try {
+    await saveEmployee(e.target);
+  } catch (err) {
+    showToast('Gagal menyimpan pegawai: ' + err.message);
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
+
+function exportEmployees() {
+  downloadCsv('data-pegawai-ngingetken.csv', employees);
+}
+
+init().catch(err => showToast(err.message));
 </script>
-</body></html>
+</body>
+</html>

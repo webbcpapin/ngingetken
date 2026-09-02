@@ -8196,6 +8196,7 @@ const CLIENT_WRITE_ACTIONS = new Set([
   'setupDatabase',
   'resetDatabase',
   'createEmployee',
+  'updateEmployee',
   'createPeriod',
   'updatePeriodStatus',
   'createFollowUp',
@@ -8381,6 +8382,20 @@ async function requestApi(action, payload = {}) {
       const newEmp = { pegawai_id: newEmpId, nama: employee.nama || '', unit: employee.unit || '', status_aktif: employee.status_aktif !== false };
       NGINGETKEN_DATA.employees.push(newEmp);
       return newEmp;
+    }
+
+    case 'updateEmployee': {
+      const { employee } = payload;
+      const employeeId = employee?.pegawai_id || payload.pegawai_id;
+      const idx = NGINGETKEN_DATA.employees.findIndex(e => e.pegawai_id === employeeId);
+      if (idx < 0) throw new Error('Pegawai tidak ditemukan');
+      NGINGETKEN_DATA.employees[idx] = {
+        ...NGINGETKEN_DATA.employees[idx],
+        nama: employee.nama || NGINGETKEN_DATA.employees[idx].nama,
+        unit: employee.unit || '',
+        status_aktif: employee.status_aktif === undefined ? NGINGETKEN_DATA.employees[idx].status_aktif : employee.status_aktif !== false
+      };
+      return NGINGETKEN_DATA.employees[idx];
     }
 
     case 'createPeriod': {
