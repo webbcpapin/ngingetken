@@ -8173,7 +8173,7 @@ function showToast(msg) {
   t.className = 'toast';
   t.textContent = msg;
   document.body.appendChild(t);
-  setTimeout(() => t.remove(), 3000);
+  setTimeout(() => t.remove(), 5000);
 }
 
 function downloadCsv(filename, rows) {
@@ -8222,8 +8222,10 @@ async function requestApi(action, payload = {}) {
         token: config.ADMIN_TOKEN || '',
         ...payload
       };
-      const res = await fetch(apiUrl, {
+      const requestUrl = apiUrl + (apiUrl.includes('?') ? '&' : '?') + '_=' + Date.now();
+      const res = await fetch(requestUrl, {
         method: 'POST',
+        cache: 'no-store',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(body)
       });

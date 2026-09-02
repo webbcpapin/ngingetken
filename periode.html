@@ -138,12 +138,16 @@ function updateDeadline() {
 async function setPeriodStatus(periodId, status) {
   const label = status === 'Aktif' ? 'mengaktifkan' : 'menutup';
   if (!confirm(`Yakin ingin ${label} periode ini?`)) return;
+  const buttons = Array.from(document.querySelectorAll('#periodBody button'));
+  buttons.forEach(button => { button.disabled = true; });
+  showToast(status === 'Aktif' ? 'Membuka periode...' : 'Menutup periode...');
   try {
     await requestApi('updatePeriodStatus', { periode_id: periodId, status });
     await reloadPeriods();
     showToast(status === 'Aktif' ? 'Periode berhasil dibuka' : 'Periode berhasil ditutup');
   } catch (err) {
-    showToast(err.message);
+    buttons.forEach(button => { button.disabled = false; });
+    showToast('Gagal memperbarui periode: ' + err.message);
   }
 }
 
