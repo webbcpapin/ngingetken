@@ -27,14 +27,22 @@
         <h1>Manajemen Periode</h1>
         <p class="lead">Buat, urutkan, buka/tutup periode, dan buka rekap setiap periode pengisian NGINGETKEN.</p>
       </div>
-      <button class="btn btn-primary" onclick="openModal()">Tambah Periode</button>
+      <button id="addPeriodButton" class="btn btn-primary" onclick="openModal()">Tambah Periode</button>
     </div>
 
     <section class="card">
+      <div class="toolbar" style="margin-bottom:14px">
+        <label for="periodMode">Pengaturan periode</label>
+        <select id="periodMode" disabled style="width:auto;max-width:100%">
+          <option value="automatic">Otomatis (WIB)</option>
+          <option value="manual">Manual oleh admin</option>
+        </select>
+        <span id="modeStatus" role="status">Memuat pengaturan...</span>
+      </div>
       <div id="activePeriodNotice" class="alert info" style="margin-bottom:14px">Memuat periode aktif...</div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Periode</th><th>Mulai</th><th>Deadline</th><th>Link Form</th><th>Status</th><th>Aksi</th></tr></thead>
+          <thead><tr><th>Periode</th><th>Pengisian Dibuka</th><th>Deadline</th><th>Link Form</th><th>Status</th><th>Aksi</th></tr></thead>
           <tbody id="periodBody"><tr><td colspan="6" class="empty">Memuat data...</td></tr></tbody>
         </table>
       </div>
@@ -47,7 +55,7 @@
     <h2>Tambah Periode</h2>
     <form id="periodForm" class="form-grid">
       <div class="form-field"><label>Nama Periode</label><input required name="nama_periode" class="input" placeholder="Mei 2026"></div>
-      <div class="form-field"><label>Tanggal Mulai</label><input required type="date" name="tanggal_mulai" class="input"></div>
+      <div class="form-field"><label>Tanggal Periode</label><input required type="date" name="tanggal_mulai" class="input"></div>
       <div class="form-field"><label>Deadline</label><input required readonly type="date" name="tanggal_deadline" id="deadlineInput" class="input"><div class="hint">Otomatis tanggal 6 bulan berikutnya.</div></div>
       <div class="form-field"><label>Status</label><select name="status"><option>Draft</option><option>Aktif</option><option>Selesai</option></select></div>
       <div class="form-field" style="grid-column:1/-1"><label>URL Form</label><input required type="url" name="form_url" class="input" placeholder="https://forms.office.com/..."></div>
@@ -57,18 +65,56 @@
 </div>
 
 <script src="assets/js/config.js"></script>
-<script src="assets/js/api.js"></script>
+<script src="assets/js/api.js?v=20261005"></script>
 <script>
 let periods = [];
+let periodMode = 'manual';
+let busy = false;
+let supportsAutomation = false;
 
 async function init() {
-  periods = sortPeriods(await requestApi('getPeriods'));
-  renderPeriods();
+  await reloadPeriods();
 }
 
 async function reloadPeriods() {
-  periods = sortPeriods(await requestApi('getPeriods'));
+  try {
+    const data = await requestApi('getPeriodManagement');
+    periods = sortPeriods(data.periods);
+    periodMode = data.mode;
+    supportsAutomation = true;
+  } catch (err) {
+    if (!err.backendHandled || !err.message.includes('Action tidak dikenal')) throw err;
+    periods = sortPeriods(await requestApi('getPeriods'));
+    supportsAutomation = false;
+  }
   renderPeriods();
+  renderMode();
+}
+
+function renderMode() {
+  document.getElementById('periodMode').value = periodMode;
+  document.getElementById('periodMode').disabled = busy || !supportsAutomation;
+  document.getElementById('modeStatus').textContent = !supportsAutomation
+    ? 'Otomatisasi belum tersedia di server. Kontrol manual tetap tersedia.'
+    : periodMode === 'automatic' ? 'Dibuka tanggal 1 bulan berikutnya, ditutup setelah deadline.'
+    : 'Status mengikuti pilihan admin hingga mode otomatis diaktifkan kembali.';
+}
+
+function setBusy(value) {
+  busy = value;
+  document.querySelectorAll('#periodBody button, #addPeriodButton, #periodForm button').forEach(b => { b.disabled = value; });
+  renderMode();
+}
+
+function escapePeriodHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
+}
+
+function openingDate(period) {
+  const match = String(period.tanggal_mulai).match(/^(\d{4})-(\d{2})-/);
+  if (!match) return '';
+  const d = new Date(Number(match[1]), Number(match[2]), 1);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-01`;
 }
 
 function renderActiveNotice() {
@@ -76,7 +122,9 @@ function renderActiveNotice() {
   const notice = document.getElementById('activePeriodNotice');
   if (!active) {
     notice.className = 'alert warning';
-    notice.textContent = 'Belum ada periode yang dibuka. Klik Aktifkan pada periode yang akan digunakan di form.';
+    notice.textContent = periodMode === 'automatic' && supportsAutomation
+      ? 'Tidak ada periode terbuka pada jadwal saat ini.'
+      : 'Belum ada periode yang dibuka.';
     return;
   }
   notice.className = 'alert info';
@@ -93,21 +141,21 @@ function renderPeriods() {
   }
   body.innerHTML = periods.map(p => {
     const isActive = String(p.status).toLowerCase() === 'aktif';
-    const safeId = JSON.stringify(p.periode_id);
-    const formUrl = p.form_url || 'isi.html';
+    const safeId = escapePeriodHtml(p.periode_id);
+    const formUrl = /^(https?:\/\/|isi\.html(?:[?#]|$))/.test(p.form_url || '') ? p.form_url : 'isi.html';
     return `<tr>
-      <td><strong>${p.nama_periode}</strong></td>
-      <td>${formatDate(p.tanggal_mulai)}</td>
+      <td><strong>${escapePeriodHtml(p.nama_periode)}</strong></td>
+      <td>${formatDate(openingDate(p))}</td>
       <td>${formatDate(p.tanggal_deadline)}</td>
-      <td><a href="${formUrl}" target="_blank">Buka Form</a></td>
-      <td><span class="badge ${badgeStatus(p.status)}">${p.status || '-'}</span></td>
+      <td><a href="${escapePeriodHtml(formUrl)}" target="_blank" rel="noopener">Buka Form</a></td>
+      <td><span class="badge ${badgeStatus(p.status)}">${escapePeriodHtml(p.status || '-')}</span></td>
       <td class="table-actions">
         ${isActive
-          ? `<button class="btn btn-secondary" onclick="setPeriodStatus(${safeId}, 'Selesai')">Tutup</button>`
-          : `<button class="btn btn-primary" onclick="setPeriodStatus(${safeId}, 'Aktif')">Aktifkan</button>`}
-        <a class="btn btn-secondary" href="dashboard.html?periode_id=${p.periode_id}">Dashboard</a>
-        <a class="btn btn-secondary" href="riwayat.html?periode_id=${p.periode_id}">Riwayat</a>
-        <a class="btn btn-secondary" href="laporan.html?periode_id=${p.periode_id}">Laporan</a>
+          ? `<button class="btn btn-secondary" data-period-id="${safeId}" data-status="Selesai">Tutup</button>`
+          : `<button class="btn btn-primary" data-period-id="${safeId}" data-status="Aktif">Aktifkan</button>`}
+        <a class="btn btn-secondary" href="dashboard.html?periode_id=${encodeURIComponent(p.periode_id)}">Dashboard</a>
+        <a class="btn btn-secondary" href="riwayat.html?periode_id=${encodeURIComponent(p.periode_id)}">Riwayat</a>
+        <a class="btn btn-secondary" href="laporan.html?periode_id=${encodeURIComponent(p.periode_id)}">Laporan</a>
       </td>
     </tr>`;
   }).join('');
@@ -136,26 +184,50 @@ function updateDeadline() {
 }
 
 async function setPeriodStatus(periodId, status) {
+  if (busy) return;
   const label = status === 'Aktif' ? 'mengaktifkan' : 'menutup';
-  if (!confirm(`Yakin ingin ${label} periode ini?`)) return;
-  const buttons = Array.from(document.querySelectorAll('#periodBody button'));
-  buttons.forEach(button => { button.disabled = true; });
+  const modeNote = supportsAutomation && periodMode === 'automatic' ? ' Pengaturan akan beralih ke Manual hingga Anda memilih Otomatis kembali.' : '';
+  if (!confirm(`Yakin ingin ${label} periode ini?${modeNote}`)) return;
+  setBusy(true);
   showToast(status === 'Aktif' ? 'Membuka periode...' : 'Menutup periode...');
   try {
     await requestApi('updatePeriodStatus', { periode_id: periodId, status });
     await reloadPeriods();
     showToast(status === 'Aktif' ? 'Periode berhasil dibuka' : 'Periode berhasil ditutup');
   } catch (err) {
-    buttons.forEach(button => { button.disabled = false; });
     showToast('Gagal memperbarui periode: ' + err.message);
+  } finally {
+    setBusy(false);
   }
 }
+
+document.getElementById('periodBody').addEventListener('click', e => {
+  const button = e.target.closest('button[data-period-id]');
+  if (button) setPeriodStatus(button.dataset.periodId, button.dataset.status);
+});
+document.getElementById('periodMode').addEventListener('change', async e => {
+  if (busy) return;
+  const mode = e.target.value;
+  if (mode === 'automatic' && !confirm('Terapkan jadwal otomatis sesuai tanggal WIB sekarang? Status manual akan diganti sesuai jadwal.')) { renderMode(); return; }
+  setBusy(true);
+  try {
+    const data = await requestApi('setPeriodMode', { mode });
+    periods = sortPeriods(data.periods);
+    periodMode = data.mode;
+    renderPeriods();
+    showToast('Pengaturan periode berhasil disimpan');
+  } catch (err) { showToast('Gagal menyimpan pengaturan: ' + err.message); }
+  finally { setBusy(false); }
+});
 
 document.querySelector('[name="tanggal_mulai"]').addEventListener('change', updateDeadline);
 document.getElementById('periodForm').addEventListener('submit', async e => {
   e.preventDefault();
+  if (busy) return;
   updateDeadline();
   const period = Object.fromEntries(new FormData(e.target).entries());
+  if (supportsAutomation && periodMode === 'automatic' && period.status !== 'Draft' && !confirm('Status yang dipilih akan mengubah pengaturan ke Manual. Lanjutkan?')) return;
+  setBusy(true);
   try {
     const saved = await requestApi('createPeriod', { period });
     if (saved.status === 'Aktif') {
@@ -168,6 +240,8 @@ document.getElementById('periodForm').addEventListener('submit', async e => {
     showToast('Periode berhasil ditambahkan');
   } catch (err) {
     showToast(err.message);
+  } finally {
+    setBusy(false);
   }
 });
 

@@ -7808,7 +7808,6 @@ function normalizeBackendPeriodNames(data) {
   if (data && typeof data === 'object') {
     Object.keys(data).forEach(key => { data[key] = normalizeBackendPeriodNames(data[key]); });
     if (data.nama_periode) data.nama_periode = formatPeriodName(data.nama_periode);
-    if (data.periode_id === 'PRD2026JUL') data.tanggal_deadline = '2026-08-10';
   }
   return data;
 }
@@ -8199,6 +8198,7 @@ const CLIENT_WRITE_ACTIONS = new Set([
   'updateEmployee',
   'createPeriod',
   'updatePeriodStatus',
+  'setPeriodMode',
   'createFollowUp',
   'updateFollowUp',
   'updateMonitoringNote',
@@ -8206,6 +8206,9 @@ const CLIENT_WRITE_ACTIONS = new Set([
 ]);
 
 const REQUIRED_BACKEND_ACTIONS = new Set([
+  'getPeriods',
+  'getActivePeriod',
+  'getPeriodManagement',
   'getDashboardData',
   'getExecutiveSummary',
   'getResponseHistory',
