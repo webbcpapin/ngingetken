@@ -8,11 +8,14 @@ Pengembangan website Ngingetken KPPBC TMP C Pangkalpinang menjadi knowledge base
 - Microsoft 365 organisasi menyimpan respons dengan hak akses pengelola yang berwenang.
 - WISE Kemenkeu sebagai kanal pelaporan resmi dugaan pelanggaran.
 
+## Form induk yang wajib dipertahankan
+Form **NGINGETKEN** yang ada sejak awal tetap menjadi **core**. Isinya 12 butir: identitas/periode, delapan indikator dugaan pelanggaran (Ya/Tidak), dan satu pernyataan penolakan penerimaan terkait jabatan. **Jangan mengganti form ini dengan template monitoring generik**. Dokumentasi lengkap: [FORM_INDUK_NGINGETKEN.md](FORM_INDUK_NGINGETKEN.md).
+
 ## Hubungkan Microsoft Forms
-1. Buat empat formulir internal melalui akun Microsoft 365 Kemenkeu yang berwenang.
-2. Sesuaikan siapa yang dapat merespons, rekam identitas hanya jika diperlukan, dan batasi akses Excel respons.
-3. Ubah empat nilai URL pada assets/js/forms-config.js setelah tautannya diverifikasi.
-4. Website otomatis akan membuka formulir jika tautan terpasang. Jika kosong, tombol menunjukkan status belum aktif.
+1. **Pertahankan Microsoft Forms NGINGETKEN yang sudah digunakan**. Mintalah URL **pengisian** dari pemilik form; jangan memakai URL detail respons.
+2. Buat hanya tiga formulir tambahan bila dibutuhkan: Saling Ngingetken, Apresiasi Rekan, Usulan Materi.
+3. Periksa hak akses, kerahasiaan, serta pembatasan respons di Microsoft 365 organisasi.
+4. Masukkan empat URL tervalidasi pada assets/js/forms-config.js. Selama kosong, website menampilkan status belum aktif.
 
 Tautan lama dari nota dinas 2025 sengaja belum diaktifkan karena perlu dipastikan masih digunakan pada periode berjalan.
 
