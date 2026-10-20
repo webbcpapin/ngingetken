@@ -1,81 +1,46 @@
-# Panduan Membuat Microsoft Forms — Ngingetken 2.0
+# Panduan Microsoft Forms — Ngingetken 2.0
 
-Formulir dibuat pada akun Microsoft 365 organisasi oleh pengelola yang berwenang. Website GitHub Pages hanya berisi tautan, tidak mengumpulkan respons. Selalu verifikasi ketentuan internal, kewenangan pengelola, dan penyimpanan data sebelum mengaktifkan formulir.
+**Prinsip wajib:** Form induk **NGINGETKEN** yang sudah digunakan selama ini adalah **core aplikasi dan tetap dipertahankan tanpa diganti**. Lihat [FORM_INDUK_NGINGETKEN.md](FORM_INDUK_NGINGETKEN.md) untuk seluruh 12 butir asli (3 identitas/periode, 8 indikator, 1 pernyataan). Template monitoring generik yang sempat dirancang bukan pengganti form asli.
 
-## A. Formulir Monitoring Integritas Bulanan
+## A. FORM INDUK — Monitoring dan Informasi Dugaan Pelanggaran
 
-Judul: NGINGETKEN — Monitoring Integritas Pegawai [Bulan Tahun]
-Deskripsi: Pengisian rutin untuk mendukung pencegahan, edukasi, dan kedisiplinan pengisian. Form ini bukan kanal investigasi atau penetapan pelanggaran.
-Pengaturan: hanya pengguna organisasi/kelompok yang ditentukan dapat menjawab, rekam akun organisasi, satu respons per pengguna per periode bila sesuai ketentuan.
+- Pertahankan **Microsoft Forms NGINGETKEN yang sudah aktif** sebagai kanal inti. Jangan membuat form monitoring baru untuk menggantinya.
+- Pertanyaan 1–3 adalah Nama Pegawai (akan dirahasiakan), UNIT (akan dirahasiakan), dan Periode.
+- Pertanyaan 4–11 (Ya/Tidak) menyangkut **gratifikasi, suap-menyuap, perbuatan curang, pemerasan, pelanggaran kode etik, gaya hidup mewah, benturan kepentingan, dan penggelapan dalam jabatan**.
+- Pertanyaan 12 adalah salinan pernyataan penolakan penerimaan terkait posisi/jabatan.
+- Jangan mengubah urutan/redaksi inti, kecuali ada persetujuan pemilik formulir. Pengelolaan kerahasiaan dan jawaban positif harus mengikuti prosedur pengaduan yang berlaku.
+- Tautan yang diperlukan untuk website adalah **Collect responses / tautan pengisi**, bukan halaman ResponseDetailPage atau tautan edit. Pemilik harus mengonfirmasi pengaturan hak akses Kemenkeu sebelum dipasang.
 
-Pertanyaan awal yang direkomendasikan:
-1. Unit kerja, pilihan dropdown jika diperlukan dan disetujui.
-2. Konfirmasi telah mempelajari panduan integritas periode ini, Ya/Belum.
-3. Konfirmasi pengisian sistem monitoring yang diwajibkan DJBC sesuai ketentuan berjalan, Ya/Belum/Tidak berlaku.
-4. Apakah ada situasi terkait gratifikasi, pungutan liar, suap, benturan kepentingan, atau penyalahgunaan kewenangan yang memerlukan konsultasi lebih lanjut? Ya/Tidak/Ragu-ragu.
-5. Jika jawaban 4 Ya atau Ragu-ragu, tampilkan penjelasan cara menggunakan kanal resmi. Jangan meminta nama terduga, detail kasus, identitas pelapor lain, atau bukti pelanggaran dalam form monitoring biasa.
-6. Apakah ada praktik positif atau usulan perbaikan budaya integritas yang ingin dibagikan? Ya/Tidak. Jika Ya, arahkan ke form apresiasi/usulan materi.
+## B. Form tambahan: Saling Ngingetken
 
-Catatan: proposal Ngingetken lama memuat kategori negatif dan positif, serta nota dinas 2025 memuat tenggat 7 setiap bulan. Periksa apakah ketentuan tersebut masih dipakai sebelum diterapkan otomatis.
+Tujuan: pengingat ringan dan preventif kepada rekan melalui moderasi. BUKAN saluran tuduhan pelanggaran. Batasi responden pada pegawai yang berhak dan akses hasil pada pengelola.
 
-## B. Formulir Saling Ngingetken
+Contoh pertanyaan: topik pengingat; jenis pengingat umum/pribadi; pesan sopan tanpa dugaan pelanggaran atau data sensitif; harapan perbaikan; persetujuan bahwa form ini bukan WBS.
 
-Judul: NGINGETKEN — Sampaikan Pengingat yang Membangun
-Deskripsi: Form preventif untuk membantu rekan memperbaiki kebiasaan kerja. Tidak digunakan untuk tuduhan korupsi, pelanggaran berat, kekerasan, atau informasi pribadi yang sensitif.
-Pengaturan: hanya pegawai organisasi; identitas pengirim tercatat secara aman untuk mencegah penyalahgunaan; respons hanya untuk pengelola yang ditetapkan.
+## C. Form tambahan: Apresiasi Rekan
 
-Pertanyaan:
-1. Topik pengingat: disiplin waktu / komitmen tugas / ketelitian dan keamanan data / etika pelayanan / budaya kerja / lainnya.
-2. Bentuk pesan: pesan pengingat umum kepada kelompok atau pengingat pribadi melalui pengelola.
-3. Isi pesan singkat yang sopan, maksimal 500 karakter. Tanpa tuduhan, informasi rahasia, atau data pribadi sensitif.
-4. Bila perlu diteruskan pribadi, penerima diidentifikasi melalui proses pengelola yang berwenang, tidak diumumkan pada dashboard umum.
-5. Harapan perbaikan: pilihan sederhana dan realistis.
-6. Persetujuan: saya memahami form ini bukan kanal pelaporan dugaan pelanggaran.
+Tujuan: apresiasi faktual dan terverifikasi. Pertanyaan dapat mencakup penerima, kategori perilaku, contoh konkret, periode, dan persetujuan sebelum publikasi.
 
-Alur: masuk ke pengelola -> periksa kelayakan pesan -> salurkan sesuai kebijakan -> catat status terkirim tanpa memublikasikan isi atau identitas.
+## D. Form tambahan: Usulan Materi Knowledge Base
 
-## C. Formulir Apresiasi Rekan
+Tujuan: mengumpulkan usulan topik dan pertanyaan umum tanpa data kasus atau identitas pihak terkait. Kategori mencakup delapan indikator form induk ditambah etika kerja dan keamanan informasi.
 
-Judul: NGINGETKEN — Apresiasi Perilaku Positif
-Pengaturan: pegawai organisasi; identitas pengirim diverifikasi; data hanya diakses pengelola.
-Pertanyaan:
-1. Nama rekan yang diapresiasi.
-2. Kategori: pelayanan prima / proaktif dan cepat tanggap / inovasi dan kreativitas / membantu rekan / kepatuhan dan keteladanan.
-3. Perilaku konkret yang diamati, bukan kesimpulan karakter umum.
-4. Tanggal/periode kejadian (opsional).
-5. Apakah apresiasi boleh diteruskan kepada penerima? Ya/Tidak.
-6. Publikasi nama dan deskripsi hanya setelah verifikasi serta persetujuan yang disyaratkan organisasi.
+## E. Hubungkan ke website
 
-## D. Formulir Usulan Materi Knowledge Base
+Setelah pemilik form mengonfirmasi URL **pengisian**, masukkan hanya tautan sah Microsoft Forms pada `assets/js/forms-config.js`:
 
-Judul: NGINGETKEN — Usulan Materi & Pertanyaan
-Pengaturan: pengguna organisasi; akses rekap hanya untuk editor atau petugas yang ditunjuk.
-Pertanyaan:
-1. Topik: gratifikasi / benturan kepentingan / disiplin / pelayanan / etika digital / keamanan data / lainnya.
-2. Pertanyaan atau situasi umum tanpa menyebut identitas atau kasus rahasia.
-3. Sumber yang ingin ditambahkan, tautan resmi jika tersedia.
-4. Usulan perbaikan informasi pada website.
+- `monitoring`: **tautan pengisian form NGINGETKEN asli**.
+- `reminder`: form tambahan Saling Ngingetken.
+- `appreciation`: form tambahan Apresiasi Rekan.
+- `suggestion`: form tambahan Usulan Materi.
 
-## E. Empat tautan ke website
+Jangan masukkan URL detail respons, URL pengeditan, file Excel hasil, token, identitas, atau data pegawai. Selama URL belum diverifikasi, tombol dengan sengaja akan menunjukkan bahwa form belum aktif.
 
-Setelah membuat dan menguji formulir, buka file assets/js/forms-config.js di GitHub dan isi hanya URL halaman respons Microsoft Forms yang sah.
+## F. Pemeriksaan keamanan dan uji coba
 
-monitoring: [URL Microsoft Forms bulanan yang aktif]
-reminder: [URL Saling Ngingetken]
-appreciation: [URL Apresiasi Rekan]
-suggestion: [URL Usulan Materi]
-
-Jangan memasukkan URL edit/kolaborasi formulir, URL Excel respons, token, atau tautan admin. Pengaturan izin form harus diuji dari akun pegawai yang berhak dan akun yang tidak berhak.
-
-## F. Uji penerimaan
-
-- Pegawai berhak berhasil mengakses dan mengisi form.
-- Akun luar organisasi tidak boleh mengirim respons.
-- Pengelola yang tidak berwenang tidak bisa membaca hasil.
-- Hasil pengisian tidak terlihat di repository atau source website.
-- Pesan berisi tuduhan atau identitas sensitif diarahkan ke kanal WISE/resmi.
-- Setiap form memiliki teks tujuan, penanggung jawab, dan ketentuan pengolahan data yang disetujui.
-
-## G. Bukti IDP
-
-Catat tanggal penyusunan, izin pengelola, pengujian formulir, masukan rekan, hasil perbaikan, dan evaluasi Mentor Tetap. Pengembangan aplikasi tidak membuktikan perubahan perilaku tanpa uji dan tindak lanjut.
+- Form induk 12 pertanyaan tetap ada dan bisa diisi pegawai sesuai izin.
+- Pemilik/otoritas internal yang berwenang mengendalikan akses data respons dan tindak lanjutnya.
+- Jawaban Ya **tidak otomatis menunjukkan pelanggaran**; rujukan/eskalasi harus mengikuti ketentuan yang berlaku.
+- Kerahasiaan yang dijanjikan harus ditegakkan, dan tidak ada data respons pada GitHub Pages.
+- Pengingat preventif dan apresiasi tidak menggantikan form induk maupun WISE.
+- Dokumentasikan uji coba, masukan, dan evaluasi mentor sebagai bukti IDP.
