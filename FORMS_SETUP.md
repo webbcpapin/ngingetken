@@ -9,6 +9,7 @@
 - Pertanyaan 4–11 (Ya/Tidak) menyangkut **gratifikasi, suap-menyuap, perbuatan curang, pemerasan, pelanggaran kode etik, gaya hidup mewah, benturan kepentingan, dan penggelapan dalam jabatan**.
 - Pertanyaan 12 adalah salinan pernyataan penolakan penerimaan terkait posisi/jabatan.
 - Jangan mengubah urutan/redaksi inti, kecuali ada persetujuan pemilik formulir. Pengelolaan kerahasiaan dan jawaban positif harus mengikuti prosedur pengaduan yang berlaku.
+- Tautan pengisian form induk yang disediakan pengelola dan dipasang pada website: **https://forms.office.com/r/J63YrAE20i** (digunakan dalam pengumuman periode Maret 2026, tenggat 7 April 2026). Sebelum mengumumkan periode baru, periksa bahwa Forms masih menerima respons dan opsi periode yang benar tersedia.
 - Tautan yang diperlukan untuk website adalah **Collect responses / tautan pengisi**, bukan halaman ResponseDetailPage atau tautan edit. Pemilik harus mengonfirmasi pengaturan hak akses Kemenkeu sebelum dipasang.
 
 ## B. Form tambahan: Saling Ngingetken
@@ -29,7 +30,7 @@ Tujuan: mengumpulkan usulan topik dan pertanyaan umum tanpa data kasus atau iden
 
 Setelah pemilik form mengonfirmasi URL **pengisian**, masukkan hanya tautan sah Microsoft Forms pada `assets/js/forms-config.js`:
 
-- `monitoring`: **tautan pengisian form NGINGETKEN asli**.
+- `monitoring`: **https://forms.office.com/r/J63YrAE20i** (form induk NGINGETKEN asli; sudah dikonfigurasi).
 - `reminder`: form tambahan Saling Ngingetken.
 - `appreciation`: form tambahan Apresiasi Rekan.
 - `suggestion`: form tambahan Usulan Materi.
