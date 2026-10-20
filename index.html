@@ -1,212 +1,73 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ngingetken - Bea Cukai Pangkalpinang</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html, body {
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-            touch-action: none;
-        }
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .container {
-            text-align: center;
-            padding: 30px 20px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            width: 90%;
-            max-width: 400px;
-            position: relative;
-            z-index: 10;
-            overflow: visible;
-        }
-        .logo-section {
-            margin-bottom: 25px;
-        }
-        .logo-img {
-            width: 80px;
-            height: auto;
-            margin-bottom: 10px;
-        }
-        .logo-text {
-            font-size: 1rem;
-            color: #1a237e;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-        .emoji { font-size: 3rem; margin-bottom: 15px; }
-        .question {
-            font-size: 1.2rem;
-            color: #333;
-            margin-bottom: 40px;
-            line-height: 1.5;
-            font-weight: 600;
-        }
-        .buttons {
-            display: flex;
-            flex-direction: row;
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            min-height: 60px;
-        }
-        .btn {
-            padding: 15px 40px;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            min-width: 140px;
-            transition: transform 0.1s;
-        }
-        .btn-ya {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            color: white;
-            z-index: 100;
-        }
-        .btn-ya:active { transform: scale(0.95); }
-        .btn-tidak {
-            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
-            color: white;
-            position: relative;
-            z-index: 200;
-            transition: all 0.05s ease-out;
-            pointer-events: auto;
-        }
-        .hint {
-            margin-top: 25px;
-            font-size: 0.85rem;
-            color: #888;
-            font-style: italic;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0e344a">
+<meta name="description" content="Ngingetken: Pusat Pengetahuan dan Budaya Integritas Bea Cukai Pangkalpinang">
+<title>Ngingetken 2.0 | Saling Mengingatkan, Menjaga Integritas</title>
+<link rel="stylesheet" href="assets/css/site.css">
+<script defer src="assets/js/forms-config.js"></script>
+<script defer src="assets/js/site.js"></script>
 </head>
 <body>
-    <div class="container" id="container">
-        <div class="logo-section">
-            <img src="https://oneweb-file.beacukai.go.id/cdn/download/mandatory/6459eac4cd0d5bae045aad25"
-                 alt="Logo Bea Cukai" class="logo-img"
-                 onerror="this.style.display='none'">
-            <div class="logo-text">BEA CUKAI PANGKALPINANG</div>
-        </div>
-        <div class="emoji">🙏</div>
-        <h1 class="question">Apakah anda sudah bersyukur dengan pekerjaan anda sekarang?</h1>
-        <div class="buttons">
-            <button class="btn btn-ya" onclick="window.location.href='akses.html'">YA</button>
-            <button class="btn btn-tidak" id="btnTidak">TIDAK</button>
-        </div>
-        <p class="hint">Pilih dengan hati yang tulus... 😊</p>
+<a href="#main" class="skip">Langsung ke konten</a>
+<header class="header">
+  <nav class="container nav" aria-label="Navigasi">
+    <a href="#beranda" class="brand"><span class="logo">N</span><span><strong>NGINGETKEN</strong><small>BEA CUKAI PANGKALPINANG</small></span></a>
+    <button id="mobileMenu" class="mobile-menu" aria-label="Buka menu" aria-expanded="false">☰</button>
+    <div class="navitems" id="navitems"><a href="#pengetahuan">Pusat Pengetahuan</a><a href="#aksi">Saling Ngingetken</a><a href="#panduan">Panduan</a><a href="#tentang">Tentang</a></div>
+    <a class="navcta" href="#aksi">Mulai Aksi ↗</a>
+  </nav>
+</header>
+<main id="main">
+<section id="beranda" class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <span class="eyebrow"><span class="dot"></span> PORTAL PENGETAHUAN DAN BUDAYA INTEGRITAS</span>
+      <h1>Saling <span>Mengingatkan.</span><br>Bersama Menjaga <em>Integritas.</em></h1>
+      <p>Ngingetken adalah ruang belajar dan kepedulian antarrekan. Temukan panduan, sampaikan pengingat dengan cara yang baik, dan tumbuhkan kebiasaan kerja yang berintegritas.</p>
+      <div class="buttons"><a href="#pengetahuan" class="btn gold">Jelajahi Pengetahuan →</a><a href="#aksi" class="btn border-white">Mulai Ngingetken</a></div>
+      <p class="fine">Website ini bersifat informasi dan tidak mengumpulkan NIP, respons, kata sandi, maupun pengaduan. Formulir menggunakan Microsoft Forms organisasi.</p>
     </div>
-
-    <script>
-        const btnTidak = document.getElementById('btnTidak');
-        const container = document.getElementById('container');
-        let isMoving = false;
-
-        function getRandomPosition() {
-            const containerRect = container.getBoundingClientRect();
-            const btnRect = btnTidak.getBoundingClientRect();
-            const padding = 15;
-            const maxX = containerRect.width - btnRect.width - padding;
-            const maxY = containerRect.height - btnRect.height - padding;
-
-            return {
-                x: Math.random() * (maxX - padding) + padding,
-                y: Math.random() * (maxY - padding) + padding
-            };
-        }
-
-        function moveButton() {
-            if (isMoving) return;
-            isMoving = true;
-
-            const pos = getRandomPosition();
-            btnTidak.style.position = 'absolute';
-            btnTidak.style.left = pos.x + 'px';
-            btnTidak.style.top = pos.y + 'px';
-            btnTidak.style.transform = `rotate(${(Math.random() - 0.5) * 30}deg)`;
-
-            setTimeout(() => { isMoving = false; }, 50);
-        }
-
-        btnTidak.addEventListener('mouseover', function(e) {
-            e.preventDefault();
-            moveButton();
-        });
-
-        btnTidak.addEventListener('mouseenter', function(e) {
-            e.preventDefault();
-            moveButton();
-        });
-
-        btnTidak.addEventListener('mousemove', function(e) {
-            e.preventDefault();
-            moveButton();
-        });
-
-        btnTidak.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            moveButton();
-        }, {passive: false});
-
-        btnTidak.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-            moveButton();
-        }, {passive: false});
-
-        btnTidak.addEventListener('click', function(e) {
-            e.preventDefault();
-            moveButton();
-        });
-
-        btnTidak.addEventListener('mousedown', function(e) {
-            e.preventDefault();
-            moveButton();
-        });
-
-        document.addEventListener('mousemove', function(e) {
-            const btnRect = btnTidak.getBoundingClientRect();
-            const btnCenterX = btnRect.left + btnRect.width / 2;
-            const btnCenterY = btnRect.top + btnRect.height / 2;
-            const distance = Math.sqrt(
-                Math.pow(e.clientX - btnCenterX, 2) +
-                Math.pow(e.clientY - btnCenterY, 2)
-            );
-
-            if (distance < 80 && distance > 0) {
-                moveButton();
-            }
-        });
-
-        document.addEventListener('touchmove', function(e) {
-            const touch = e.touches[0];
-            const btnRect = btnTidak.getBoundingClientRect();
-            const btnCenterX = btnRect.left + btnRect.width / 2;
-            const btnCenterY = btnRect.top + btnRect.height / 2;
-            const distance = Math.sqrt(
-                Math.pow(touch.clientX - btnCenterX, 2) +
-                Math.pow(touch.clientY - btnCenterY, 2)
-            );
-
-            if (distance < 80 && distance > 0) {
-                moveButton();
-            }
-        }, {passive: false});
-    </script>
+    <div class="hero-card">
+      <span class="mini">MARI NGINGETKEN <span class="spark">✦</span></span>
+      <div class="shield"><span>✓</span></div>
+      <blockquote>Integritas dibangun melalui tindakan kecil yang konsisten.</blockquote>
+      <div class="hero-step"><b>01</b><span><strong>Kenali</strong><small>Pelajari nilai dan ketentuan</small></span><i>↗</i></div>
+      <div class="hero-step"><b>02</b><span><strong>Ingatkan</strong><small>Sampaikan masukan dengan hormat</small></span><i>↗</i></div>
+      <div class="hero-step"><b>03</b><span><strong>Perbaiki</strong><small>Tindak lanjuti dan evaluasi</small></span><i>↗</i></div>
+    </div>
+  </div>
+</section>
+<section class="featureline"><div class="container featuregrid"><div><strong>◉ Belajar dari sumber</strong><small>Ringkasan pengetahuan</small></div><div><strong>✧ Saling menguatkan</strong><small>Pengingat dan apresiasi</small></div><div><strong>◇ Menjaga kepercayaan</strong><small>Privasi dan etika</small></div></div></section>
+<section class="section knowledge" id="pengetahuan">
+ <div class="container">
+  <div class="title-row"><div><span class="overline">01 / BELAJAR</span><h2>Pusat Pengetahuan <span>Integritas</span></h2><p>Materi ringkas untuk memahami risiko, menentukan sikap, dan mengambil tindakan yang tepat.</p></div><span class="review-tag">Materi awal, perlu validasi pengelola</span></div>
+  <div class="search-panel"><label class="search" for="search"><span>⌕</span><input id="search" type="search" autocomplete="off" placeholder="Cari topik, misalnya gratifikasi atau etika"></label><div class="filters" id="filters" aria-label="Filter materi"></div></div>
+  <div id="articles" class="article-grid" aria-live="polite"></div>
+  <p id="none" class="empty" hidden>Materi tidak ditemukan. Coba kata kunci lain.</p>
+  <p class="disclaimer">Artikel merupakan ringkasan edukasi awal yang harus ditinjau pengelola. Informasi ini tidak menggantikan ketentuan resmi atau menjadi dasar menyimpulkan adanya pelanggaran.</p>
+ </div>
+</section>
+<section class="section" id="aksi">
+ <div class="container">
+  <span class="overline">02 / BERTINDAK</span><h2>Mulai dari <span>hal yang sederhana</span></h2><p class="intro">Pilih tindakan sesuai kebutuhan. Pengingat, apresiasi, dan pelaporan dugaan pelanggaran memiliki jalur berbeda.</p>
+  <div class="action-grid">
+   <article class="action"><span class="action-icon mint">↗</span><small>MEMBANGUN KEPEDULIAN</small><h3>Saling Ngingetken</h3><p>Kirim masukan preventif yang sopan melalui formulir dan peninjauan pengelola.</p><button data-form="reminder">Buka Form Pengingat <span>→</span></button></article>
+   <article class="action"><span class="action-icon amber">★</span><small>BUDAYA POSITIF</small><h3>Apresiasi Rekan</h3><p>Apresiasi keteladanan, pelayanan prima, inovasi, dan kepedulian pegawai.</p><button data-form="appreciation">Berikan Apresiasi <span>→</span></button></article>
+   <article class="action"><span class="action-icon sky">▣</span><small>TANGGUNG JAWAB</small><h3>Monitoring Berkala</h3><p>Pengisian periode integritas melalui Microsoft Forms Kemenkeu.</p><button data-form="monitoring">Isi Monitoring <span>→</span></button></article>
+   <article class="action"><span class="action-icon lilac">?</span><small>PENGETAHUAN BERSAMA</small><h3>Usulkan Materi</h3><p>Usulkan pertanyaan atau bahan yang bermanfaat bagi rekan kerja.</p><button data-form="suggestion">Kirim Usulan <span>→</span></button></article>
+  </div>
+  <div class="report"><div class="report-icon">!</div><div><strong>Mengetahui dugaan pelanggaran?</strong><p>Jangan sampaikan tuduhan melalui fitur pengingat. Gunakan saluran pelaporan resmi dan jaga kerahasiaan pihak terkait.</p></div><a class="btn navy" href="https://wise.kemenkeu.go.id/" target="_blank" rel="noopener noreferrer">WISE Kemenkeu ↗</a></div>
+ </div>
+</section>
+<section class="section guidance" id="panduan"><div class="container guidance-grid"><div><span class="overline">03 / PANDUAN</span><h2>Ketika ragu, <span>pilih jalur yang tepat.</span></h2><p>Bedakan konsultasi, pengingat ringan, dan dugaan pelanggaran yang harus dilaporkan secara resmi.</p></div><div class="steps"><div><b>01</b><span><strong>Ingin memahami aturan?</strong><small>Baca materi dan konsultasikan situasi khusus kepada petugas yang berwenang.</small></span></div><div><b>02</b><span><strong>Ingin mengingatkan rekan?</strong><small>Fokus pada tindakan yang dapat diperbaiki. Jangan memberi label atau menyebarkan tuduhan.</small></span></div><div><b>03</b><span><strong>Mengetahui dugaan pelanggaran?</strong><small>Gunakan WISE atau mekanisme pelaporan resmi, bukan kolom pengingat antarrekan.</small></span></div></div></div></section>
+<section class="section about" id="tentang"><div class="container about-grid"><div class="about-logo"><strong>N</strong><small>NGINGETKEN</small></div><div><span class="overline">04 / TENTANG</span><h2>Inovasi lokal, komitmen bersama.</h2><p>Ngingetken, dari bahasa Bangka yang berarti mengingatkan, dikembangkan sejak 2018 untuk menguatkan integritas dan kepedulian antarrekan di Bea Cukai Pangkalpinang. Versi 2.0 menambahkan pusat pengetahuan sebagai sarana pencegahan dan pembelajaran.</p><p>Website GitHub Pages ini dapat diakses publik, sedangkan akses pengisian dibatasi melalui pengaturan Microsoft Forms organisasi. Website tidak menggantikan WISE atau aplikasi resmi DJBC.</p></div></div></section>
+</main>
+<footer class="footer"><div class="container foot"><span><strong>NGINGETKEN</strong><small> BEA CUKAI PANGKALPINANG</small></span><p>Media edukasi dan penguatan budaya integritas. Materi memerlukan validasi pengelola.</p><small>© 2026 Ngingetken</small></div></footer>
+<dialog id="articleDialog" aria-labelledby="detailTitle"><div class="dialog-head"><span id="detailCat"></span><button id="closeArticle" aria-label="Tutup artikel">×</button></div><h2 id="detailTitle"></h2><p id="detailIntro"></p><h3>Hal yang perlu diperhatikan</h3><ul id="detailPoints"></ul><p class="source" id="detailSource"></p><button class="btn gold" id="doneArticle">Selesai Membaca</button></dialog>
+<dialog id="formDialog" aria-labelledby="formTitle"><div class="dialog-head"><span>MICROSOFT FORMS</span><button id="closeForm" aria-label="Tutup">×</button></div><h2 id="formTitle">Formulir belum aktif</h2><p>Tautan Microsoft Forms Kemenkeu terbaru belum diaktifkan oleh pengelola. Website tidak mengumpulkan data apa pun.</p><button class="btn gold" id="doneForm">Mengerti</button></dialog>
 </body>
 </html>
