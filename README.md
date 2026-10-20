@@ -12,12 +12,12 @@ Pengembangan website Ngingetken KPPBC TMP C Pangkalpinang menjadi knowledge base
 Form **NGINGETKEN** yang ada sejak awal tetap menjadi **core**. Isinya 12 butir: identitas/periode, delapan indikator dugaan pelanggaran (Ya/Tidak), dan satu pernyataan penolakan penerimaan terkait jabatan. **Jangan mengganti form ini dengan template monitoring generik**. Dokumentasi lengkap: [FORM_INDUK_NGINGETKEN.md](FORM_INDUK_NGINGETKEN.md).
 
 ## Hubungkan Microsoft Forms
-1. **Pertahankan Microsoft Forms NGINGETKEN yang sudah digunakan**. Mintalah URL **pengisian** dari pemilik form; jangan memakai URL detail respons.
+1. **Form asli NGINGETKEN sudah ditautkan:** https://forms.office.com/r/J63YrAE20i. Ini adalah URL pengisian yang pernah digunakan untuk periode Maret 2026, bukan tautan detail respons.
 2. Buat hanya tiga formulir tambahan bila dibutuhkan: Saling Ngingetken, Apresiasi Rekan, Usulan Materi.
 3. Periksa hak akses, kerahasiaan, serta pembatasan respons di Microsoft 365 organisasi.
-4. Masukkan empat URL tervalidasi pada assets/js/forms-config.js. Selama kosong, website menampilkan status belum aktif.
+4. URL form induk sudah terpasang sebagai nilai `monitoring` dalam `assets/js/forms-config.js`. Isi tiga URL formulir tambahan setelah tersedia. Tombol yang URL-nya kosong menampilkan status belum aktif.
 
-Tautan lama dari nota dinas 2025 sengaja belum diaktifkan karena perlu dipastikan masih digunakan pada periode berjalan.
+Catatan: pengumuman periode Maret 2026 menyebut tenggat **7 April 2026**. Ini adalah tenggat historis, bukan batas waktu periode saat ini. Pengelola Forms harus memastikan form masih menerima jawaban dan opsi periode yang relevan tersedia.
 
 ## Struktur
 - index.html = portal utama
