@@ -19,6 +19,15 @@ Form **NGINGETKEN** yang ada sejak awal tetap menjadi **core**. Isinya 12 butir:
 
 Catatan: pengumuman periode Maret 2026 menyebut tenggat **7 April 2026**. Ini adalah tenggat historis, bukan batas waktu periode saat ini. Pengelola Forms harus memastikan form masih menerima jawaban dan opsi periode yang relevan tersedia.
 
+## Modul SJT Best–Worst (latihan formatif)
+- Halaman: [sjt/index.html](sjt/index.html); akses publik GitHub Pages melalui `/ngingetken/sjt/`.
+- Bank **45 soal orisinal** dalam sembilan kompetensi (lima soal per kompetensi) di `sjt/bank.js`, disertai dua pilihan tiap soal: tindakan paling efektif dan paling tidak efektif.
+- Skoring **draf**: 1 poin untuk kecocokan jawaban paling efektif, 1 poin untuk paling tidak efektif; maksimum 90. Umpan balik per soal dan per kompetensi tersedia setelah semua jawaban terisi.
+- Seluruh pengisian, skoring dan unduhan hasil dikerjakan **di browser pengguna**, tanpa akun/NIP, tanpa pengiriman jawaban dan tanpa penyimpanan otomatis.
+- **PENTING:** bank berikut kunci draf terbaca oleh publik dari kode JavaScript. Modul hanya untuk belajar mandiri, **BUKAN asesmen resmi, passing grade, penilaian integritas pegawai, maupun dasar promosi.** Untuk asesmen formal dibutuhkan kunci di server organisasi, penyelenggaraan terkendali, validasi asesor, analisis psikometrik, tata kelola data, dan otorisasi.
+- Soal dan kunci belum disahkan oleh ahli jabatan/asesor. Basis metodologi: PermenPANRB 38/2017, panduan SJT OPM, serta contoh konteks etika kepabeanan. Tinjau keberlakuan peraturan sebelum pemanfaatan formal.
+- **Form Induk NGINGETKEN tetap tidak berubah.**
+
 ## Struktur
 - index.html = portal utama
 - assets/css/site.css = tata letak responsif
