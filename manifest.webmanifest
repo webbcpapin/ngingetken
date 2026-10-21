@@ -1,0 +1,32 @@
+{
+  "id": "/ngingetken/",
+  "name": "NGINGETKEN — Bea Cukai Pangkalpinang",
+  "short_name": "Ngingetken",
+  "description": "Portal monitoring integritas dan pengembangan kompetensi Bea Cukai Pangkalpinang.",
+  "lang": "id",
+  "start_url": "/ngingetken/",
+  "scope": "/ngingetken/",
+  "display": "standalone",
+  "background_color": "#f3f7f7",
+  "theme_color": "#0b293d",
+  "icons": [
+    {
+      "src": "/ngingetken/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/ngingetken/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/ngingetken/assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

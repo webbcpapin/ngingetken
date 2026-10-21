@@ -1,0 +1,47 @@
+/* NGINGETKEN Official Identity – applies to portal, SJT, Knowledge & legacy tools */
+.brand-official-icon {
+  display: block;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  object-fit: contain;
+  border-radius: 12px;
+}
+.brand { min-width: 0; }
+.brand-lines { min-width: 0; }
+.hero-seal-logo {
+  width: min(82%, 240px);
+  height: auto;
+  max-height: 80%;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 18px rgba(0,0,0,.18));
+}
+/* Layout safety for narrow screens, including 320px viewport */
+@media (max-width: 680px) {
+  .brand-official-icon { width: 40px; height: 40px; border-radius: 10px; }
+  .brand-lines strong { font-size: 15px; letter-spacing: .9px; }
+  .brand-lines small { font-size: 8px; letter-spacing: .6px; }
+  .service-card { min-height: 0; }
+  .card-bottom { flex-wrap: wrap; gap: 10px; }
+  .button, .menu-toggle, .back { min-height: 44px; }
+  .hero-actions .button { width: 100%; }
+  .hero-seal-logo { width: 85%; }
+}
+@media (max-width: 360px) {
+  .brand-lines small { display: none; }
+  .brand-lines strong { font-size: 14px; }
+  .service-card h3 { overflow-wrap: anywhere; }
+  .card-link { white-space: normal; }
+}
+@media (hover: none) {
+  .service-card:hover { transform: none; }
+}
+@media (display-mode: standalone) {
+  .site-header, .topbar, .top { padding-top: env(safe-area-inset-top, 0px); }
+  body { padding-bottom: env(safe-area-inset-bottom, 0px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; }
+}
