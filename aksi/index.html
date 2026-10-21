@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#10364e">
+<meta name="description" content="Panduan pengingat yang baik, apresiasi rekan, dan pilihan jalur tindak lanjut NGINGETKEN.">
+<title>Ruang Aksi | NGINGETKEN</title>
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Lewati navigasi</a>
+<header class="top"><div class="wrap top-inner">
+<a class="brand" href="../index.html"><span class="mark">N</span><span><strong>NGINGETKEN</strong><small>BEA CUKAI PANGKALPINANG</small></span></a>
+<a class="back" href="../index.html#aksi">← Kembali ke portal</a>
+</div></header>
+<main class="wrap" id="main">
+<section class="hero">
+<p class="kicker">RUANG AKSI · LANGSUNG BERMANFAAT</p>
+<h1>Mulai dari tindakan yang <em>baik dan tepat.</em></h1>
+<p>Gunakan panduan untuk menyampaikan pengingat dengan hormat, mengapresiasi perilaku positif, dan memilih saluran tindak lanjut yang sesuai. Tanpa akun, tanpa tautan formulir tambahan.</p>
+<div class="privacy"><strong>Privasi:</strong> seluruh pemilihan dan penyusunan pesan dilakukan di perangkat Anda. Situs tidak menerima atau menyimpan isi pesan. Jangan masukkan nama pegawai, informasi dinas terbatas, identitas pelapor, atau kronologi dugaan pelanggaran.</div>
+</section>
+<nav class="tabs" aria-label="Fitur Ruang Aksi">
+<a href="#pengingat" data-tab="pengingat"><span>01</span> Saling Ngingetken</a>
+<a href="#apresiasi" data-tab="apresiasi"><span>02</span> Apresiasi Rekan</a>
+<a href="#panduan" data-tab="panduan"><span>03</span> Pilih Langkah</a>
+</nav>
+<section class="workspace" id="pengingat" aria-labelledby="reminder-title">
+<div class="head"><div><p class="kicker">01 / KOMUNIKASI PREVENTIF</p><h2 id="reminder-title">Saling Ngingetken</h2><p>Pilih topik sehari-hari. Contoh pesan yang disiapkan berfokus pada perbaikan proses, bukan menuduh atau menilai pribadi rekan.</p></div><span class="iconbox mint">↗</span></div>
+<div class="grid-two">
+<div class="card"><label for="reminder-topic">Topik pengingat</label><select id="reminder-topic"></select>
+<label for="reminder-style">Gaya penyampaian</label><select id="reminder-style"><option value="santai">Antarrekan, bersahabat</option><option value="formal">Profesional dan formal</option><option value="tim">Untuk pengingat tim</option></select>
+<div class="micro"><strong>Prinsip saling mengingatkan</strong><ol><li>Sampaikan secara privat bila menyangkut individu.</li><li>Fokus pada tindakan yang dapat diperbaiki.</li><li>Berikan ajakan atau bantuan yang realistis.</li><li>Jangan gunakan pesan pengingat untuk mengolah dugaan pelanggaran.</li></ol></div></div>
+<div class="card"><div class="result-head"><strong>Contoh pesan siap disesuaikan</strong><span class="tag">DRAF EDUKASI</span></div><textarea id="reminder-output" readonly rows="9" aria-label="Pesan pengingat yang dihasilkan"></textarea><button class="primary" id="copy-reminder" type="button">Salin pesan pengingat</button><p id="reminder-status" class="status" role="status"></p><p class="caption">Baca dan sesuaikan sebelum dikirim secara pribadi. Menyalin pesan tidak berarti mengirimkannya.</p></div>
+</div>
+</section>
+<section class="workspace" id="apresiasi" aria-labelledby="appreciation-title" hidden>
+<div class="head"><div><p class="kicker">02 / BUDAYA POSITIF</p><h2 id="appreciation-title">Apresiasi Rekan</h2><p>Apresiasi yang efektif menyebut perilaku nyata dan dampak yang terlihat, bukan sekadar pujian umum.</p></div><span class="iconbox amber">★</span></div>
+<div class="grid-two">
+<div class="card">
+<label for="appreciation-topic">Hal baik yang ingin diapresiasi</label><select id="appreciation-topic"></select>
+<label for="appreciation-style">Gaya apresiasi</label><select id="appreciation-style"><option value="hangat">Hangat dan tulus</option><option value="ringkas">Singkat</option><option value="formal">Profesional</option></select>
+<label for="appreciation-detail">Contoh perilaku (opsional)</label><textarea id="appreciation-detail" rows="3" maxlength="180" placeholder="Misalnya: menjelaskan alur kerja dengan sabar kepada anggota tim baru"></textarea>
+<p class="caption">Tidak perlu menulis nama penerima, nama pengguna jasa, atau data pribadi. Isi hanya contoh perilaku positif yang aman dibagikan.</p></div>
+<div class="card"><div class="result-head"><strong>Pesan apresiasi</strong><span class="tag">SIAP DISALIN</span></div><textarea id="appreciation-output" readonly rows="9" aria-label="Pesan apresiasi yang dihasilkan"></textarea><button class="primary" id="copy-appreciation" type="button">Salin pesan apresiasi</button><p id="appreciation-status" class="status" role="status"></p><p class="caption">Pesan ini tidak otomatis diteruskan ke Teams, WhatsApp, atau pimpinan. Anda menentukan sendiri penerimanya.</p></div>
+</div>
+</section>
+<section class="workspace" id="panduan" aria-labelledby="guidance-title" hidden>
+<div class="head"><div><p class="kicker">03 / PILIH SALURAN YANG TEPAT</p><h2 id="guidance-title">Saya perlu melakukan apa?</h2><p>Pilih tujuan Anda untuk mendapatkan langkah awal yang proporsional. Ini panduan edukatif, bukan keputusan hukum atau investigasi.</p></div><span class="iconbox sky">?</span></div>
+<div class="choices" id="decision-buttons">
+<button class="decision" type="button" data-decision="belajar"><strong>Saya ingin memahami aturan</strong><span>Butuh rujukan, bukan menyampaikan informasi tentang orang lain.</span></button>
+<button class="decision" type="button" data-decision="ingatkan"><strong>Ingin mengingatkan kebiasaan kerja</strong><span>Masukan preventif tanpa dugaan pelanggaran.</span></button>
+<button class="decision" type="button" data-decision="konsultasi"><strong>Saya ragu apakah ini benturan kepentingan atau gratifikasi</strong><span>Perlu arahan pengelola yang berwenang.</span></button>
+<button class="decision" type="button" data-decision="lapor"><strong>Saya mengetahui informasi indikasi pelanggaran</strong><span>Ada persoalan yang memerlukan kanal penanganan resmi dan kerahasiaan.</span></button>
+</div>
+<article class="decision-result" id="decision-result" hidden aria-live="polite"><h3 id="decision-title"></h3><p id="decision-body"></p><div id="decision-actions"></div></article>
+</section>
+<section class="official">
+<div><strong>Formulir induk NGINGETKEN tetap tersedia</strong><p>Pengisian monitoring berkala tetap dilakukan melalui Microsoft Forms resmi yang telah digunakan selama ini. Ruang Aksi ini tidak mengumpulkan respons monitoring atau laporan pelanggaran.</p></div>
+<a href="https://forms.office.com/r/J63YrAE20i" target="_blank" rel="noopener noreferrer">Buka Form Induk ↗</a>
+</section>
+<footer><p>Ruang Aksi NGINGETKEN · Materi contoh untuk komunikasi positif, memerlukan penyesuaian konteks dan peninjauan pengelola.</p><p><a href="../index.html">Portal utama</a> · <a href="../sjt/index.html">Latihan SJT</a> · <a href="https://wise.kemenkeu.go.id/" target="_blank" rel="noopener noreferrer">WISE Kemenkeu</a></p></footer>
+</main>
+</body>
+</html>
