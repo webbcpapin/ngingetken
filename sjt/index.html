@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#123c52">
+<title>Latihan SJT Best–Worst | NGINGETKEN</title>
+<link rel="stylesheet" href="styles.css">
+<script defer src="bank.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Lewati navigasi</a>
+<header class="topbar">
+ <div class="wrap topinner">
+  <a class="brand" href="../index.html"><span class="brandmark">N</span><span>NGINGETKEN <small>BEA CUKAI PANGKALPINANG</small></span></a>
+  <nav aria-label="Navigasi"><a href="../index.html">← Kembali ke portal</a><a href="https://forms.office.com/r/J63YrAE20i" target="_blank" rel="noopener noreferrer">Form Induk ↗</a></nav>
+ </div>
+</header>
+<main id="main" class="wrap">
+<section class="intro">
+ <p class="kicker">MODUL PENGEMBANGAN KOMPETENSI · 0.9-DRAFT</p>
+ <h1>Latihan <span>Situational Judgment Test</span></h1>
+ <p>45 situasi kerja fiktif untuk sembilan kompetensi ASN. Pada setiap kasus pilih <strong>tindakan paling efektif</strong> dan <strong>tindakan paling tidak efektif</strong>. Pilihan keduanya harus berbeda.</p>
+ <div class="notice" role="note"><strong>Latihan, bukan asesmen resmi.</strong> Kunci jawaban masih berupa hipotesis penyusun yang belum divalidasi asesor maupun diuji psikometrik. Hasil menunjukkan kesesuaian terhadap kunci draf, bukan tingkat integritas, level kompetensi ASN, atau kelayakan jabatan.</div>
+</section>
+<div class="layout">
+ <div class="maincol">
+ <section id="quiz" class="panel" aria-labelledby="quiz-title">
+  <div class="questionhead"><div><p class="kicker" id="question-number">SOAL</p><h2 id="quiz-title">Kasus Penilaian Situasional</h2></div><span class="pill" id="question-domain"></span></div>
+  <p class="case" id="scenario"></p>
+  <p class="behavior" id="behavior"></p>
+  <div class="legend"><span class="legendbest">TERBAIK = paling efektif</span><span class="legendworst">TERBURUK = paling tidak efektif</span></div>
+  <div id="options" class="choices" role="group" aria-label="Pilihan tindakan"></div>
+  <p class="hint" id="hint" role="status"></p>
+  <div class="actions"><button id="prev" class="button secondary" type="button">← Sebelumnya</button><button id="next" class="button primary" type="button">Berikutnya →</button></div>
+ </section>
+ <section id="results" class="panel" hidden aria-labelledby="results-title">
+  <p class="kicker">HASIL LATIHAN — KUNCI DRAF</p><h2 id="results-title">Ringkasan jawaban</h2>
+  <div class="score" id="score"></div><p class="muted" id="percentage"></p>
+  <p class="notice">Hasil ini hanya menunjukkan kecocokan dengan kunci draf. Tidak dapat dijadikan diagnosis integritas pribadi, skor Assessment Center, dasar pemeringkatan pegawai, ataupun keputusan promosi.</p>
+  <div class="stats" id="stats"></div>
+  <h3>Hasil per kompetensi</h3><div class="tablewrap"><table><thead><tr><th>Kompetensi</th><th>Skor draf</th></tr></thead><tbody id="competency-results"></tbody></table></div>
+  <div class="actions actionwrap"><button class="button primary" id="download" type="button">Unduh hasil JSON</button><button class="button secondary" id="print" type="button">Cetak hasil / PDF</button><button class="button secondary" id="retry" type="button">Ulangi latihan</button></div>
+  <h3>Umpan balik 45 situasi</h3><div id="explanations"></div>
+ </section>
+ </div>
+ <aside class="panel sidebar" aria-label="Kemajuan latihan">
+  <div class="progressrow"><h2>Progres</h2><strong id="completed">0 / 45</strong></div><div class="progressbar"><span id="progressfill"></span></div>
+  <p class="muted small">Pilih dua tindakan berbeda untuk setiap soal. Anda dapat berpindah soal dan kembali mengubah jawaban sebelum melihat hasil.</p>
+  <h3>Pilih nomor soal</h3><div id="question-grid" class="questiongrid" aria-label="Navigasi soal"></div>
+  <div class="key"><span class="dot complete"></span> Lengkap <span class="dot partial"></span> Sebagian <span class="dot empty"></span> Belum</div>
+  <button id="submit" class="button primary wide" type="button" disabled>Lihat hasil (0/45)</button>
+  <p id="submit-note" class="muted small">Lengkapi seluruh 45 soal untuk menampilkan hasil.</p>
+  <p class="privacy small"><strong>Privasi:</strong> tidak meminta nama atau NIP, tidak menyimpan ke server, dan tidak mencatat jawaban secara otomatis. Menutup halaman akan menghapus progres.</p>
+ </aside>
+</div>
+<footer class="footer">
+ <strong>NGINGETKEN · Modul SJT edukatif</strong>
+ <p>Sumber kerangka: PermenPANRB 38/2017 dan panduan SJT OPM. Kasus dan kunci merupakan materi latihan orisinal; masih memerlukan validasi asesor.</p>
+ <p><a href="https://jdih.menpan.go.id/dokumen-hukum/peraturan-menteri-pendayagunaan-aparatur-negara-dan-reformasi-birokrasi-nomor-38-tahun-2017-tentang-768" target="_blank" rel="noopener noreferrer">Standar Kompetensi ASN ↗</a> · <a href="https://www.opm.gov/policy-data-oversight/assessment-and-selection/other-assessment-methods/situational-judgment-tests/" target="_blank" rel="noopener noreferrer">Panduan metode SJT ↗</a></p>
+</footer>
+</main>
+</body>
+</html>
