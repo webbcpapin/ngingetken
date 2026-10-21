@@ -4,20 +4,21 @@ Pengembangan website Ngingetken KPPBC TMP C Pangkalpinang menjadi knowledge base
 
 ## Arsitektur
 - GitHub Pages hanya memuat materi informasi yang layak diakses publik. Situs tidak mempunyai login dan tidak menyimpan data pegawai.
-- Microsoft Forms Kemenkeu untuk pengisian monitoring, pengingat, apresiasi dan usulan materi.
+- Microsoft Forms Kemenkeu hanya untuk pengisian **Form Induk NGINGETKEN** yang sudah ada.
+- Halaman `aksi/` untuk menyusun contoh pengingat dan apresiasi, serta panduan pemilihan saluran tanpa formulir tambahan, akun, atau backend.
 - Microsoft 365 organisasi menyimpan respons dengan hak akses pengelola yang berwenang.
 - WISE Kemenkeu sebagai kanal pelaporan resmi dugaan pelanggaran.
 
 ## Form induk yang wajib dipertahankan
 Form **NGINGETKEN** yang ada sejak awal tetap menjadi **core**. Isinya 12 butir: identitas/periode, delapan indikator dugaan pelanggaran (Ya/Tidak), dan satu pernyataan penolakan penerimaan terkait jabatan. **Jangan mengganti form ini dengan template monitoring generik**. Dokumentasi lengkap: [FORM_INDUK_NGINGETKEN.md](FORM_INDUK_NGINGETKEN.md).
 
-## Hubungkan Microsoft Forms
-1. **Form asli NGINGETKEN sudah ditautkan:** https://forms.office.com/r/J63YrAE20i. Ini adalah URL pengisian yang pernah digunakan untuk periode Maret 2026, bukan tautan detail respons.
-2. Buat hanya tiga formulir tambahan bila dibutuhkan: Saling Ngingetken, Apresiasi Rekan, Usulan Materi.
-3. Periksa hak akses, kerahasiaan, serta pembatasan respons di Microsoft 365 organisasi.
-4. URL form induk sudah terpasang sebagai nilai `monitoring` dalam `assets/js/forms-config.js`. Isi tiga URL formulir tambahan setelah tersedia. Tombol yang URL-nya kosong menampilkan status belum aktif.
-
-Catatan: pengumuman periode Maret 2026 menyebut tenggat **7 April 2026**. Ini adalah tenggat historis, bukan batas waktu periode saat ini. Pengelola Forms harus memastikan form masih menerima jawaban dan opsi periode yang relevan tersedia.
+## Form Induk dan Ruang Aksi tanpa tautan tambahan
+1. **Form Induk NGINGETKEN tetap digunakan:** https://forms.office.com/r/J63YrAE20i. Pemilik Form perlu memeriksa izin dan periode yang sedang berlaku. Tenggat 7 April 2026 pada pengumuman periode Maret 2026 hanya informasi historis.
+2. **Saling Ngingetken:** `aksi/#pengingat` menyediakan delapan topik komunikasi preventif dengan tiga gaya pesan; hasil dapat disalin, bukan dikirim otomatis.
+3. **Apresiasi Rekan:** `aksi/#apresiasi` menyediakan delapan kategori keteladanan/perilaku positif dengan pilihan gaya dan contoh perilaku opsional; hasil dapat disalin, bukan disimpan.
+4. **Panduan Bertindak:** `aksi/#panduan` membantu membedakan belajar, mengingatkan, konsultasi, dan melapor melalui kanal resmi.
+5. Tidak diperlukan Microsoft Forms tambahan untuk ketiga fitur baru. **Konten atau bukti dugaan pelanggaran bukan untuk halaman publik**; gunakan WISE atau mekanisme pelaporan resmi berwenang.
+6. Website GitHub Pages bersifat publik dan **tidak membatasi akses hanya kepada pegawai**. Semua konten sisi klien dapat dilihat publik; jangan gunakan aplikasi untuk memasukkan rahasia, data pribadi, identitas pelapor, atau laporan sensitif. Browser tidak mengirim ataupun menyimpan pesan pengguna secara otomatis.
 
 ## Modul SJT Best–Worst (latihan formatif)
 - Halaman: [sjt/index.html](sjt/index.html); akses publik GitHub Pages melalui `/ngingetken/sjt/`.
@@ -32,7 +33,8 @@ Catatan: pengumuman periode Maret 2026 menyebut tenggat **7 April 2026**. Ini ad
 - index.html = portal utama
 - assets/css/site.css = tata letak responsif
 - assets/js/site.js = daftar artikel awal dan pencarian
-- assets/js/forms-config.js = tautan Forms saja, bukan token atau data
+- assets/js/forms-config.js = tautan Form Induk saja, bukan token atau data
+- aksi/index.html, aksi/style.css, aksi/app.js = ruang aksi tanpa Form tambahan
 - SECURITY.md = isu migrasi, riwayat, dan tindak lanjut
 
 ## Konten
