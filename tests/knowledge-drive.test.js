@@ -41,7 +41,7 @@ function load(extraMaterials) {
   vm.createContext(context);
   vm.runInContext(fs.readFileSync(path.join(base, "library.js"), "utf8"), context);
   vm.runInContext(fs.readFileSync(path.join(base, "drive-materials.js"), "utf8"), context);
-  context.window.NGINGETKEN_DRIVE_MATERIALS = extraMaterials;
+  if (extraMaterials !== undefined) context.window.NGINGETKEN_DRIVE_MATERIALS = extraMaterials;
   vm.runInContext(fs.readFileSync(path.join(base, "knowledge.js"), "utf8"), context);
   get("filters").click({ target: { closest: () => filterButtons[1] } });
   return { get };
@@ -52,11 +52,18 @@ assert.equal(empty.get("results").children.length, 0);
 assert.match(empty.get("empty-message").textContent, /Belum ada tautan Google Drive/);
 
 const valid = load([
-  { id: "a", title: "Panduan", url: "https://drive.google.com/file/d/example/view", access: "Organisasi" },
+  { id: "a", title: "Panduan", url: "https://drive.google.com/drive/folders/example" },
   { id: "b", title: "Tidak valid", url: "https://drive.google.com.evil.example/file/d/example/view" },
   { id: "c", title: "Belum diunggah" },
+  { id: "d", title: "Materi Lainnya", status: "pending" },
 ]);
-assert.equal(valid.get("results").children.length, 1);
+assert.equal(valid.get("results").children.length, 2);
 assert.equal(valid.get("results").children[0].children[2].textContent, "Panduan");
-assert.equal(valid.get("results").children[0].children[4].children[1].href, "https://drive.google.com/file/d/example/view");
-console.log("Katalog Drive: tautan kosong dan domain tidak sah tidak ditampilkan.");
+assert.equal(valid.get("results").children[0].children[4].children[1].href, "https://drive.google.com/drive/folders/example");
+assert.equal(valid.get("results").children[1].children[2].textContent, "Materi Lainnya");
+assert.equal(valid.get("results").children[1].children[4].children.length, 1);
+const published = load();
+assert.equal(published.get("results").children.length, 9);
+assert.equal(published.get("results").children.filter(card => card.children[4].children.length === 2).length, 8);
+assert.equal(published.get("results").children[8].children[2].textContent, "Materi Lainnya");
+console.log("Katalog Drive: hanya folder sah bertautan; Materi Lainnya tampil tanpa tautan.");

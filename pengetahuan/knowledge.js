@@ -10,7 +10,7 @@
  const regulations=db.regulations.map(r=>({...r,group:r.type,isRegulation:true}));
  const materials=db.articles.map((a,i)=>({...a,group:"Materi",isRegulation:false,code:"MATERI EDUKASI "+String(i+1).padStart(2,"0")}));
  const driveMaterials=(Array.isArray(window.NGINGETKEN_DRIVE_MATERIALS)?window.NGINGETKEN_DRIVE_MATERIALS:[])
-   .filter(a=>a&&a.title&&safeDriveUrl(a.url))
+   .filter(a=>a&&a.title&&(safeDriveUrl(a.url)||a.status==="pending"))
    .map(a=>({...a,group:"Paparan",isDriveMaterial:true}));
  const all=[...regulations,...materials,...driveMaterials];
  let selected="Semua";
@@ -64,14 +64,17 @@
  function makeDriveMaterial(a){
    const card=create("article","resource");
    const head=create("div","resource-head");
-   head.append(create("span","resource-type materi","Bahan paparan"),create("span","resource-verified",a.access||"AKSES SESUAI IZIN"));
+   head.append(create("span","resource-type materi","Bahan paparan"),create("span","resource-verified",a.status==="pending"?"DALAM PENELAAHAN":"GOOGLE DRIVE"));
    card.append(head,create("span","resource-code",a.category||"MATERI PENDAMPING"),create("h4","",a.title),create("p","",a.description||"Bahan pembelajaran tambahan."));
    const foot=create("div","resource-foot");
-   foot.append(create("span","resource-source","Google Drive · izin akses mengikuti pemilik berkas"));
-   const link=create("a","","Buka materi ↗");
-   link.href=a.url;link.target="_blank";link.rel="noopener noreferrer";
-   link.setAttribute("aria-label","Buka materi "+a.title+" di Google Drive");
-   foot.append(link);card.append(foot);
+   foot.append(create("span","resource-source",a.status==="pending"?"Tautan belum ditampilkan":"Google Drive · akses mengikuti izin folder"));
+   if(a.status!=="pending"){
+     const link=create("a","","Buka folder Drive ↗");
+     link.href=a.url;link.target="_blank";link.rel="noopener noreferrer";
+     link.setAttribute("aria-label","Buka folder "+a.title+" di Google Drive");
+     foot.append(link);
+   }
+   card.append(foot);
    return card;
  }
  function openMaterial(a){
@@ -100,7 +103,7 @@
    const query=$("search").value.toLocaleLowerCase("id").trim();
    return all.filter(item=>{
      const category=selected==="Semua"||item.group===selected;
-     const text=[item.title,item.description,item.code,item.publisher,item.topics,item.short,item.intro,item.cat].join(" ").toLocaleLowerCase("id");
+     const text=[item.title,item.description,item.code,item.publisher,item.topics,item.short,item.intro,item.cat,item.category].join(" ").toLocaleLowerCase("id");
      return category&&(!query||text.includes(query));
    });
  }
@@ -115,7 +118,7 @@
    items.forEach(item=>root.append(item.isRegulation?makeRegulation(item):item.isDriveMaterial?makeDriveMaterial(item):makeMaterial(item)));
    $("item-count").textContent=items.length+" referensi ditampilkan";
    $("collection-note").textContent=selected==="Semua"?
-     db.regulations.length+" dokumen pemerintah · "+db.articles.length+" ringkasan edukasi · "+driveMaterials.length+" tautan Drive":selected==="SE"?"Perlu inventarisasi naskah SE dan validasi pengelola":selected==="Paparan"?"Tautan ditampilkan setelah penelaahan dan persetujuan akses":"Materi mengikuti filter yang dipilih";
+     db.regulations.length+" dokumen pemerintah · "+db.articles.length+" ringkasan edukasi · "+driveMaterials.filter(a=>a.status!=="pending").length+" tautan Drive":selected==="SE"?"Perlu inventarisasi naskah SE dan validasi pengelola":selected==="Paparan"?"Materi Lainnya menunggu penelaahan isi dan akses":"Materi mengikuti filter yang dipilih";
    $("empty").hidden=items.length>0;
    if(items.length===0){
      $("empty-message").textContent=selected==="SE"?
