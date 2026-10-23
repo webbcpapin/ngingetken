@@ -22,7 +22,7 @@ NGINGETKEN merupakan inovasi Bea Cukai Pangkalpinang yang dikembangkan sejak 201
 - Daftar dokumen memiliki label **sumber resmi**, namun hal itu *bukan* pernyataan bahwa status hukum, perubahan, atau pencabutannya telah selesai dinilai. Periksa ulang metadata JDIH sebelum menjadikan regulasi sebagai dasar keputusan.
 - Artikel edukasi **draf**, bukan teks hukum resmi; memerlukan review substansi oleh pengelola.
 - Kategori **Surat Edaran** disediakan tetapi belum diisi karena belum ada naskah integritas yang dapat dipastikan untuk katalog. Jangan mengarang nomor dan judul SE.
-- **Materi paparan internal** tetap diarahkan untuk inventarisasi dan tata kelola di SharePoint. Tidak boleh menyalin file terbatas, hasil pemeriksaan, identitas pegawai, atau informasi pelapor ke repository publik.
+- **Bahan paparan** disiapkan sebagai katalog tautan Google Drive di `pengetahuan/drive-materials.js`. Kartu hanya muncul setelah URL yang valid dimasukkan; berkas tidak diunggah ke GitHub Pages. Periksa isi dan izin berbagi sebelum menautkan, terutama untuk bahan internal. Inventaris berkas lokal disimpan di `private/` yang diabaikan Git.
 
 ## Form induk tetap utuh
 Form **NGINGETKEN** asli adalah core dan **tidak diganti**: tiga pertanyaan identitas/periode, delapan indikator indikasi pelanggaran (jawaban Ya/Tidak), serta pernyataan integritas. Lihat [FORM_INDUK_NGINGETKEN.md](FORM_INDUK_NGINGETKEN.md). Respons asli hanya ada pada Microsoft Forms organisasi, tidak disalin ke repo. Pemilik perlu memeriksa periode pengisian aktif dan izin akses.
@@ -45,6 +45,6 @@ Modul `sjt/` menyediakan latihan 45 soal Best–Worst dalam sembilan kompetensi 
 2. Verifikasi nomor, judul, tanggal, versi, status keberlakuan, dan relevansi oleh pengelola/penelaah.
 3. Pisahkan bahan publik dari paparan/internal data yang memerlukan otorisasi.
 4. Uji ulang tautan, pencarian, dan perangkat desktop/mobile sebelum publikasi.
-5. Simpan eviden review dan perubahan untuk evaluasi inovasi serta IDP.
+5. Simpan catatan penelaahan dan perubahan di tempat internal yang sesuai.
 
 **Catatan:** Pengumuman Form Induk untuk periode Maret 2026 pernah mencantumkan batas 7 April 2026. Tanggal tersebut bersifat historis; tidak digunakan sebagai tenggat periode berjalan.
